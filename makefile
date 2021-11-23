@@ -14,7 +14,14 @@ NAME = minishell
 
 SRCS =  get_next_line/get_next_line_utils.c 	\
 		get_next_line/get_next_line.c 			\
-		minishell.c
+		minishell.c								\
+		pipex/exit_error.c						\
+		pipex/ft_lst.c							\
+		pipex/ft_split.c						\
+		pipex/parsing.c 						\
+		pipex/pipex.c							\
+		pipex/utils_two.c						\
+		pipex/utils.c 
 
 CC = gcc
 

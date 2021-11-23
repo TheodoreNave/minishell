@@ -12,15 +12,15 @@
 
 #include "../includes/minishell.h"
 
-size_t			ft_strlen(char const *str)
-{
-	size_t		i;
+// size_t			ft_strlen(char const *str)
+// {
+// 	size_t		i;
 
-	i = 0;
-	while (str[i])
-		i++;
-	return (i);
-}
+// 	i = 0;
+// 	while (str[i])
+// 		i++;
+// 	return (i);
+// }
 
 int				get_len(char *str)
 {
@@ -36,22 +36,22 @@ int				get_len(char *str)
 	return (i);
 }
 
-char			*ft_strdup(const char *s1)
-{
-	int			i;
-	char		*str;
+// char			*ft_strdup(char *s1)
+// {
+// 	int			i;
+// 	char		*str;
 
-	i = 0;
-	if (!(str = malloc(sizeof(char) * ft_strlen(s1) + 1)))
-		return (NULL);
-	while (s1[i])
-	{
-		str[i] = s1[i];
-		i++;
-	}
-	str[i] = '\0';
-	return (str);
-}
+// 	i = 0;
+// 	if (!(str = malloc(sizeof(char) * ft_strlen(s1) + 1)))
+// 		return (NULL);
+// 	while (s1[i])
+// 	{
+// 		str[i] = s1[i];
+// 		i++;
+// 	}
+// 	str[i] = '\0';
+// 	return (str);
+// }
 
 char			*ft_substr(char const *s, unsigned int start, size_t len)
 {
