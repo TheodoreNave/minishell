@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:39:18 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/23 16:46:28 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/24 12:27:51 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,8 +63,7 @@ void	child(pid_t pid, t_utils *utils, t_utils_list *tmp)
 	if (tmp->next)
 		close(tmp->pfd[STDOUT]);
 	if (!tmp->next)
-		printf("coucou\n");
-		// exit_function(utils);
+		exit_function(utils);
 }
 
 int	pipex(int ac, char **av, char **environ)

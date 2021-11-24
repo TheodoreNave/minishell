@@ -6,21 +6,11 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/26 16:01:38 by tnave             #+#    #+#             */
-/*   Updated: 2021/01/29 16:04:41 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/24 12:06:33 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
-
-// size_t			ft_strlen(char const *str)
-// {
-// 	size_t		i;
-
-// 	i = 0;
-// 	while (str[i])
-// 		i++;
-// 	return (i);
-// }
+#include "../includes/get_next_line.h"
 
 int				get_len(char *str)
 {
@@ -35,23 +25,6 @@ int				get_len(char *str)
 	}
 	return (i);
 }
-
-// char			*ft_strdup(char *s1)
-// {
-// 	int			i;
-// 	char		*str;
-
-// 	i = 0;
-// 	if (!(str = malloc(sizeof(char) * ft_strlen(s1) + 1)))
-// 		return (NULL);
-// 	while (s1[i])
-// 	{
-// 		str[i] = s1[i];
-// 		i++;
-// 	}
-// 	str[i] = '\0';
-// 	return (str);
-// }
 
 char			*ft_substr(char const *s, unsigned int start, size_t len)
 {

@@ -6,11 +6,11 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/01/21 16:09:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/01/31 18:50:25 by theo             ###   ########.fr       */
+/*   Updated: 2021/11/24 12:04:07 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../includes/get_next_line.h"
 
 char				*ft_strjoin_free(char *s1, char *s2)
 {

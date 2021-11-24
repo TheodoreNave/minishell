@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/23 17:02:13 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/24 12:36:37 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,8 @@ void	ft_check_access_two_minishell(char *buff, int i, int j, t_utils *utils)
 		{
 			ft_lstadd_back(&utils->lst, ft_lstnew(utils->temp,
 					ft_strdup(utils->join)));
-			printf("utils->temp[0] = %s\n", utils->temp[0]);
+			printf("utils->temp[] = %s\n", utils->temp[0]);
+			printf("utils->temp[] = %s\n", utils->temp[1]);
 			utils->cmd_ok = 1;
 			printf("cmd ok\n");
 		}
@@ -118,10 +119,24 @@ void	opt_exec_minishell(char **environ, t_utils *utils, t_utils_list *tmp)
 		// if (ft_strncmp(av[1], "/dev/urandom", 16) == 0)
 		// 	close(tmp->prev->pfd[STDIN]);
 		execve(tmp->path, tmp->cmd_opt, environ);
-		// exit(127);
+		exit(127);
 	}
 	else
-		child(pid, utils, tmp);
+		child_mini(pid, utils, tmp);
+}
+
+void	child_mini(pid_t pid, t_utils *utils, t_utils_list *tmp)
+{
+	(void)utils;
+	(void)tmp;
+	waitpid(pid, NULL, 0);
+	if (tmp->prev)
+		close(tmp->prev->pfd[STDIN]);
+	if (tmp->next)
+		close(tmp->pfd[STDOUT]);
+	if (!tmp->next)
+		printf("coucou\n");
+		// exit_function(utils);
 }
 
 
@@ -134,6 +149,9 @@ int main(int ac, char **av, char **env)
     t_utils_list *tmp;
 	int i = 0;
 
+	// signal(SIGINT, function_ctrl-c); new prompt newline
+	// signal(SIGQUIT, function_ctrl-\); nothing
+	// signal(???, function_ctrl-d); exit the shell
     ft_memset(&utils, 0, sizeof(t_utils));
     parse_env_minishell(env, &utils);
 	while (utils.parse_env[i])
