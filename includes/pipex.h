@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:42:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/10/15 15:40:42 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/24 16:37:36 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,11 +47,11 @@ typedef struct s_utils
 	char				**parse_env;
 	int					cmd_ok;
 	char				*join;
+	t_utils_list		*lst;
 	char				**temp;
 	int					p;
 	int					wrong_cmd;
 	char				*error_msg;
-	t_utils_list		*lst;
 
 }	t_utils;
 

@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/24 12:36:37 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/25 15:28:15 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,114 +31,21 @@ int	parse_env_minishell(char **env, t_utils *utils)
 	return (0);
 }
 
-void	ft_check_access_minishell(char *buff, t_utils *utils)
+void	signals(int sig)
 {
-	int	i;
-	int	j;
-
-	i = 0;
-	j = 0;
-	while (j < 1)
+	(void)sig;
+	while (SIGQUIT)
 	{
-		printf("test access\n");
-		ft_check_access_two_minishell(buff, i, j, utils);
-		utils->cmd_ok = 0;
-		utils->wrong_cmd = 0;
-		j++;
+		// erase the ^/
+		break;
 	}
 }
 
-void	ft_check_access_two_minishell(char *buff, int i, int j, t_utils *utils)
+void	mem(t_utils *utils, t_shell *shell)
 {
-	while (utils->parse_env && utils->parse_env[i] && !utils->cmd_ok)
-	{
-		utils->temp = ft_split(&buff[j], ' ');
-		utils->join = ft_strjoin_three(utils->parse_env[i], "/", utils->temp[0]);
-		if (access(utils->join, F_OK) == 0)
-		{
-			ft_lstadd_back(&utils->lst, ft_lstnew(utils->temp,
-					ft_strdup(utils->join)));
-			printf("utils->temp[] = %s\n", utils->temp[0]);
-			printf("utils->temp[] = %s\n", utils->temp[1]);
-			utils->cmd_ok = 1;
-			printf("cmd ok\n");
-		}
-		else
-		{
-			if (utils->wrong_cmd == 0)
-			{
-				utils->error_msg = ft_strdup(utils->temp[0]);
-				utils->wrong_cmd = 1;
-			}
-			free_split(utils->temp);
-			utils->temp = NULL;
-		}
-		free(utils->join);
-		i++;
-	}
-	utils_cmd_ok_minishell(buff, j, utils);
+	ft_memset(utils, 0, sizeof(t_utils));
+	ft_memset(shell, 0, sizeof(t_shell));
 }
-
-void	utils_cmd_ok_minishell(char *buff, int j, t_utils *utils)
-{
-	if (!utils->cmd_ok)
-	{
-		utils->temp = ft_split(&buff[j], ' ');
-		ft_lstadd_back(&utils->lst, ft_lstnew(utils->temp, NULL));
-		if (!utils->invalid_fd)
-		{
-			write(2, "bash: ", 6);
-			write(2, utils->error_msg, ft_strlen(utils->error_msg));
-			write(2, ": Command not found\n", 20);
-			free(utils->error_msg);
-		}
-		else
-			error_msg(utils);
-	}
-	else
-		error_msg(utils);
-}
-
-void	opt_exec_minishell(char **environ, t_utils *utils, t_utils_list *tmp)
-{
-	pid_t	pid;
-
-	pid = fork();
-	if (pid < 0)
-		ft_error(0, strerror(errno), utils);
-	if (pid == 0)
-	{
-		if (!tmp->prev)
-			dup2(utils->fd_one, STDIN);
-		else
-			dup2(tmp->prev->pfd[STDIN], STDIN);
-		if (tmp->next)
-			dup2(tmp->pfd[STDOUT], STDOUT);
-		else
-			dup2(utils->fd_two, STDOUT);
-		// if (ft_strncmp(av[1], "/dev/urandom", 16) == 0)
-		// 	close(tmp->prev->pfd[STDIN]);
-		execve(tmp->path, tmp->cmd_opt, environ);
-		exit(127);
-	}
-	else
-		child_mini(pid, utils, tmp);
-}
-
-void	child_mini(pid_t pid, t_utils *utils, t_utils_list *tmp)
-{
-	(void)utils;
-	(void)tmp;
-	waitpid(pid, NULL, 0);
-	if (tmp->prev)
-		close(tmp->prev->pfd[STDIN]);
-	if (tmp->next)
-		close(tmp->pfd[STDOUT]);
-	if (!tmp->next)
-		printf("coucou\n");
-		// exit_function(utils);
-}
-
 
 int main(int ac, char **av, char **env)
 {
@@ -146,41 +53,29 @@ int main(int ac, char **av, char **env)
 	(void)av;
     char *buff;
     t_utils utils;
-    t_utils_list *tmp;
+	t_shell shell;
+	// t_token_list *tmp;
 	int i = 0;
 
-	// signal(SIGINT, function_ctrl-c); new prompt newline
-	// signal(SIGQUIT, function_ctrl-\); nothing
-	// signal(???, function_ctrl-d); exit the shell
-    ft_memset(&utils, 0, sizeof(t_utils));
+	mem(&utils, &shell);
     parse_env_minishell(env, &utils);
-	while (utils.parse_env[i])
-	{
-		printf("env = %s\n", utils.parse_env[i]);
-		i++;
-	}
-	write(1, "$> ", 3);
-    while (get_next_line(0, &buff))
+    while (1)
     {
-		printf("yo\n");
-		// buff = ls -la
-		// split pour metre ls et -la dans une liste
-		// on envoi la liste
-		ft_check_access_minishell(buff, &utils);
-        // ft_check_access(ac_bis, av_bis, &utils);
-
-        tmp = utils.lst;
-		while (tmp)
+		signal(SIGQUIT, signals);
+		buff = readline("Minishell $> ");
+		parsing_shit(buff, &shell);
+		while (shell.token)
 		{
-			if (tmp->next)
-			{
-				if (pipe(tmp->pfd) == -1)
-					ft_error(0, strerror(errno), &utils);
-			}
-			opt_exec_minishell(env, &utils, tmp);
-			tmp = tmp->next;
+			printf("-------------------------------------\n");
+			printf("list numero = [%d]\n", i);
+			printf("type = [%d]\n", shell.token->type);
+			printf("word = [%s]\n", shell.token->word);
+			printf("-------------------------------------\n");
+			i++;
+			shell.token = shell.token->next;
 		}
-        write(1, "$> ", 3);
+		(void)buff;
+		// printf("buff = %s\n", buff);
 	}
     write(1, "ciao\n", 5);
 }

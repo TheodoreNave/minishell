@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/24 12:28:15 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/25 15:16:42 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,84 @@
 # include <string.h>
 # include <fcntl.h>
 # include <stdio.h>
+# include <signal.h>
 # include <sys/types.h>
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <errno.h>
+# include <err.h>
+# include <readline/readline.h>
+# include <readline/history.h>
 
-typedef	struct s_shell
+# define BUFF_MAX 2048
+# define TYPE_PIPE 1
+# define TYPE_SIMPLE_QUOTE 2
+# define TYPE_DOUBLE_QUOTE 3
+# define TYPE_WORD 4
+# define TYPE_REDIR 5
+# define TYPE_ENV 6
+# define TYPE_DOLLARS 7
+
+
+typedef	struct s_token_list			// TOKEN PARSING
+{
+	int		type;
+	char	*word;
+
+	struct s_token_list *next;
+	struct s_token_list *prev;
+
+} t_token_list;
+
+typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 {
 
-} t_shell;
 
-int	parse_env_minishell(char **env, t_utils *utils);
+
+}	t_cmd_list;
+
+typedef struct s_shell				// MAIN STRUCTURE
+{
+	char 			buff_temp[BUFF_MAX];
+	int				x;
+	t_token_list	*token;
+
+}	t_shell;
+
+
+
+
+
+
+
+
+
+
+
+// ls -la wc | wc -c
+
+
+
+
+
+
+t_token_list	*ft_lstnew_shell(int type, char *word);
+
+void	ft_lstclear_shell(t_token_list **token);
+
+void	ft_lstadd_back_shell(t_token_list **token, t_token_list *new);
+
+int		ft_lstsize_shell(t_token_list *lst);
+
+void	add_to_buff(t_shell *shell, char c);
+
+int		parsing_shit(char *buff, t_shell *shell);
+
+void	mem(t_utils *utils, t_shell *shell);
+
+void	signals(int sig);
+
+int		parse_env_minishell(char **env, t_utils *utils);
 
 void	ft_check_access_minishell(char *buff, t_utils *utils);
 

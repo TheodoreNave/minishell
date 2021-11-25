@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:56:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/23 16:52:48 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/24 15:59:53 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,7 @@ void	ft_check_access_two(char **av, int i, int j, t_utils *utils)
 
 void	error_msg(t_utils *utils)
 {
+	printf("salut\n");
 	if (utils->error_msg)
 	{
 		free(utils->error_msg);

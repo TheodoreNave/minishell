@@ -6,7 +6,7 @@
 #    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/08/03 15:56:11 by tnave            ###   ########.fr        #
+#    Updated: 2021/11/25 15:16:54 by tnave            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,13 +15,15 @@ NAME = minishell
 SRCS =  get_next_line/get_next_line_utils.c 	\
 		get_next_line/get_next_line.c 			\
 		minishell.c								\
+		parsing.c								\
+		ft_lst.c 								\
 		pipex/exit_error.c						\
 		pipex/ft_lst.c							\
 		pipex/ft_split.c						\
 		pipex/parsing.c 						\
 		pipex/pipex.c							\
 		pipex/utils_two.c						\
-		pipex/utils.c 
+		pipex/utils.c
 
 CC = gcc
 
@@ -32,7 +34,7 @@ HEADER = -I ./includes/
 OBJ = $(SRCS:%.c=%.o)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS) -lreadline
 
 all: $(NAME)
 

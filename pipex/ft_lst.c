@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 11:38:46 by tnave             #+#    #+#             */
-/*   Updated: 2021/10/12 13:19:52 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/24 16:42:42 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,8 @@ void	ft_lstclear(t_utils_list **lst, void (*del)(void *))
 			free_split(end_list->cmd_opt);
 			end_list->cmd_opt = NULL;
 		}
-		ft_free(&end_list->path);
+		if (end_list->path != NULL)
+			ft_free(&end_list->path);
 		free(end_list);
 		end_list = end_list_two;
 	}
