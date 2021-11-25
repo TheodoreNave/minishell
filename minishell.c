@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/25 15:28:15 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/25 16:22:35 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,7 +55,7 @@ int main(int ac, char **av, char **env)
     t_utils utils;
 	t_shell shell;
 	// t_token_list *tmp;
-	int i = 0;
+	// int i = 0;
 
 	mem(&utils, &shell);
     parse_env_minishell(env, &utils);
@@ -64,16 +64,7 @@ int main(int ac, char **av, char **env)
 		signal(SIGQUIT, signals);
 		buff = readline("Minishell $> ");
 		parsing_shit(buff, &shell);
-		while (shell.token)
-		{
-			printf("-------------------------------------\n");
-			printf("list numero = [%d]\n", i);
-			printf("type = [%d]\n", shell.token->type);
-			printf("word = [%s]\n", shell.token->word);
-			printf("-------------------------------------\n");
-			i++;
-			shell.token = shell.token->next;
-		}
+		parsing_shit_two(&shell);
 		(void)buff;
 		// printf("buff = %s\n", buff);
 	}

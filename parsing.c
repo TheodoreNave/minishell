@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/25 15:33:01 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/25 18:32:08 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void	clear_buff(t_shell *shell)
 	return ;
 }
 
-int		add_symbol(t_shell *shell, char symbole)
+void		add_symbol(t_shell *shell, char symbole)
 {
 	if (symbole == '|')
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_PIPE, "|"));
@@ -53,12 +53,12 @@ int		add_symbol(t_shell *shell, char symbole)
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_DOUBLE_QUOTE, "\""));
 	else if (symbole == 39)
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_SIMPLE_QUOTE, "\'"));
-	return (0);
+	return ;
 }
 
 void	empty_buff_in_lst(t_shell *shell, char symbole)
 {
-	if (shell->buff_temp)
+	if (ft_strlen(shell->buff_temp) > 0)
 	{
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_WORD, shell->buff_temp));
 		clear_buff(shell);
@@ -72,7 +72,6 @@ void	empty_buff_in_lst(t_shell *shell, char symbole)
 
 int	parsing_shit(char *prompt, t_shell *shell)
 {
-	// cd | ls -la | echo theo
 	int i = 0;
 	while (prompt[i])
 	{
@@ -90,6 +89,5 @@ int	parsing_shit(char *prompt, t_shell *shell)
 	{
 		empty_buff_in_lst(shell, prompt[i]);
 	}
-	// if ()			''''
 	return (0);
 }

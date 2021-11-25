@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/25 15:16:42 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/25 17:16:12 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,7 @@
 # define TYPE_REDIR 5
 # define TYPE_ENV 6
 # define TYPE_DOLLARS 7
+# define TYPE_END 8
 
 
 typedef	struct s_token_list			// TOKEN PARSING
@@ -52,9 +53,11 @@ typedef	struct s_token_list			// TOKEN PARSING
 
 typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 {
+	char 	*cmd;
+	int 	type;
 
-
-
+	struct s_cmd_list *next;
+	struct s_cmd_list *prev;
 }	t_cmd_list;
 
 typedef struct s_shell				// MAIN STRUCTURE
@@ -80,7 +83,7 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 
 
-
+void	parsing_shit_two(t_shell *shell);
 
 t_token_list	*ft_lstnew_shell(int type, char *word);
 

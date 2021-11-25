@@ -6,7 +6,7 @@
 #    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/11/25 15:16:54 by tnave            ###   ########.fr        #
+#    Updated: 2021/11/25 16:23:05 by tnave            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS =  get_next_line/get_next_line_utils.c 	\
 		minishell.c								\
 		parsing.c								\
 		ft_lst.c 								\
+		parsing2.c 								\
 		pipex/exit_error.c						\
 		pipex/ft_lst.c							\
 		pipex/ft_split.c						\

@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:46:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/25 14:59:01 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/25 18:22:19 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,19 +47,23 @@ void	ft_lstclear_shell(t_token_list **token)
 
 void	ft_lstadd_back_shell(t_token_list **token, t_token_list *new)
 {
-	t_token_list	*end_list;
+	t_token_list	*tmp;
 
 	if (!token || !new)
 		return ;
 	if (*token)
 	{
-		end_list = *token;
-		while (end_list->next != NULL)
-			end_list = end_list->next;
-		end_list->next = new;
+		tmp = *token;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		tmp->next->prev = tmp;
 	}
 	else
+	{
+		new->prev = NULL;
 		*token = new;
+	}
 }
 
 int	ft_lstsize_shell(t_token_list *lst)
