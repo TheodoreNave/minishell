@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/25 16:22:35 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/25 19:12:52 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,12 +33,17 @@ int	parse_env_minishell(char **env, t_utils *utils)
 
 void	signals(int sig)
 {
-	(void)sig;
-	while (SIGQUIT)
+	if (sig == SIGQUIT)
 	{
-		// erase the ^/
-		break;
+		return ;
 	}
+	else if (sig == SIGINT)
+	{
+		sig = SIGCONT;
+		write(1, "\n", 1);
+		return ;
+	}
+	el
 }
 
 void	mem(t_utils *utils, t_shell *shell)
@@ -59,12 +64,13 @@ int main(int ac, char **av, char **env)
 
 	mem(&utils, &shell);
     parse_env_minishell(env, &utils);
+		signal(SIGQUIT, signals);
+		signal(SIGINT, signals);
     while (1)
     {
-		signal(SIGQUIT, signals);
 		buff = readline("Minishell $> ");
 		parsing_shit(buff, &shell);
-		parsing_shit_two(&shell);
+		// parsing_shit_two(&shell);
 		(void)buff;
 		// printf("buff = %s\n", buff);
 	}
