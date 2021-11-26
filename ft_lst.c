@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:46:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/26 13:47:26 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:22:58 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,6 @@ t_token_list	*ft_lstnew_shell(int type, char *word)
 	return (new_list);
 }
 
-t_cmd_list	*ft_lstnew_action(t_cmd_list *commandes)
-{
-	t_cmd_list	*new_list;
-
-	new_list = malloc(sizeof(t_cmd_list));
-	if (!(new_list))
-		return (NULL);
-	new_list->typetype = commandes->typetype;
-	new_list->cmd = ft_strdup(commandes->cmd);
-	new_list->opt = commandes->opt;
-	new_list->fichier = ft_strdup(commandes->fichier);
-	new_list->next = NULL;
-	return (new_list);
-}
 
 void	ft_lstclear_shell(t_token_list **token)
 {
@@ -59,6 +45,38 @@ void	ft_lstclear_shell(t_token_list **token)
 	}
 	*token = NULL;
 }
+
+
+void	ft_lstclear_action(t_cmd_list **action)
+{
+	t_cmd_list	*end_list;
+
+	if (!action)
+		return ;
+	while (*action != NULL)
+	{
+		end_list = *action;
+		if (end_list->cmd)
+		{
+			free(end_list->cmd);
+			end_list->cmd = NULL;
+		}
+		if (end_list->fichier)
+		{
+			free(end_list->fichier);
+			end_list->fichier = NULL;
+		}
+		if (end_list->opt)
+		{
+			free_split(end_list->opt);
+			end_list->opt = NULL;
+		}
+		*action = end_list->next;
+		free(end_list);
+	}
+	*action = NULL;
+}
+
 
 void	ft_lstadd_back_shell(t_token_list **token, t_token_list *new)
 {

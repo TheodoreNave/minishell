@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/26 16:55:46 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:23:13 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -77,9 +77,9 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 }	t_shell;
 
+void	ft_lstclear_action(t_cmd_list **action);
 
-
-
+void	ft_lstadd_back_action(t_cmd_list **action, t_cmd_list *new);
 
 // ls -la wc | wc -c
 

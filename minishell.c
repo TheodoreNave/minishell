@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/26 15:02:17 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:20:36 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,28 @@ void 	print_list_z(t_token_list *token)
 
 }
 
+void 	print_new_lst(t_cmd_list *lst)
+{
+	t_cmd_list *tmp;
+	tmp = lst;
+	int i = 0;
+	while (tmp)
+	{
+		printf("t_start = %d\n", tmp->type_start);
+		printf("fichier = %s\n", tmp->fichier);
+		printf("cmd     = %s\n", tmp->cmd);
+		printf("------------------opt-------------\n");
+		while (tmp->opt[i])
+		{
+			printf("opt[%d]     = %s\n", i, tmp->opt[i]);
+			i++;
+		}
+		printf("------------------opt-------------\n");
+		printf("t_end   = %d\n", tmp->type_end);
+		tmp = tmp->next;
+	}
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -88,9 +110,12 @@ int main(int ac, char **av, char **env)
 		parsing_shit(buff, &shell);
 		// print_list_z(shell.token);
 		parsing_shit_two(&shell);
+		print_new_lst(shell.action);
 		(void)buff;
 		// printf("buff = %s\n", buff);
 		ft_lstclear_shell(&shell.token);
+		ft_lstclear_action(&shell.action);
+	
 	}
     write(1, "ciao\n", 5);
 }

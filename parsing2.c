@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:21:10 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/26 17:05:55 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/11/26 17:17:31 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void parsing_shit_two(t_shell *shell)
 		}	
 		else
 			exit(1);
-		ft_lstadd_back(&shell->action, tmpp);
+		ft_lstadd_back_action(&shell->action, tmpp);
 	}
 	clear_buff(shell);
 	shell->x = 0;
