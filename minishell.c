@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/25 19:12:52 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/26 12:13:01 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,13 @@ void	signals(int sig)
 	{
 		return ;
 	}
-	else if (sig == SIGINT)
+	if (sig == SIGINT)
 	{
 		sig = SIGCONT;
 		write(1, "\n", 1);
+		// write(1, "Minishell $> ", 13);
 		return ;
 	}
-	el
 }
 
 void	mem(t_utils *utils, t_shell *shell)
