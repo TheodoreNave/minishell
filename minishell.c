@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/26 12:13:01 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/26 15:02:17 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,22 @@ void	mem(t_utils *utils, t_shell *shell)
 	ft_memset(shell, 0, sizeof(t_shell));
 }
 
+void 	print_list_z(t_token_list *token)
+{
+	t_token_list *tmp;
+
+	tmp = token;
+
+	while (tmp)
+	{
+		printf("========================\n");
+		printf("TAREUM = %s\n", tmp->word);
+		printf("========================\n");
+		tmp = tmp->next;
+	}
+
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -65,14 +81,16 @@ int main(int ac, char **av, char **env)
 	mem(&utils, &shell);
     parse_env_minishell(env, &utils);
 		signal(SIGQUIT, signals);
-		signal(SIGINT, signals);
+		// signal(SIGINT, signals);
     while (1)
     {
 		buff = readline("Minishell $> ");
 		parsing_shit(buff, &shell);
-		// parsing_shit_two(&shell);
+		// print_list_z(shell.token);
+		parsing_shit_two(&shell);
 		(void)buff;
 		// printf("buff = %s\n", buff);
+		ft_lstclear_shell(&shell.token);
 	}
     write(1, "ciao\n", 5);
 }

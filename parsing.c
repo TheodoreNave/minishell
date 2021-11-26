@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/25 18:32:08 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/26 15:08:58 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,15 @@ int	is_symbol(char c)
 
 void	add_to_buff(t_shell *shell, char c)
 {
+	// printf("%c\n", c);
 	shell->buff_temp[shell->x] = c;
+	shell->x++;
+}
+
+void	add_to_buff_two(t_shell *shell, char c)
+{
+	// printf("%c\n", c);
+	shell->buff_two[shell->x] = c;
 	shell->x++;
 }
 
@@ -38,6 +46,20 @@ void	clear_buff(t_shell *shell)
 	}
 	return ;
 }
+
+void	clear_buff_two(t_shell *shell)
+{
+	int i;
+
+	i = 0;
+	while (shell->buff_two[i])
+	{
+		shell->buff_two[i] = '\0';
+		i++;
+	}
+	return ;
+}
+
 
 void		add_symbol(t_shell *shell, char symbole)
 {

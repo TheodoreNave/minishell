@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:39:18 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/24 12:27:51 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/26 13:00:26 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 void	fd_exist(char **av, int ac, t_utils *utils)
 {
-	utils->fd_one = open(av[1], O_RDONLY);
+	utils->fd_one = open(av[1], O_RDONLY);			// < file1 pwd
 	utils->fd_two = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU
 			| S_IRGRP | S_IROTH);
 	if (utils->fd_one < 0)

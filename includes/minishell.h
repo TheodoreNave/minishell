@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/25 17:16:12 by tnave            ###   ########.fr       */
+/*   Updated: 2021/11/26 16:55:46 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,14 +31,16 @@
 # include <readline/history.h>
 
 # define BUFF_MAX 2048
-# define TYPE_PIPE 1
+# define TYPE_WORD 1
 # define TYPE_SIMPLE_QUOTE 2
 # define TYPE_DOUBLE_QUOTE 3
-# define TYPE_WORD 4
+# define TYPE_PIPE 4
 # define TYPE_REDIR 5
-# define TYPE_ENV 6
-# define TYPE_DOLLARS 7
-# define TYPE_END 8
+# define TYPE_REDIR_LEFT 6
+# define TYPE_REDIR_RIGHT 7
+# define TYPE_ENV 8
+# define TYPE_DOLLARS 9
+# define TYPE_END 10
 
 
 typedef	struct s_token_list			// TOKEN PARSING
@@ -54,7 +56,10 @@ typedef	struct s_token_list			// TOKEN PARSING
 typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 {
 	char 	*cmd;
-	int 	type;
+	char 	**opt;
+	char	*fichier;
+	int 	type_start;
+	int 	type_end;
 
 	struct s_cmd_list *next;
 	struct s_cmd_list *prev;
@@ -63,8 +68,12 @@ typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 typedef struct s_shell				// MAIN STRUCTURE
 {
 	char 			buff_temp[BUFF_MAX];
+	char			buff_two[BUFF_MAX];
 	int				x;
+	int				i;
 	t_token_list	*token;
+	t_cmd_list		*action;
+	
 
 }	t_shell;
 
@@ -72,16 +81,16 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 
 
-
-
-
-
-
-
 // ls -la wc | wc -c
 
+void	add_to_buff_two(t_shell *shell, char c);
+
+void	clear_buff_two(t_shell *shell);
 
 
+void 	print_list_z(t_token_list * token);
+
+void	clear_buff(t_shell *shell);
 
 void	parsing_shit_two(t_shell *shell);
 

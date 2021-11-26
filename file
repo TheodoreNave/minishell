@@ -1,0 +1,27 @@
+total 116
+drwxr-xr-x 7 tigerber 2020_paris  4096 Nov 26 16:40 .
+drwxr-xr-x 9 tigerber 2020_paris  4096 Nov 26 12:48 ..
+-rw-r--r-- 1 tigerber 2020_paris   184 Nov 26 13:15 EOF
+-rw-r--r-- 1 tigerber 2020_paris     0 Nov 26 16:40 file
+-rw-r--r-- 1 tigerber 2020_paris  2596 Nov 26 13:47 ft_lst.c
+-rw-r--r-- 1 tigerber 2020_paris  2936 Nov 26 16:37 ft_lst.o
+drwxr-xr-x 2 tigerber 2020_paris  4096 Nov 26 16:37 get_next_line
+drwxr-xr-x 8 tigerber 2020_paris  4096 Nov 26 12:49 .git
+-rw-r--r-- 1 tigerber 2020_paris   430 Nov 26 12:49 .gitignore
+drwxr-xr-x 2 tigerber 2020_paris  4096 Nov 26 12:49 includes
+-rw-r--r-- 1 tigerber 2020_paris     0 Nov 26 13:05 infile
+-rw-r--r-- 1 tigerber 2020_paris  1599 Nov 26 12:49 makefile
+-rwxr-xr-x 1 tigerber 2020_paris 28144 Nov 26 16:37 minishell
+-rw-r--r-- 1 tigerber 2020_paris  2278 Nov 26 15:02 minishell.c
+-rw-r--r-- 1 tigerber 2020_paris  3576 Nov 26 16:37 minishell.o
+-rw-r--r-- 1 tigerber 2020_paris    47 Nov 26 12:53 outfile
+-rw-r--r-- 1 tigerber 2020_paris  1813 Nov 26 16:40 parsing2.c
+-rw-r--r-- 1 tigerber 2020_paris  2544 Nov 26 16:37 parsing2.o
+-rw-r--r-- 1 tigerber 2020_paris  2837 Nov 26 15:08 parsing.c
+-rw-r--r-- 1 tigerber 2020_paris  4096 Nov 26 16:37 parsing.o
+drwxr-xr-x 2 tigerber 2020_paris  4096 Nov 26 16:37 pipex
+-rw-r--r-- 1 tigerber 2020_paris  3415 Nov 26 12:49 pipex_mini.c
+-rw-r--r-- 1 tigerber 2020_paris    11 Nov 26 12:49 README.md
+-rw-r--r-- 1 tigerber 2020_paris     0 Nov 26 13:03 tou
+-rw-r--r-- 1 tigerber 2020_paris    47 Nov 26 12:53 txt.c
+drwxr-xr-x 2 tigerber 2020_paris  4096 Nov 26 12:49 .vscode
