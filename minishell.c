@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/26 17:20:36 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/11/29 15:55:57 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,8 @@ void 	print_list_z(t_token_list *token)
 	while (tmp)
 	{
 		printf("========================\n");
-		printf("TAREUM = %s\n", tmp->word);
+		printf("Token = [%s]\n", tmp->word);
+		printf("type = [%d]\n", tmp->type);
 		printf("========================\n");
 		tmp = tmp->next;
 	}
@@ -108,9 +109,9 @@ int main(int ac, char **av, char **env)
     {
 		buff = readline("Minishell $> ");
 		parsing_shit(buff, &shell);
-		// print_list_z(shell.token);
-		parsing_shit_two(&shell);
-		print_new_lst(shell.action);
+		print_list_z(shell.token);
+		// parsing_shit_two(&shell);
+		// print_new_lst(shell.action);
 		(void)buff;
 		// printf("buff = %s\n", buff);
 		ft_lstclear_shell(&shell.token);

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/26 17:23:13 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/11/29 16:09:15 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 typedef struct s_shell				// MAIN STRUCTURE
 {
 	char 			buff_temp[BUFF_MAX];
-	char			buff_two[BUFF_MAX];
 	int				x;
 	int				i;
 	t_token_list	*token;
@@ -77,16 +76,11 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 }	t_shell;
 
+int		add_to_buff_quote(char *prompt, char c, t_shell *shell);
+
 void	ft_lstclear_action(t_cmd_list **action);
 
 void	ft_lstadd_back_action(t_cmd_list **action, t_cmd_list *new);
-
-// ls -la wc | wc -c
-
-void	add_to_buff_two(t_shell *shell, char c);
-
-void	clear_buff_two(t_shell *shell);
-
 
 void 	print_list_z(t_token_list * token);
 
@@ -101,6 +95,8 @@ void	ft_lstclear_shell(t_token_list **token);
 void	ft_lstadd_back_shell(t_token_list **token, t_token_list *new);
 
 int		ft_lstsize_shell(t_token_list *lst);
+
+void	add_to_buff_no_space(t_shell *shell, char c);
 
 void	add_to_buff(t_shell *shell, char c);
 

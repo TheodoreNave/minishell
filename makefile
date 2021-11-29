@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
+#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/11/25 16:23:05 by tnave            ###   ########.fr        #
+#    Updated: 2021/11/29 16:56:26 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,12 @@ HEADER = -I ./includes/
 OBJ = $(SRCS:%.c=%.o)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS) -lreadline
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS) -lreadline -fsanitize=address
 
 all: $(NAME)
 
 %.o%.c:
-	$(CC) -c $(CFLAGS) -I $(HEADER) $< -o ${<:.c=.o}
+	$(CC) -c $(CFLAGS) -I $(HEADER) $< -o ${<:.c=.o} -fsanitize=address
 
 clean:
 	rm -f $(OBJ)
