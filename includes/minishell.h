@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/29 16:09:15 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:31:23 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ typedef struct s_shell				// MAIN STRUCTURE
 {
 	char 			buff_temp[BUFF_MAX];
 	int				x;
-	int				i;
+	int				i;	
 	t_token_list	*token;
 	t_cmd_list		*action;
 	

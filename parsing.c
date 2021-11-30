@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/29 17:27:58 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/11/30 15:26:59 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,39 +84,62 @@ void	empty_buff_in_lst(t_shell *shell, char symbole)
 
 int	add_to_buff_quote(char *prompt, char c, t_shell *shell)
 {
-	int i = 1;
-	printf("i = %d\n", i);
+	int i;
+	
+	i = 1;
 	printf("prompt = [%s]\n", prompt);
 	if (c == '\0')
 		return 0;
+	if (prompt[i] == c)
+		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_WORD, ""));
 	while (prompt[i] && prompt[i] != c)
 	{
 		add_to_buff(shell, prompt[i]);
 		i++;
 	}
-	// empty_buff_in_lst(shell, 0);
+	if (prompt[i] != c)
+		printf("erreur quote!\n");
 	return (i);
+}
+
+int	is_double_redir(char a, char b)
+{
+	if (a == '<' && b == '<')
+		return (1);
+	else if (a == '>' && b == '>')
+		return (1);
+	return (0);
+}
+
+int	add_to_buff_redir(char c, t_shell *shell)
+{
+	if (c == '<')	
+		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_REDIR, "<<"));
+	else if (c == '>')
+		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_REDIR, ">>"));
+	return (1);
 }
 
 int	parsing_shit(char *prompt, t_shell *shell)
 {
-	int i = 0;
-	int quote = 0;
+	int i;
+	
+	i = 0;
 	while (prompt[i])
 	{
 		if (prompt[i] == 34 || prompt[i] == 39)
 		{
-			// i += add_to_buff_quote(&prompt[i], prompt[i], shell);
-			quote = quote ? 0 : 1;
+			i += add_to_buff_quote(&prompt[i], prompt[i], shell);
+		}
+		else if (is_double_redir(prompt[i], prompt[i + 1]))
+		{
+			i += add_to_buff_redir(prompt[i], shell);
 		}
 		else if (!is_symbol(prompt[i]))
 		{
-			if (quote)
-				add_to_buff(shell, prompt[i]);
-			else
-				add_to_buff_no_space(shell, prompt[i]);
+			add_to_buff_no_space(shell, prompt[i]);
 		} 
-		else if (is_symbol(prompt[i]) && !quote)
+		else if (is_symbol(prompt[i]))
 		{
 			empty_buff_in_lst(shell, prompt[i]);
 		}
