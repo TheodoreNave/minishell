@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/29 15:55:57 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/01 16:24:22 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,8 @@ int main(int ac, char **av, char **env)
 		buff = readline("Minishell $> ");
 		parsing_shit(buff, &shell);
 		print_list_z(shell.token);
-		// parsing_shit_two(&shell);
+		if (!parsing_shit_two(&shell)) 
+			return (0);
 		// print_new_lst(shell.action);
 		(void)buff;
 		// printf("buff = %s\n", buff);
@@ -119,4 +120,5 @@ int main(int ac, char **av, char **env)
 	
 	}
     write(1, "ciao\n", 5);
+	return (0);
 }

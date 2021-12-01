@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/30 15:31:23 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/01 16:25:06 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,8 @@
 # define TYPE_REDIR_RIGHT 7
 # define TYPE_ENV 8
 # define TYPE_DOLLARS 9
-# define TYPE_END 10
+# define TYPE_HEREDOC 10
+# define TYPE_END 11
 
 
 typedef	struct s_token_list			// TOKEN PARSING
@@ -76,6 +77,8 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 }	t_shell;
 
+int		ft_error_two(char *str, t_shell *shell);
+
 int		add_to_buff_quote(char *prompt, char c, t_shell *shell);
 
 void	ft_lstclear_action(t_cmd_list **action);
@@ -86,7 +89,7 @@ void 	print_list_z(t_token_list * token);
 
 void	clear_buff(t_shell *shell);
 
-void	parsing_shit_two(t_shell *shell);
+int 	parsing_shit_two(t_shell *shell);
 
 t_token_list	*ft_lstnew_shell(int type, char *word);
 

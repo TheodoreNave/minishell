@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/30 15:26:59 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:57:14 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -114,7 +114,7 @@ int	is_double_redir(char a, char b)
 int	add_to_buff_redir(char c, t_shell *shell)
 {
 	if (c == '<')	
-		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_REDIR, "<<"));
+		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_HEREDOC, "<<"));
 	else if (c == '>')
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_REDIR, ">>"));
 	return (1);

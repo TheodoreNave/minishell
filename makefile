@@ -6,7 +6,7 @@
 #    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/11/29 16:56:26 by tigerber         ###   ########.fr        #
+#    Updated: 2021/12/01 16:03:21 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -35,12 +35,12 @@ HEADER = -I ./includes/
 OBJ = $(SRCS:%.c=%.o)
 
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS) -lreadline -fsanitize=address
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS) -lreadline
 
 all: $(NAME)
 
 %.o%.c:
-	$(CC) -c $(CFLAGS) -I $(HEADER) $< -o ${<:.c=.o} -fsanitize=address
+	$(CC) -c $(CFLAGS) -I $(HEADER) $< -o ${<:.c=.o}
 
 clean:
 	rm -f $(OBJ)
