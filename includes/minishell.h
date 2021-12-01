@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/01 16:25:06 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/01 18:04:58 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,14 +70,17 @@ typedef struct s_shell				// MAIN STRUCTURE
 {
 	char 			buff_temp[BUFF_MAX];
 	int				x;
-	int				i;	
+	int				i;
+	int				quote;			
 	t_token_list	*token;
 	t_cmd_list		*action;
 	
 
 }	t_shell;
 
-int		ft_error_two(char *str, t_shell *shell);
+void 	parse_dollars(char *str, t_shell *shell);
+
+int		ft_error_two(char *str, t_shell *shell, int error);
 
 int		add_to_buff_quote(char *prompt, char c, t_shell *shell);
 

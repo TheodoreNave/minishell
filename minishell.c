@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/01 16:24:22 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:47:18 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,8 +61,11 @@ void 	print_list_z(t_token_list *token)
 	while (tmp)
 	{
 		printf("========================\n");
+		printf("prev = [%p]\n", tmp->prev);
+		printf("temp = [%p]\n", tmp);
 		printf("Token = [%s]\n", tmp->word);
 		printf("type = [%d]\n", tmp->type);
+		printf("next = [%p]\n", tmp->next);
 		printf("========================\n");
 		tmp = tmp->next;
 	}
@@ -108,13 +111,12 @@ int main(int ac, char **av, char **env)
     while (1)
     {
 		buff = readline("Minishell $> ");
-		parsing_shit(buff, &shell);
+		if (!parsing_shit(buff, &shell))
+			return (0);
 		print_list_z(shell.token);
 		if (!parsing_shit_two(&shell)) 
 			return (0);
 		// print_new_lst(shell.action);
-		(void)buff;
-		// printf("buff = %s\n", buff);
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
 	

@@ -6,50 +6,59 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:21:10 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/01 16:54:17 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:53:39 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-int	ft_error_two(char *str, t_shell *shell)
+int	ft_error_two(char *str, t_shell *shell, int error)
 {
 	(void)shell;
-	printf("bash: syntax error near unexpected token `%s'\n", str);
+	if (error == 1)
+	{
+		printf("bash: syntax error near unexpected token `%s'\n", str);
+	}
+	if (error == 2)
+	{
+		printf(">\n");
+	}
+	ft_lstclear_shell(&shell->token);
+	// ft_lstclear_action(&shell.action);
 	// strerror(errno) tard plus
 	return (0);
 }
-
 
 int parsing_shit_two(t_shell *shell)
 {
 	t_token_list *tmp;
 
-	tmp = shell->token;	
+	tmp = shell->token;
+	
 	while (tmp)
 	{
 		if (tmp->type == TYPE_REDIR && tmp->next)
 		{
 			if (tmp->next->type == TYPE_PIPE || tmp->next->type == TYPE_REDIR)
-				return (ft_error_two(tmp->next->word, shell));
+				return (ft_error_two(tmp->next->word, shell, 1));
 		}
-		if (tmp->type == TYPE_PIPE && tmp->next)
+		else if (tmp->type == TYPE_PIPE && tmp->prev == NULL)
+		{
+			return(ft_error_two(tmp->word, shell, 1));
+		}
+		else if (tmp->type == TYPE_PIPE && tmp->next)
 		{
 			if (tmp->next->type == TYPE_PIPE)
-				return (ft_error_two(tmp->next->word, shell));
+				return (ft_error_two(tmp->next->word, shell, 1));
 		}
-		if (tmp->type == TYPE_PIPE && tmp->next == NULL)
+		else if (tmp->type == TYPE_PIPE && tmp->next == NULL)
 		{
 			printf(">\n");
 			return (0);
 		}
-		if (tmp->type == TYPE_REDIR && tmp->next == NULL)
+		else if (tmp->type == TYPE_REDIR && tmp->next == NULL)
 		{
-			return (ft_error_two("newline", shell));
-		}
-		if (tmp->type == TYPE_PIPE && tmp->prev == NULL)
-		{
-			return(ft_error_two(tmp->word, shell));
+			return (ft_error_two("newline", shell, 1));
 		}
 		tmp = tmp->next;
 	}

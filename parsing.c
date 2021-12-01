@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/01 15:57:14 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/01 19:41:14 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,6 @@ int	add_to_buff_quote(char *prompt, char c, t_shell *shell)
 	int i;
 	
 	i = 1;
-	printf("prompt = [%s]\n", prompt);
 	if (c == '\0')
 		return 0;
 	if (prompt[i] == c)
@@ -98,7 +97,7 @@ int	add_to_buff_quote(char *prompt, char c, t_shell *shell)
 		i++;
 	}
 	if (prompt[i] != c)
-		printf("erreur quote!\n");
+		shell->quote = -1;
 	return (i);
 }
 
@@ -130,6 +129,8 @@ int	parsing_shit(char *prompt, t_shell *shell)
 		if (prompt[i] == 34 || prompt[i] == 39)
 		{
 			i += add_to_buff_quote(&prompt[i], prompt[i], shell);
+			if (shell->quote == -1)
+				return (ft_error_two(NULL, shell, 2));
 		}
 		else if (is_double_redir(prompt[i], prompt[i + 1]))
 		{
@@ -149,5 +150,5 @@ int	parsing_shit(char *prompt, t_shell *shell)
 	{
 		empty_buff_in_lst(shell, prompt[i]);
 	}
-	return (0);
+	return (1);
 }
