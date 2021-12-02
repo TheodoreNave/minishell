@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/02 17:51:53 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/02 19:25:39 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,6 +79,7 @@ void 	print_new_lst(t_cmd_list *lst)
 	int i = 0;
 	while (tmp)
 	{
+		printf("**************************************************\n");
 		printf("t_start = %d\n", tmp->type_start);
 		printf("fichier = %s\n", tmp->fichier);
 		printf("------------------opt-------------\n");
@@ -89,11 +90,14 @@ void 	print_new_lst(t_cmd_list *lst)
 				printf("opt[%d]     = %s\n", i, tmp->opt[i]);
 				i++;
 			}
+			i = 0;
 		}
 		printf("------------------opt-------------\n");
 		printf("t_end   = %d\n", tmp->type_end);
+		printf("**************************************************\n");
 		tmp = tmp->next;
 	}
+	printf("alooo\n");
 }
 
 int main(int ac, char **av, char **env)

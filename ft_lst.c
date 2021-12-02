@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:46:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/02 17:49:18 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/02 20:12:26 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ void	ft_lstclear_shell(t_token_list **token)
 	while (*token != NULL)
 	{
 		end_list = *token;
+		printf("==> %p %s\n", end_list->word, end_list->word);
 		if (end_list->word)
 		{
 			free(end_list->word);
@@ -49,30 +50,39 @@ void	ft_lstclear_shell(t_token_list **token)
 
 void	ft_lstclear_action(t_cmd_list **action)
 {
-	t_cmd_list	*end_list;
+	printf("FREE_action\n");
+	t_cmd_list	*temp;
 
 	if (!action)
 		return ;
 	while (*action != NULL)
 	{
-		end_list = *action;
-		// if (end_list->cmd)
+		temp = *action;
+		for (int i = 0 ; temp->opt[i] ; i++)
+			printf("==> %p %s\n", temp->opt[i], temp->opt[i]);
+		// if (temp->cmd)
 		// {
-		// 	free(end_list->cmd);
-		// 	end_list->cmd = NULL;
+		// 	free(temp->cmd);
+		// 	temp->cmd = NULL;
 		// }
-		if (end_list->fichier)
+		if (temp->fichier)
 		{
-			free(end_list->fichier);
-			end_list->fichier = NULL;
+			free(temp->fichier);
+			temp->fichier = NULL;
 		}
-		if (end_list->opt)
+		if (temp->opt)
 		{
-			free_split(end_list->opt);
-			end_list->opt = NULL;
+			// for (int i = 0 ; temp->opt[i] ; i++)
+			// {	
+			// 	free(temp->opt[i]);
+			// 	temp->opt[i] = NULL;
+			// }
+			free_split(temp->opt);
+			// free(temp->opt);
+			temp->opt = NULL;
 		}
-		*action = end_list->next;
-		free(end_list);
+		*action = temp->next;
+		free(temp);
 	}
 	*action = NULL;
 }

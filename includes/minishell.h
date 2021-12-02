@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/02 17:57:39 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/02 19:38:15 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ typedef	struct s_token_list			// TOKEN PARSING
 
 typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 {
+	//char 	*cmd;
 	int 	type_start;		// <
 	char	*fichier;
-	char 	*cmd;
 	char 	**opt;
 	int 	type_end;
 
@@ -78,7 +78,7 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 void 	print_new_lst(t_cmd_list *lst);
 
-void		malloc_opt(t_token_list **tmp, t_cmd_list *tpmp);
+void	malloc_opt(t_token_list *tmp, t_cmd_list *tpmp);
 
 int		fill_cmd(t_shell *shell);
 

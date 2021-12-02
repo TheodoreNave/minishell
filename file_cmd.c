@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:24:23 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/02 17:59:34 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/02 20:15:09 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void		malloc_opt(t_token_list *tmp, t_cmd_list *tpmp)
 
 	i = 0;
 	size = ft_lstsize_shell(tmp);
-	tpmp->opt = malloc(sizeof(size + 1));
+	tpmp->opt = malloc(sizeof(char *) * (size + 1));
 	if (!tpmp->opt)
 		return ;
 	while (i < size)
 	{
 		tpmp->opt[i] = ft_strdup(tmp->word);
+		printf("+++ allocating %p for %s\n", tpmp->opt[i], tmp->word);
 		i++;
 		tmp = tmp->next;
 	}
@@ -35,17 +36,17 @@ void		malloc_opt(t_token_list *tmp, t_cmd_list *tpmp)
 
 int		fill_cmd(t_shell *shell)
 {
-	(void)shell;
 	t_token_list *tmp;
-	t_cmd_list *tpmp;
 
 	tmp = shell->token;
-	tpmp = malloc(sizeof(t_cmd_list));
-	if (!tpmp)
-		return (0);
-	// while (tmp)
-	// {
-						printf("entre\n");
+	while (tmp)
+	{
+		printf("LAPS\n");
+		t_cmd_list *tpmp;
+		tpmp = malloc(sizeof(t_cmd_list));
+		if (!tpmp)
+			return (0);
+		ft_memset(tpmp, 0, sizeof(t_cmd_list));
 		if (tmp->type == TYPE_REDIR_LEFT || tmp->type == TYPE_REDIR_RIGHT)
 		{
 			tpmp->type_start = tmp->type;
@@ -56,14 +57,25 @@ int		fill_cmd(t_shell *shell)
 				tmp = tmp->next;
 				if (tmp)
 				{
-					// < fichier      ls -la -l
 					if (tmp->type == TYPE_WORD)							// SI commande et/ou options
-					{
 						malloc_opt(tmp, tpmp);
+					while (tmp != NULL && tmp->type == TYPE_WORD)
+						tmp = tmp->next;
+					if (tmp)
+					{
+						printf("TMP->TYPE = %d\n", tmp->type);
+						printf("TMP->WORD = %s\n", tmp->word);
+						tpmp->type_end = tmp->type;
 						ft_lstadd_back_action(&shell->action, tpmp);
+						tmp = tmp->prev;
 					}
-					printf("tmp->ASDKJKLASJDLJASL = %d\n", tmp->type);
-					printf("tmp->LOL = %s\n", tmp->word);
+					else
+					{
+						tpmp->type_end = TYPE_END;
+						ft_lstadd_back_action(&shell->action, tpmp);
+						printf("OK\n");
+						break ;
+					}
 				}
 				else
 				{
@@ -72,9 +84,9 @@ int		fill_cmd(t_shell *shell)
 				}
 			}
 		}
-		print_new_lst(shell->action);
-	// 	tmp = tmp->next;
-	// }
+		tmp = tmp->next;
+	}
+	print_new_lst(shell->action);
 
 	return (0);
 }

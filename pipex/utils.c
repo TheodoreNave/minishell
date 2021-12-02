@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 11:37:42 by tnave             #+#    #+#             */
-/*   Updated: 2021/10/15 15:24:56 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/02 19:44:58 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,9 @@ void	free_split(char **tab)
 	{
 		if (tab[i])
 		{
+			printf("> %s\n", tab[i]);
 			free(tab[i]);
+			printf("> Freed !\n");
 			tab[i] = NULL;
 		}
 		i++;
