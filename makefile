@@ -3,21 +3,20 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
+#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/01 16:03:21 by tigerber         ###   ########.fr        #
+#    Updated: 2021/12/02 17:21:32 by tnave            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS =  get_next_line/get_next_line_utils.c 	\
-		get_next_line/get_next_line.c 			\
-		minishell.c								\
+SRCS =  minishell.c								\
 		parsing.c								\
 		ft_lst.c 								\
 		parsing2.c 								\
+		file_cmd.c 								\
 		pipex/exit_error.c						\
 		pipex/ft_lst.c							\
 		pipex/ft_split.c						\
@@ -34,8 +33,10 @@ HEADER = -I ./includes/
 
 OBJ = $(SRCS:%.c=%.o)
 
+LIBS = -lreadline
+
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS) -lreadline
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS)
 
 all: $(NAME)
 

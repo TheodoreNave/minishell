@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:46:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/26 17:22:58 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:49:18 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,11 +56,11 @@ void	ft_lstclear_action(t_cmd_list **action)
 	while (*action != NULL)
 	{
 		end_list = *action;
-		if (end_list->cmd)
-		{
-			free(end_list->cmd);
-			end_list->cmd = NULL;
-		}
+		// if (end_list->cmd)
+		// {
+		// 	free(end_list->cmd);
+		// 	end_list->cmd = NULL;
+		// }
 		if (end_list->fichier)
 		{
 			free(end_list->fichier);
@@ -127,7 +127,7 @@ int	ft_lstsize_shell(t_token_list *lst)
 
 	i = 0;
 	tmp = lst;
-	while (tmp != NULL)
+	while (tmp != NULL && tmp->type == TYPE_WORD)
 	{
 		tmp = tmp->next;
 		i++;

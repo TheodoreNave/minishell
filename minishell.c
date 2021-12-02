@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/01 19:47:18 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:51:53 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,14 @@ void 	print_new_lst(t_cmd_list *lst)
 	{
 		printf("t_start = %d\n", tmp->type_start);
 		printf("fichier = %s\n", tmp->fichier);
-		printf("cmd     = %s\n", tmp->cmd);
 		printf("------------------opt-------------\n");
-		while (tmp->opt[i])
+		if (tmp->opt)
 		{
-			printf("opt[%d]     = %s\n", i, tmp->opt[i]);
-			i++;
+			while (tmp->opt[i])
+			{
+				printf("opt[%d]     = %s\n", i, tmp->opt[i]);
+				i++;
+			}
 		}
 		printf("------------------opt-------------\n");
 		printf("t_end   = %d\n", tmp->type_end);
@@ -113,13 +115,12 @@ int main(int ac, char **av, char **env)
 		buff = readline("Minishell $> ");
 		if (!parsing_shit(buff, &shell))
 			return (0);
-		print_list_z(shell.token);
-		if (!parsing_shit_two(&shell)) 
-			return (0);
+		// print_list_z(shell.token);
+		if (parsing_shit_two(&shell))
+			fill_cmd(&shell);
 		// print_new_lst(shell.action);
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
-	
 	}
     write(1, "ciao\n", 5);
 	return (0);

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/01 18:04:58 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/02 17:57:39 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,6 @@
 # define MINISHELL_H
 
 # include "pipex.h"
-# include "get_next_line.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
@@ -56,10 +55,10 @@ typedef	struct s_token_list			// TOKEN PARSING
 
 typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 {
+	int 	type_start;		// <
+	char	*fichier;
 	char 	*cmd;
 	char 	**opt;
-	char	*fichier;
-	int 	type_start;
 	int 	type_end;
 
 	struct s_cmd_list *next;
@@ -71,12 +70,17 @@ typedef struct s_shell				// MAIN STRUCTURE
 	char 			buff_temp[BUFF_MAX];
 	int				x;
 	int				i;
-	int				quote;			
+	int				quote;
 	t_token_list	*token;
 	t_cmd_list		*action;
-	
 
 }	t_shell;
+
+void 	print_new_lst(t_cmd_list *lst);
+
+void		malloc_opt(t_token_list **tmp, t_cmd_list *tpmp);
+
+int		fill_cmd(t_shell *shell);
 
 void 	parse_dollars(char *str, t_shell *shell);
 

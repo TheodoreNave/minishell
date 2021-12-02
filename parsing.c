@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/01 19:41:14 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:38:18 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,9 +55,9 @@ void		add_symbol(t_shell *shell, char symbole)
 	if (symbole == '|')
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_PIPE, "|"));
 	else if (symbole == '<')
-		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_REDIR, "<"));
+		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_REDIR_LEFT, "<"));
 	else if (symbole == '>')
-		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_REDIR, ">"));
+		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_REDIR_RIGHT, ">"));
 	else if (symbole == '$')
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_DOLLARS, "$"));
 	else if (symbole == 34)

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:21:10 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/01 19:53:39 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/02 15:39:31 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,12 +34,11 @@ int parsing_shit_two(t_shell *shell)
 	t_token_list *tmp;
 
 	tmp = shell->token;
-	
 	while (tmp)
 	{
-		if (tmp->type == TYPE_REDIR && tmp->next)
+		if ((tmp->type == TYPE_REDIR_LEFT || tmp->type == TYPE_REDIR_RIGHT) && tmp->next)
 		{
-			if (tmp->next->type == TYPE_PIPE || tmp->next->type == TYPE_REDIR)
+			if (tmp->next->type == TYPE_PIPE || tmp->next->type == TYPE_REDIR_LEFT || tmp->next->type == TYPE_REDIR_RIGHT)
 				return (ft_error_two(tmp->next->word, shell, 1));
 		}
 		else if (tmp->type == TYPE_PIPE && tmp->prev == NULL)
@@ -56,7 +55,7 @@ int parsing_shit_two(t_shell *shell)
 			printf(">\n");
 			return (0);
 		}
-		else if (tmp->type == TYPE_REDIR && tmp->next == NULL)
+		else if ((tmp->type == TYPE_REDIR_LEFT || tmp->type == TYPE_REDIR_RIGHT) && tmp->next == NULL)
 		{
 			return (ft_error_two("newline", shell, 1));
 		}
