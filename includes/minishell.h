@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/02 19:38:15 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/03 14:11:01 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,10 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 void 	print_new_lst(t_cmd_list *lst);
 
-void	malloc_opt(t_token_list *tmp, t_cmd_list *tpmp);
+void	malloc_opt(t_token_list **tmp, t_cmd_list *tpmp);
+
+int	init_lst_redir(t_shell *shell, t_token_list **tmp, t_cmd_list *tpmp);
+
 
 int		fill_cmd(t_shell *shell);
 

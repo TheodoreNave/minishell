@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
+#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/02 17:21:32 by tnave            ###   ########.fr        #
+#    Updated: 2021/12/03 14:37:40 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,6 +17,7 @@ SRCS =  minishell.c								\
 		ft_lst.c 								\
 		parsing2.c 								\
 		file_cmd.c 								\
+		file_cmd_redir.c 						\
 		pipex/exit_error.c						\
 		pipex/ft_lst.c							\
 		pipex/ft_split.c						\

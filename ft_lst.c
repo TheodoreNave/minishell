@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:46:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/02 20:12:26 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/03 13:11:14 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_lstclear_shell(t_token_list **token)
 	while (*token != NULL)
 	{
 		end_list = *token;
-		printf("==> %p %s\n", end_list->word, end_list->word);
 		if (end_list->word)
 		{
 			free(end_list->word);
@@ -58,8 +57,6 @@ void	ft_lstclear_action(t_cmd_list **action)
 	while (*action != NULL)
 	{
 		temp = *action;
-		for (int i = 0 ; temp->opt[i] ; i++)
-			printf("==> %p %s\n", temp->opt[i], temp->opt[i]);
 		// if (temp->cmd)
 		// {
 		// 	free(temp->cmd);
@@ -72,11 +69,6 @@ void	ft_lstclear_action(t_cmd_list **action)
 		}
 		if (temp->opt)
 		{
-			// for (int i = 0 ; temp->opt[i] ; i++)
-			// {	
-			// 	free(temp->opt[i]);
-			// 	temp->opt[i] = NULL;
-			// }
 			free_split(temp->opt);
 			// free(temp->opt);
 			temp->opt = NULL;
