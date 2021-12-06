@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/03 19:16:53 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/06 13:09:21 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,7 +115,7 @@ int main(int ac, char **av, char **env)
 	// int i = 0;
 
 	mem(&utils, &shell);
-    parse_env_minishell(env, &utils);
+	// built_in_check(&shell);
 		signal(SIGQUIT, signals);
 		// signal(SIGINT, signals);
     while (1)
@@ -127,6 +127,17 @@ int main(int ac, char **av, char **env)
 		if (parsing_shit_two(&shell))
 			fill_cmd(&shell);
 		// print_new_lst(shell.action);
+							// cmd is the result of the parsing
+		parse_env_minishell(env, &utils);
+		if (is_built_in(shell.action->opt[0]))
+		{
+			printf("cmd is ok\n");
+			built_in_check(env, shell.action->opt, &shell);
+			return (1);
+		}
+		else {
+			printf("pas la bonne commande\n");
+		}
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
 	}

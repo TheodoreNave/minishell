@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/03 14:11:01 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/06 13:05:59 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@
 # include <sys/wait.h>
 # include <sys/stat.h>
 # include <errno.h>
+# include <limits.h>
 # include <err.h>
 # include <readline/readline.h>
 # include <readline/history.h>
@@ -76,12 +77,21 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 }	t_shell;
 
+int		built_in_env(char **env);
+
+int		is_built_in(char *cmd);
+
+int		built_in_pwd(t_shell *shell);
+
+int		built_in_cd(t_shell *shell, char *path);
+
+int		built_in_check(char **env, char **built_in, t_shell *shell);
+
 void 	print_new_lst(t_cmd_list *lst);
 
 void	malloc_opt(t_token_list **tmp, t_cmd_list *tpmp);
 
-int	init_lst_redir(t_shell *shell, t_token_list **tmp, t_cmd_list *tpmp);
-
+int		init_lst_redir(t_shell *shell, t_token_list **tmp, t_cmd_list *tpmp);
 
 int		fill_cmd(t_shell *shell);
 
