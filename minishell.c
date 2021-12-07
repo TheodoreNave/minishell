@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/06 13:09:21 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/07 12:28:26 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,20 @@ void 	print_new_lst(t_cmd_list *lst)
 	}
 }
 
+char	*prompt(t_shell *shell, char *buff)
+{
+	char *temp;
+	char *join_temp;
+	
+	temp = getcwd(shell->buff_pwd, sizeof(shell->buff_pwd));
+	if (!temp)
+		free(temp);
+	join_temp = ft_strjoin(temp , " $> ");
+	buff = readline(join_temp);
+	free(join_temp);
+	return (buff);
+}
+
 int main(int ac, char **av, char **env)
 {
 	(void)ac;
@@ -118,9 +132,12 @@ int main(int ac, char **av, char **env)
 	// built_in_check(&shell);
 		signal(SIGQUIT, signals);
 		// signal(SIGINT, signals);
+	if (chdir(getenv("HOME")) == -1)
+		ft_error_two("chdir()", &shell, 1);
     while (1)
     {
-		buff = readline("Minishell $> ");
+		// buff = readline("Minishell $> ");
+		buff = prompt(&shell, buff);
 		if (!parsing_shit(buff, &shell))
 			return (0);
 		// print_list_z(shell.token);
@@ -133,9 +150,10 @@ int main(int ac, char **av, char **env)
 		{
 			printf("cmd is ok\n");
 			built_in_check(env, shell.action->opt, &shell);
-			return (1);
+			// return (1);
 		}
-		else {
+		else
+		{
 			printf("pas la bonne commande\n");
 		}
 		ft_lstclear_shell(&shell.token);

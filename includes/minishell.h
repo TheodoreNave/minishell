@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/06 13:05:59 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/07 12:03:22 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 typedef struct s_shell				// MAIN STRUCTURE
 {
 	char 			buff_temp[BUFF_MAX];
+	char			buff_pwd[BUFF_MAX];
 	int				x;
 	int				i;
 	int				quote;
