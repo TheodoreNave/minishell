@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/07 12:03:22 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/07 17:19:43 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,8 +75,11 @@ typedef struct s_shell				// MAIN STRUCTURE
 	int				quote;
 	t_token_list	*token;
 	t_cmd_list		*action;
+	int				on;
 
 }	t_shell;
+
+char	*prompt(t_shell *shell, char *buff);
 
 int		built_in_env(char **env);
 

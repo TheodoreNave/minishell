@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/07 12:28:26 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/07 17:51:57 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
-
-//before ac = 2 av[0] = ./pipex av[1] ls -la
 
 int	parse_env_minishell(char **env, t_utils *utils)
 {
@@ -33,16 +31,24 @@ int	parse_env_minishell(char **env, t_utils *utils)
 
 void	signals(int sig)
 {
-	if (sig == SIGQUIT)
-	{
-		return ;
-	}
+	char *temp;
+	char *join_temp;
+	char buff_pwd[1024];
+
 	if (sig == SIGINT)
 	{
-		sig = SIGCONT;
+		temp = getcwd(buff_pwd, sizeof(buff_pwd));
+		if (!temp)
+			free(temp);
+		join_temp = ft_strjoin(temp , " $> ");
+		// rl_on_new_line();
+		// if (rl_on_new_line())
 		write(1, "\n", 1);
-		// write(1, "Minishell $> ", 13);
-		return ;
+		// rl_redisplay();
+		rl_replace_line("", 0);
+		write(1, join_temp, strlen(join_temp));
+		// printf("\n%s", join_temp);
+		free(join_temp);
 	}
 }
 
@@ -52,69 +58,23 @@ void	mem(t_utils *utils, t_shell *shell)
 	ft_memset(shell, 0, sizeof(t_shell));
 }
 
-void 	print_list_z(t_token_list *token)
-{
-	t_token_list *tmp;
-
-	tmp = token;
-
-	while (tmp)
-	{
-		printf("========================\n");
-		printf("prev = [%p]\n", tmp->prev);
-		printf("temp = [%p]\n", tmp);
-		printf("Token = [%s]\n", tmp->word);
-		printf("type = [%d]\n", tmp->type);
-		printf("next = [%p]\n", tmp->next);
-		printf("========================\n");
-		tmp = tmp->next;
-	}
-
-}
-
-void 	print_new_lst(t_cmd_list *lst)
-{
-	t_cmd_list *tmp;
-	tmp = lst;
-	int j = 1;
-	int i = 0;
-	while (tmp)
-	{
-		printf("*--------------------------NEW-LST-[%d]---------------------*\n", j);
-		printf("|	Adresse     = [%p]                                       \n", tmp);
-		printf("|	Type start  = [%d]                                       \n", tmp->type_start);
-		printf("|	Fichier     = [%s]                                       \n", tmp->fichier);
-		printf("|		*----------------opt-------------*                   \n");
-		if (tmp->opt)
-		{
-			while (tmp->opt[i])
-			{
-		printf("|		|	opt[%d] = [%s]                                   \n", i, tmp->opt[i]);
-				i++;
-			}
-			i = 0;
-		}
-		printf("|		*----------------opt-------------*                   \n");
-		printf("|	Type end    = [%d]                                       \n", tmp->type_end);
-		printf("|	AdresseNext = [%p]                                       \n", tmp->next);
-		printf("*-----------------------------------------------------------*\n");
-		printf("\n");
-		j++;
-		tmp = tmp->next;
-	}
-}
 
 char	*prompt(t_shell *shell, char *buff)
 {
 	char *temp;
 	char *join_temp;
-	
+
 	temp = getcwd(shell->buff_pwd, sizeof(shell->buff_pwd));
 	if (!temp)
 		free(temp);
 	join_temp = ft_strjoin(temp , " $> ");
 	buff = readline(join_temp);
-	free(join_temp);
+	if (!buff)
+	{
+		write(1, "exit\n", 5);
+		exit(0);
+	}
+	// free(join_temp);
 	return (buff);
 }
 
@@ -122,42 +82,40 @@ int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-    char *buff;
+    // char *rl_line_buffer;
     t_utils utils;
 	t_shell shell;
-	// t_token_list *tmp;
-	// int i = 0;
 
 	mem(&utils, &shell);
-	// built_in_check(&shell);
-		signal(SIGQUIT, signals);
-		// signal(SIGINT, signals);
 	if (chdir(getenv("HOME")) == -1)
 		ft_error_two("chdir()", &shell, 1);
+	signal(SIGQUIT, SIG_IGN);
+	signal(SIGINT, signals);
     while (1)
     {
-		// buff = readline("Minishell $> ");
-		buff = prompt(&shell, buff);
-		if (!parsing_shit(buff, &shell))
+		rl_line_buffer = prompt(&shell, rl_line_buffer);
+		add_history(rl_line_buffer);
+		if (!parsing_shit(rl_line_buffer, &shell))
 			return (0);
-		// print_list_z(shell.token);
 		if (parsing_shit_two(&shell))
 			fill_cmd(&shell);
-		// print_new_lst(shell.action);
-							// cmd is the result of the parsing
+
 		parse_env_minishell(env, &utils);
+
 		if (is_built_in(shell.action->opt[0]))
 		{
 			printf("cmd is ok\n");
 			built_in_check(env, shell.action->opt, &shell);
-			// return (1);
 		}
 		else
 		{
-			printf("pas la bonne commande\n");
+				printf("pas la bonne commande\n");
 		}
+		// free(buff);
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
+		// print_new_lst(shell.action);
+		// print_list_z(shell.token);
 	}
     write(1, "ciao\n", 5);
 	return (0);

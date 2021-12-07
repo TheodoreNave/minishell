@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/02 15:38:18 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/07 17:47:33 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ void		add_symbol(t_shell *shell, char symbole)
 	return ;
 }
 
-void	empty_buff_in_lst(t_shell *shell, char symbole)
+void		empty_buff_in_lst(t_shell *shell, char symbole)
 {
 	if (ft_strlen(shell->buff_temp) > 0)
 	{
@@ -85,7 +85,7 @@ void	empty_buff_in_lst(t_shell *shell, char symbole)
 int	add_to_buff_quote(char *prompt, char c, t_shell *shell)
 {
 	int i;
-	
+
 	i = 1;
 	if (c == '\0')
 		return 0;
@@ -112,7 +112,7 @@ int	is_double_redir(char a, char b)
 
 int	add_to_buff_redir(char c, t_shell *shell)
 {
-	if (c == '<')	
+	if (c == '<')
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_HEREDOC, "<<"));
 	else if (c == '>')
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_REDIR, ">>"));
@@ -122,7 +122,7 @@ int	add_to_buff_redir(char c, t_shell *shell)
 int	parsing_shit(char *prompt, t_shell *shell)
 {
 	int i;
-	
+
 	i = 0;
 	while (prompt[i])
 	{
@@ -139,7 +139,7 @@ int	parsing_shit(char *prompt, t_shell *shell)
 		else if (!is_symbol(prompt[i]))
 		{
 			add_to_buff_no_space(shell, prompt[i]);
-		} 
+		}
 		else if (is_symbol(prompt[i]))
 		{
 			empty_buff_in_lst(shell, prompt[i]);

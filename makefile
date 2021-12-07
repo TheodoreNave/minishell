@@ -6,7 +6,7 @@
 #    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/06 10:51:11 by tnave            ###   ########.fr        #
+#    Updated: 2021/12/07 15:46:27 by tnave            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 
 SRCS =  minishell.c								\
 		parsing.c								\
+		les_print.c								\
 		ft_lst.c 								\
 		parsing2.c 								\
 		file_cmd.c 								\

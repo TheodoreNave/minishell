@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/07 11:35:19 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/07 14:50:24 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,7 +74,15 @@ int		built_in_check(char **env, char **built_in, t_shell *shell)
 {
 	// printf("built_in[0] = %s\n", built_in);
 	if (!strcmp(built_in[0], "cd"))
-		built_in_cd(shell, built_in[1]);
+	{
+		if (!built_in[1])
+		{
+			if (chdir(getenv("HOME")) == -1)
+				ft_error_two("chdir()", shell, 1);
+		}
+		else
+			built_in_cd(shell, built_in[1]);
+	}
 	else if (!strcmp(built_in[0], "pwd"))
 		built_in_pwd(shell);
 	else if (!strcmp(built_in[0], "env"))
