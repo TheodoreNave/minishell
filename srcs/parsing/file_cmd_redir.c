@@ -6,11 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:09:08 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/03 18:46:08 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:48:37 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void		malloc_opt(t_token_list **tmp, t_cmd_list *tpmp)
 {

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 18:51:09 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/08 20:17:43 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,7 +112,7 @@ int		is_built_in(char *cmd);
 
 int		built_in_pwd(t_shell *shell);
 
-int		built_in_cd(t_shell *shell, char *path);
+int		built_in_cd(t_shell *shell, char **opt);
 
 int		built_in_check(char **env, char **built_in, t_shell *shell);
 

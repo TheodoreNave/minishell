@@ -6,11 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:24:23 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 18:06:52 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/08 19:48:43 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "includes/minishell.h"
+#include "../../includes/minishell.h"
 
 // printf("OKAY\n");
 
@@ -60,8 +60,3 @@ int		fill_cmd(t_shell *shell)
 	// print_new_lst(shell->action);
 	return (0);
 }
-
-//tokem// [<] [file1] [|] [<] [fil2] [ls] [-la]
- 
-// [< file1 |] < fil2 ls -la 
-// [< file1] [|] [< fil2 ls -la] 

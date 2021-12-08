@@ -6,26 +6,33 @@
 #    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/08 13:31:44 by tigerber         ###   ########.fr        #
+#    Updated: 2021/12/08 20:29:22 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
-SRCS =  minishell.c								\
-		parsing.c								\
-		les_print.c								\
-		ft_lst.c 								\
-		parsing2.c 								\
-		file_cmd.c 								\
-		file_cmd_redir.c 						\
-		built_in.c 								\
-		pipex/exit_error.c						\
-		pipex/ft_lst.c							\
-		pipex/ft_split.c						\
-		pipex/parsing.c 						\
-		pipex/pipex.c							\
-		pipex/utils_two.c						\
+SRCS =  srcs/minishell.c								\
+		srcs/prompt.c									\
+		srcs/parsing/environement.c						\
+		srcs/parsing/parsing.c							\
+		srcs/parsing/parsing2.c 						\
+		srcs/parsing/file_cmd.c 						\
+		srcs/parsing/file_cmd_redir.c 					\
+		srcs/utils_lst/ft_lst_env.c 					\
+		srcs/utils_lst/ft_lst_action.c 					\
+		srcs/utils_lst/ft_lst_shell.c 					\
+		srcs/built_in/built_in.c 						\
+		srcs/built_in/built_in_cd_pwd.c 				\
+		srcs/built_in/built_in_export.c 				\
+		srcs/built_in/built_in_unset.c 					\
+		les_print.c										\
+		pipex/exit_error.c								\
+		pipex/ft_lst.c									\
+		pipex/ft_split.c								\
+		pipex/parsing.c 								\
+		pipex/pipex.c									\
+		pipex/utils_two.c								\
 		pipex/utils.c
 
 CC = clang
