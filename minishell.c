@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/07 17:51:57 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/08 13:31:07 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,24 +31,12 @@ int	parse_env_minishell(char **env, t_utils *utils)
 
 void	signals(int sig)
 {
-	char *temp;
-	char *join_temp;
-	char buff_pwd[1024];
-
 	if (sig == SIGINT)
 	{
-		temp = getcwd(buff_pwd, sizeof(buff_pwd));
-		if (!temp)
-			free(temp);
-		join_temp = ft_strjoin(temp , " $> ");
-		// rl_on_new_line();
-		// if (rl_on_new_line())
 		write(1, "\n", 1);
-		// rl_redisplay();
+		rl_on_new_line();
 		rl_replace_line("", 0);
-		write(1, join_temp, strlen(join_temp));
-		// printf("\n%s", join_temp);
-		free(join_temp);
+		rl_redisplay();
 	}
 }
 
@@ -69,12 +57,12 @@ char	*prompt(t_shell *shell, char *buff)
 		free(temp);
 	join_temp = ft_strjoin(temp , " $> ");
 	buff = readline(join_temp);
+	free(join_temp);
 	if (!buff)
 	{
 		write(1, "exit\n", 5);
 		exit(0);
 	}
-	// free(join_temp);
 	return (buff);
 }
 
@@ -82,7 +70,7 @@ int main(int ac, char **av, char **env)
 {
 	(void)ac;
 	(void)av;
-    // char *rl_line_buffer;
+
     t_utils utils;
 	t_shell shell;
 
@@ -101,17 +89,21 @@ int main(int ac, char **av, char **env)
 			fill_cmd(&shell);
 
 		parse_env_minishell(env, &utils);
-
-		if (is_built_in(shell.action->opt[0]))
+		
+		if (shell.action)
 		{
-			printf("cmd is ok\n");
-			built_in_check(env, shell.action->opt, &shell);
+			if (is_built_in(shell.action->opt[0]))
+			{
+				printf("cmd is ok\n");
+				built_in_check(env, shell.action->opt, &shell);
+			}
+			else
+			{
+					printf("pas la bonne commande\n");
+			}
 		}
-		else
-		{
-				printf("pas la bonne commande\n");
-		}
-		// free(buff);
+		printf("ok++++++++++++++");
+		// free(rl_line_buffer); //free dans une fonction pour la norme
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
 		// print_new_lst(shell.action);

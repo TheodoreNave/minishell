@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing2.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:21:10 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/07 17:34:15 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/08 12:02:57 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,10 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 	if (error == 2)
 	{
 		printf(">\n");
+	}
+	if (error == 3)
+	{
+		printf("bash: cd: %s: No such file or directory\n", str);
 	}
 	ft_lstclear_shell(&shell->token);
 	// ft_lstclear_action(&shell.action);

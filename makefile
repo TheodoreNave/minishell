@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
+#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/07 15:46:27 by tnave            ###   ########.fr        #
+#    Updated: 2021/12/08 13:31:44 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,9 +28,9 @@ SRCS =  minishell.c								\
 		pipex/utils_two.c						\
 		pipex/utils.c
 
-CC = gcc
+CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -I ./include/
+CFLAGS = -Wall -Wextra -g3 -I ./include/
 
 HEADER = -I ./includes/
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/07 14:50:24 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/08 13:33:38 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,20 +16,7 @@
 int		built_in_cd(t_shell *shell, char *path)
 {
 	if (chdir(path) == -1)
-		ft_error_two("chdir()", shell, 1);
-	return (0);
-}
-
-int		built_in_env(char **env)
-{
-	int i;
-
-	i = 0;
-	while (env[i])
-	{
-		printf("%s\n", env[i]);
-		i++;
-	}
+		ft_error_two(path, shell, 3);
 	return (0);
 }
 
@@ -43,6 +30,48 @@ int		built_in_pwd(t_shell *shell)
 		ft_error_two("getcurrent()", shell, 1);
 	return (0);
 }
+int		built_in_env(char **env)
+{
+	int i;
+
+	i = 0;
+	while (env[i])
+	{
+		if (*env[i])
+			printf("%s\n", env[i]);
+		i++;
+	}
+	return (0);
+}
+
+int	built_in_unset(char **env, t_shell *shell)
+{
+	int i;
+
+	i = 0;
+	while (env[i])
+	{	if (shell->action)
+		{
+			if (ft_strncmp(env[i], shell->action->opt[1], strlen(shell->action->opt[1])) == 0)
+			{
+				env[i] = "";
+				return (1);
+			}
+		}
+		i++;
+	}
+	return (1);
+}
+
+// int	built_in_exit(t_shell *shell)
+// {
+// 	(void)shell;
+// 	//free ALL
+// 	printf("exit\n");
+// 	exit(0);
+// }
+
+
 
 int	is_built_in(char *cmd)
 {
@@ -57,13 +86,13 @@ int	is_built_in(char *cmd)
 		return (1);
 	else if (!strncmp(cmd, "env", 3))
 		return (1);
+	else if (strncmp(cmd, "unset", 5))
+		return (1);
+	// else if (strncmp(cmd, "exit", 4))
+	// 	return (1);
 	// else if (strncmp(cmd, "echo", 4))
 	// 	return (1);
 	// else if (strncmp(cmd, "export", 6))
-	// 	return (1);
-	// else if (strncmp(cmd, "unset", 5))
-	// 	return (1);
-	// else if (strncmp(cmd, "exit", 4))
 	// 	return (1);
 	else
 		return (0);
@@ -87,13 +116,13 @@ int		built_in_check(char **env, char **built_in, t_shell *shell)
 		built_in_pwd(shell);
 	else if (!strcmp(built_in[0], "env"))
 		built_in_env(env);
+	else if (strncmp(built_in[0], "unset", 5))
+		built_in_unset(env, shell);
+	// else if (strncmp(built_in[0], "exit", 4))
+	// 	built_in_exit(shell);
 	// if (strncmp(built_in[0], "echo", 4))
 	// 	built_in_echo();
 	// else if (strncmp(built_in[0], "export", 6))
 	// 	built_in_export();
-	// else if (strncmp(built_in[0], "unset", 5))
-	// 	built_in_unset();
-	// else if (strncmp(built_in[0], "exit", 4))
-	// 	built_in_exit();
 	return (1);
 }
