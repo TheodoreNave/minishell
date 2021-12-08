@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 15:01:54 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/08 18:06:11 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,19 +51,117 @@ char	*prompt(t_shell *shell, char *buff)
 {
 	char *temp;
 	char *join_temp;
-
-	temp = getcwd(shell->buff_pwd, sizeof(shell->buff_pwd));
-	if (!temp)
-		free(temp);
-	join_temp = ft_strjoin(temp , " $> ");
-	buff = readline(join_temp);
-	free(join_temp);
+	
+	if (shell->on == 0)
+	{// free shell->pwd_temp
+		shell->pwd_temp = getcwd(shell->buff_pwd, sizeof(shell->buff_pwd));
+		if (!shell->pwd_temp)
+			free(shell->pwd_temp);
+	}
+	
+	if (shell->on)
+	{
+		join_temp = ft_strjoin(shell->pwd_temp, " $> ");
+		buff = readline(join_temp);
+		free(join_temp);
+		shell->on = 0;
+	}
+	else
+	{
+		temp = getcwd(shell->buff_pwd, sizeof(shell->buff_pwd));
+		if (!temp)
+			free(temp);
+		join_temp = ft_strjoin(temp , " $> ");
+		buff = readline(join_temp);
+		free(join_temp);
+	}
 	if (!buff)
 	{
 		write(1, "exit\n", 5);
 		exit(0);
 	}
 	return (buff);
+}
+
+int		stock_env(char **env, t_shell *shell)
+{
+	(void)shell;
+	int i;
+	int j;
+
+	i = 0;
+	j = 1;
+	while (env[i])
+	{
+		ft_lstadd_back_env(&shell->environ, ft_lstnew_env(env[i]));
+		i++;
+	}
+	return (0);
+}
+
+int 	parse_pwd_two(t_shell *shell)
+{
+	int i;
+	t_env *tmp;
+	t_env *tempo;
+	char *pwd_temp;
+	
+	pwd_temp = NULL;
+	tmp = shell->environ;
+	tempo = shell->environ;
+	i = 0;
+	while (tempo)
+	{
+		if (ft_strncmp(tempo->var_env, "PWD=", 4) == 0)
+		{					
+			pwd_temp = ft_strjoin("OLD", tempo->var_env);
+		}
+		tempo = tempo->next;
+	}
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->var_env, "OLDPWD=", 7) == 0)
+		{
+			
+			free(tmp->var_env);
+			tmp->var_env = ft_strdup(pwd_temp);
+		}
+		if (ft_strncmp(tmp->var_env, "PWD=", 4) == 0)
+		{
+			free(tmp->var_env);
+			tmp->var_env = ft_strjoin("PWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
+		}
+		i++;
+		tmp = tmp->next;
+	}
+	free(pwd_temp);
+	return (0);
+}
+
+
+int 	parse_pwd(t_shell *shell)
+{
+	int i;
+	t_env *tmp;
+
+	tmp = shell->environ;
+	i = 0;
+	
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->var_env, "PWD=", 4) == 0)
+		{
+			free(tmp->var_env);
+			tmp->var_env = ft_strjoin("PWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
+		}
+		if (ft_strncmp(tmp->var_env, "OLDPWD=", 7) == 0)
+		{
+			free(tmp->var_env);
+			tmp->var_env = ft_strjoin("OLDPWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
+		}
+		tmp = tmp->next;
+	}
+	return (0);
 }
 
 int main(int ac, char **av, char **env)
@@ -77,8 +175,12 @@ int main(int ac, char **av, char **env)
 	mem(&utils, &shell);
 	if (chdir(getenv("HOME")) == -1)
 		ft_error_two("chdir()", &shell, 1);
+	
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signals);
+	stock_env(env, &shell);
+	parse_pwd(&shell);
+	// print_env_lst(shell.environ);
     while (1)
     {
 		rl_line_buffer = prompt(&shell, rl_line_buffer);
@@ -94,12 +196,12 @@ int main(int ac, char **av, char **env)
 		{
 			if (is_built_in(shell.action->opt[0]))
 			{
-				printf("cmd is ok\n");
+				// printf("cmd is ok\n");
 				built_in_check(env, shell.action->opt, &shell);
 			}
 			else
 			{
-					printf("pas la bonne commande\n");
+					// printf("pas la bonne commande\n");
 			}
 		}
 		// free(rl_line_buffer); //free dans une fonction pour la norme

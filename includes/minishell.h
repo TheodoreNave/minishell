@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/07 17:19:43 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/08 18:51:09 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,13 @@
 # define TYPE_HEREDOC 10
 # define TYPE_END 11
 
+typedef struct	s_env
+{
+	char *var_env;
+	struct s_env *next;
+	struct s_env *prev;
+}				t_env;
+
 
 typedef	struct s_token_list			// TOKEN PARSING
 {
@@ -76,8 +83,26 @@ typedef struct s_shell				// MAIN STRUCTURE
 	t_token_list	*token;
 	t_cmd_list		*action;
 	int				on;
+	char			*pwd_temp;
+	t_env 			*environ;
 
 }	t_shell;
+
+int		built_in_unset(t_shell *shell, char **opt);
+
+int 	built_in_export(char **opt, t_env *environ, t_shell *shell);
+
+int 	parse_pwd_two(t_shell *shell);
+
+int 	parse_pwd(t_shell *shell);
+
+void	print_env_lst(t_env *env);
+
+t_env	*ft_lstnew_env(char *variable);
+
+void	ft_lstadd_back_env(t_env **environ, t_env *new);
+
+int		stock_env(char **env, t_shell *shell);
 
 char	*prompt(t_shell *shell, char *buff);
 

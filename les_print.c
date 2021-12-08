@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   les_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 15:45:28 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/07 15:46:07 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/08 18:53:16 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,26 @@ void 	print_list_z(t_token_list *token)
 		printf("type = [%d]\n", tmp->type);
 		printf("next = [%p]\n", tmp->next);
 		printf("========================\n");
+		tmp = tmp->next;
+	}
+
+}
+
+void	print_env_lst(t_env *env)
+{
+	t_env *tmp;
+	int i = 0;
+
+	tmp = env;
+	while (tmp)
+	{
+		if (tmp->var_env[0] != '\0')
+		{
+			printf("=================================\n");
+			printf("env[%d] = [%s]\n", i, tmp->var_env);
+			printf("=================================\n");
+		}
+		i++;
 		tmp = tmp->next;
 	}
 

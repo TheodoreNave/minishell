@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:46:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/03 13:11:14 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/08 16:56:42 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,19 @@ t_token_list	*ft_lstnew_shell(int type, char *word)
 	new_list->next = NULL;
 	return (new_list);
 }
+
+t_env	*ft_lstnew_env(char *variable)
+{
+	t_env	*new_list;
+
+	new_list = malloc(sizeof(t_env));
+	if (!(new_list))
+		return (NULL);
+	new_list->var_env = ft_strdup(variable);
+	new_list->next = NULL;
+	return (new_list);
+}
+
 
 
 void	ft_lstclear_shell(t_token_list **token)
@@ -49,7 +62,7 @@ void	ft_lstclear_shell(t_token_list **token)
 
 void	ft_lstclear_action(t_cmd_list **action)
 {
-	printf("FREE_action\n");
+	// printf("FREE_action\n");
 	t_cmd_list	*temp;
 
 	if (!action)
@@ -98,6 +111,27 @@ void	ft_lstadd_back_shell(t_token_list **token, t_token_list *new)
 	{
 		new->prev = NULL;
 		*token = new;
+	}
+}
+
+void	ft_lstadd_back_env(t_env **environ, t_env *new)
+{
+	t_env	*tmp;
+
+	if (!environ || !new)
+		return ;
+	if (*environ)
+	{
+		tmp = *environ;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
+		tmp->next->prev = tmp;
+	}
+	else
+	{
+		new->prev = NULL;
+		*environ = new;
 	}
 }
 
