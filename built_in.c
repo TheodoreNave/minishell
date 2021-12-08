@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 18:51:39 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/08 18:58:30 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,21 +82,16 @@ int	built_in_unset(t_shell *shell, char **opt)
 
 int	is_built_in(char *cmd)
 {
-	// printf("cmd = [%s]\n", cmd);
-	// printf("**********************\n");
 	if (!strcmp(cmd, "cd"))
-	{
-		printf("cd est bon\n");
 		return (1);
-	}
 	else if (!strcmp(cmd, "pwd"))
 		return (1);
 	else if (!strncmp(cmd, "env", 3))
 		return (1);
 	else if (!strncmp(cmd, "export", 6))
 		return (1);
-	// else if (!strncmp(cmd, "unset", 5))
-	// 	return (1);
+	else if (!strncmp(cmd, "unset", 5))
+		return (1);
 	// else if (!strncmp(cmd, "exit", 4))
 	// 	return (1);
 	// else if (!strncmp(cmd, "echo", 4))
