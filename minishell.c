@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 13:31:07 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:01:54 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,7 +102,6 @@ int main(int ac, char **av, char **env)
 					printf("pas la bonne commande\n");
 			}
 		}
-		printf("ok++++++++++++++");
 		// free(rl_line_buffer); //free dans une fonction pour la norme
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);

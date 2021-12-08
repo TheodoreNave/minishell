@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 13:33:38 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/08 15:01:42 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,13 @@ int	built_in_unset(char **env, t_shell *shell)
 	while (env[i])
 	{	if (shell->action)
 		{
-			if (ft_strncmp(env[i], shell->action->opt[1], strlen(shell->action->opt[1])) == 0)
+			if (shell->action->opt[1])
 			{
-				env[i] = "";
-				return (1);
+				if (ft_strncmp(env[i], shell->action->opt[1], strlen(shell->action->opt[1])) == 0)
+				{
+					env[i] = "";
+					return (1);
+				}
 			}
 		}
 		i++;
