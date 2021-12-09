@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_unset.c                                   :+:      :+:    :+:   */
+/*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/08 20:28:41 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/09 00:58:58 by tnave            ###   ########.fr       */
+/*   Created: 2021/12/09 01:55:20 by tnave             #+#    #+#             */
+/*   Updated: 2021/12/09 01:56:50 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	built_in_unset(t_shell *shell, char **opt)
+int		built_in_echo(char **opt)
 {
-	t_env *tmp;
-
-	tmp = shell->environ;
-
-	int i;
-
-	i = 0;
-	while (tmp)
+	if (!opt[1])
 	{
-		if (ft_strncmp(tmp->var_env, opt[1], ft_strlen(opt[1])) == 0)
-		{
-			free(tmp->var_env);
-			tmp->var_env = strdup("");
-			return (0);
-		}
-		tmp = tmp->next;
+		write(1, "\n", 1);
+		return (0);
 	}
-	return (1);
+	if (!strcmp(opt[1], "-n"))
+	{
+		if (!opt[2])
+			return (0);
+		else
+			write(1, opt[2], ft_strlen(opt[2]));
+	}
+	if (strcmp(opt[1], "-n"))
+	{
+		write(1, opt[1], ft_strlen(opt[1]));
+		write(1, "\n", 1);
+	}
+	return (0);
 }

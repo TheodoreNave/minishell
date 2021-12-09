@@ -3,15 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_cd_pwd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:11:02 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/08 20:31:11 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/09 01:40:58 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <linux/limits.h>
 
 int		built_in_cd(t_shell *shell, char **opt)
 {
@@ -32,7 +31,7 @@ int		built_in_cd(t_shell *shell, char **opt)
 
 int		built_in_pwd(t_shell *shell)
 {
-	//fix quand on suprime dossier dans un autres shell 
+	//fix quand on suprime dossier dans un autres shell + erreur si option
 	char	current[PATH_MAX];
 
 	if (getcwd(current, sizeof(current)))

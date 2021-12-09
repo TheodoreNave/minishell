@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
+#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/08 20:29:22 by tigerber         ###   ########.fr        #
+#    Updated: 2021/12/09 01:59:20 by tnave            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,6 +14,7 @@ NAME = minishell
 
 SRCS =  srcs/minishell.c								\
 		srcs/prompt.c									\
+		srcs/utils.c									\
 		srcs/parsing/environement.c						\
 		srcs/parsing/parsing.c							\
 		srcs/parsing/parsing2.c 						\
@@ -26,6 +27,8 @@ SRCS =  srcs/minishell.c								\
 		srcs/built_in/built_in_cd_pwd.c 				\
 		srcs/built_in/built_in_export.c 				\
 		srcs/built_in/built_in_unset.c 					\
+		srcs/built_in/built_in_echo.c 					\
+		srcs/built_in/built_in_exit.c 					\
 		les_print.c										\
 		pipex/exit_error.c								\
 		pipex/ft_lst.c									\

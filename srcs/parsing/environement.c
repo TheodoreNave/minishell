@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environement.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:25:42 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/08 19:52:37 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/09 01:01:06 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int 	parse_pwd_two(t_shell *shell)
 	t_env *tmp;
 	t_env *tempo;
 	char *pwd_temp;
-	
+
 	pwd_temp = NULL;
 	tmp = shell->environ;
 	tempo = shell->environ;
@@ -26,7 +26,7 @@ int 	parse_pwd_two(t_shell *shell)
 	while (tempo)
 	{
 		if (ft_strncmp(tempo->var_env, "PWD=", 4) == 0)
-		{					
+		{
 			pwd_temp = ft_strjoin("OLD", tempo->var_env);
 		}
 		tempo = tempo->next;
@@ -34,7 +34,7 @@ int 	parse_pwd_two(t_shell *shell)
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->var_env, "OLDPWD=", 7) == 0)
-		{	
+		{
 			free(tmp->var_env);
 			tmp->var_env = ft_strdup(pwd_temp);
 		}
@@ -57,7 +57,7 @@ int 	parse_pwd(t_shell *shell)
 
 	tmp = shell->environ;
 	i = 0;
-	
+
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->var_env, "PWD=", 4) == 0)

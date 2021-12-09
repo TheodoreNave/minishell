@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   file_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:24:23 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 19:48:43 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/09 01:52:21 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-// printf("OKAY\n");
 
 int		fill_cmd(t_shell *shell)
 {
@@ -25,7 +23,7 @@ int		fill_cmd(t_shell *shell)
 		tpmp = malloc(sizeof(t_cmd_list));
 		if (!tpmp)
 			return (0);
-		ft_memset(tpmp, 0, sizeof(t_cmd_list));
+		ft_memset(tpmp, 0, sizeof(t_cmd_list));		// changer de place ??
 		tpmp->next = NULL;
 		if (tmp->type == TYPE_REDIR_LEFT || tmp->type == TYPE_REDIR_RIGHT)
 		{

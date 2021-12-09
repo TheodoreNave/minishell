@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_cmd_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:09:08 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/08 19:48:37 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/09 01:01:37 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void		malloc_opt(t_token_list **tmp, t_cmd_list *tpmp)
 	}
 	tpmp->opt[i] = NULL;
 }
-
-
 
 int	init_lst_redir(t_shell *shell, t_token_list **tmp, t_cmd_list *tpmp)
 {

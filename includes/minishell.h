@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 20:17:43 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/09 02:01:38 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,16 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 }	t_shell;
 
+void	add_symbol(t_shell *shell, char symbole);
+
+int		is_symbol(char c);
+
+void	empty_buff_in_lst(t_shell *shell, char symbole);
+
+int		built_in_exit(t_shell *shell);
+
+int		built_in_echo(char **opt);
+
 int		built_in_unset(t_shell *shell, char **opt);
 
 int 	built_in_export(char **opt, t_env *environ, t_shell *shell);
@@ -114,7 +124,7 @@ int		built_in_pwd(t_shell *shell);
 
 int		built_in_cd(t_shell *shell, char **opt);
 
-int		built_in_check(char **env, char **built_in, t_shell *shell);
+int		built_in_check(char **built_in, t_shell *shell);
 
 void 	print_new_lst(t_cmd_list *lst);
 

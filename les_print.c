@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   les_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 15:45:28 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 19:43:05 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/09 01:40:20 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ void 	print_list_z(t_token_list *token)
 
 }
 
-void	print_env_lst(t_env *env)
+void	print_env_lst(t_env *env)			// If option -> ft_error
 {
 	t_env *tmp;
 	int i = 0;

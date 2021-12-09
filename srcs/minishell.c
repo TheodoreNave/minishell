@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 20:00:00 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/09 02:02:23 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,16 +48,15 @@ void	mem(t_utils *utils, t_shell *shell)
 
 int main(int ac, char **av, char **env)
 {
-	(void)ac;
-	(void)av;
-
     t_utils utils;
 	t_shell shell;
 
+	(void)ac;
+	(void)av;
 	mem(&utils, &shell);
 	if (chdir(getenv("HOME")) == -1)
 		ft_error_two("chdir()", &shell, 1);
-	
+
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signals);
 	stock_env(env, &shell);
@@ -72,14 +71,14 @@ int main(int ac, char **av, char **env)
 			fill_cmd(&shell);
 
 		parse_env_minishell(env, &utils);
-		
+
 		if (shell.action)
 		{
-			if (!built_in_check(env, shell.action->opt, &shell))
+			if (!built_in_check(shell.action->opt, &shell))
 			{
-				printf("cmd is not built_in\n");	
+				printf("cmd is not built_in\n");
+				// stock dans une liste et balancer dans pipex si necessaire au dernier moment
 			}
-
 		}
 		// free(rl_line_buffer); //free dans une fonction pour la norme
 		ft_lstclear_shell(&shell.token);

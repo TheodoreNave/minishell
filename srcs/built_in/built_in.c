@@ -3,27 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 20:31:23 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/09 01:55:45 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-#include <linux/limits.h>
 
-int	built_in_exit(t_shell *shell)
+int		built_in_check(char **built_in, t_shell *shell)
 {
-	(void)shell;
-	//free ALL
-	printf("exit\n");
-	exit(0);
-}
-
-int		built_in_check(char **env, char **built_in, t_shell *shell)
-{
-	(void)env;
 	if (!strcmp(built_in[0], "cd"))
 		built_in_cd(shell, built_in);
 	else if (!strcmp(built_in[0], "pwd"))
@@ -34,12 +24,12 @@ int		built_in_check(char **env, char **built_in, t_shell *shell)
 		built_in_unset(shell, built_in);
 	else if (!strncmp(built_in[0], "export", 6))
 		built_in_export(built_in, shell->environ, shell);
+	else if (!strncmp(built_in[0], "echo", 4))
+		built_in_echo(built_in);
+	else if (!strncmp(built_in[0], "exit", 4))
+		built_in_exit(shell);
 	else
 		return (0);
-	// else if (strncmp(built_in[0], "exit", 4))
-	// 	built_in_exit(shell);
-	// if (strncmp(built_in[0], "echo", 4))
-	// 	built_in_echo();
 	return (1);
 
 // int	is_built_in(char *cmd)
