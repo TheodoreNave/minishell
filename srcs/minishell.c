@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 02:49:06 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/09 18:37:12 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	signals(int sig)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		// rl_replace_line("", 0);
+		rl_replace_line("", 0);
 		rl_redisplay();
 	}
 }
@@ -119,7 +119,7 @@ int main(int ac, char **av, char **env)
 
 	(void)ac;
 	(void)av;
-	int i = 0;
+	// int i = 0;
 	mem(&utils, &shell);
 	if (chdir(getenv("HOME")) == -1)
 		ft_error_two("chdir()", &shell, 1);
@@ -137,13 +137,13 @@ int main(int ac, char **av, char **env)
 		if (parsing_shit_two(&shell))
 			fill_cmd(&shell);
 
-		parse_env_minishell(env, &utils);
-		// if (pipe)
-		while (i <= 3)	// while tant que env existe encore
-		{
-			ft_check_access_mini(env, i, &shell, &utils);	// 2 commandes ou plus
-			i++;
-		}
+		// parse_env_minishell(env, &utils);
+		// // if (pipe)
+		// while (i <= 3)	// while tant que env existe encore
+		// {
+		// 	ft_check_access_mini(env, i, &shell, &utils);	// 2 commandes ou plus
+		// 	i++;
+		// }
 		// if (!pipe)
 		if (shell.action)
 		{

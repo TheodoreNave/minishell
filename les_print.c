@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   les_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 15:45:28 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 01:40:20 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/09 17:38:07 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,22 @@ void 	print_list_z(t_token_list *token)
 
 }
 
-void	print_env_lst(t_env *env)			// If option -> ft_error
+void	print_env_lst(t_env *env, int indic)			// If option -> ft_error
 {
 	t_env *tmp;
-	int i = 0;
 
 	tmp = env;
-	while (tmp)
+	if (indic == 1)
 	{
-		if (tmp->var_env[0] != '\0')
+		while (tmp)
 		{
-			printf("------------------------------------\n");
-			printf("env[%d] = [%s]\n", i, tmp->var_env);
+			if (tmp->var_env[0] != '\0')
+			{
+				printf("%s\n", tmp->var_env);
+			}
+			tmp = tmp->next;
 		}
-		i++;
-		tmp = tmp->next;
 	}
-	printf("------------------------------------\n");
 }
 
 void 	print_new_lst(t_cmd_list *lst)

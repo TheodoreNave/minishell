@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environement.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:25:42 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/09 01:01:06 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/09 19:56:21 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,11 +18,11 @@ int 	parse_pwd_two(t_shell *shell)
 	t_env *tmp;
 	t_env *tempo;
 	char *pwd_temp;
-
+	
+	i = 0;
 	pwd_temp = NULL;
 	tmp = shell->environ;
 	tempo = shell->environ;
-	i = 0;
 	while (tempo)
 	{
 		if (ft_strncmp(tempo->var_env, "PWD=", 4) == 0)
@@ -35,18 +35,25 @@ int 	parse_pwd_two(t_shell *shell)
 	{
 		if (ft_strncmp(tmp->var_env, "OLDPWD=", 7) == 0)
 		{
-			free(tmp->var_env);
-			tmp->var_env = ft_strdup(pwd_temp);
+			if (shell->on == 0)
+			{
+				free(tmp->var_env);
+				tmp->var_env = ft_strdup(pwd_temp);
+			}
 		}
 		if (ft_strncmp(tmp->var_env, "PWD=", 4) == 0)
 		{
-			free(tmp->var_env);
-			tmp->var_env = ft_strjoin("PWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
+			if (shell->on == 0)
+			{
+				free(tmp->var_env);
+				tmp->var_env = ft_strjoin("PWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
+			}	
 		}
 		i++;
 		tmp = tmp->next;
 	}
-	free(pwd_temp);
+	if (pwd_temp)
+		free(pwd_temp);
 	return (0);
 }
 
@@ -69,6 +76,11 @@ int 	parse_pwd(t_shell *shell)
 		{
 			free(tmp->var_env);
 			tmp->var_env = ft_strjoin("OLDPWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
+		}
+		if (ft_strncmp(tmp->var_env, "_=", 2) == 0)
+		{
+			free(tmp->var_env);
+			tmp->var_env = ft_strdup("_=/usr/bin/env");
 		}
 		tmp = tmp->next;
 	}

@@ -6,11 +6,26 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:46:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/08 19:46:50 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/09 15:20:59 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+int		count_env_lst(t_env *env)
+{
+	int i;
+	t_env *tmp;
+
+	i = 0;
+	tmp = env;
+	while (tmp)
+	{
+		i++;
+		tmp = tmp->next;
+	}
+	return (i);
+}
 
 t_env	*ft_lstnew_env(char *variable)
 {

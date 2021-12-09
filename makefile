@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
+#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/09 01:59:20 by tnave            ###   ########.fr        #
+#    Updated: 2021/12/09 16:23:27 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -26,6 +26,7 @@ SRCS =  srcs/minishell.c								\
 		srcs/built_in/built_in.c 						\
 		srcs/built_in/built_in_cd_pwd.c 				\
 		srcs/built_in/built_in_export.c 				\
+		srcs/built_in/built_in_export_utils.c			\
 		srcs/built_in/built_in_unset.c 					\
 		srcs/built_in/built_in_echo.c 					\
 		srcs/built_in/built_in_exit.c 					\

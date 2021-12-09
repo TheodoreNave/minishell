@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 02:01:38 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/09 17:35:23 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,6 +88,16 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 }	t_shell;
 
+int	 	ft_putstr_quotes(char *str);
+
+int	ft_strncmpp(const char *s1, const char *s2, size_t n);
+
+int	ft_strlen_egal(char *str);
+
+int		count_env_lst(t_env *env);
+
+int 	print_sort_env(t_env *env);
+
 void	add_symbol(t_shell *shell, char symbole);
 
 int		is_symbol(char c);
@@ -106,7 +116,7 @@ int 	parse_pwd_two(t_shell *shell);
 
 int 	parse_pwd(t_shell *shell);
 
-void	print_env_lst(t_env *env);
+void	print_env_lst(t_env *env, int indic);
 
 t_env	*ft_lstnew_env(char *variable);
 

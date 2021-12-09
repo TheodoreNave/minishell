@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 01:55:45 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/09 13:33:11 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int		built_in_check(char **built_in, t_shell *shell)
 	else if (!strcmp(built_in[0], "pwd"))
 		built_in_pwd(shell);
 	else if (!strcmp(built_in[0], "env"))
-		print_env_lst(shell->environ);
+		print_env_lst(shell->environ, 1);
 	else if (!strncmp(built_in[0], "unset", 5))
 		built_in_unset(shell, built_in);
 	else if (!strncmp(built_in[0], "export", 6))
