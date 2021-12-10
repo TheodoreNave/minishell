@@ -6,11 +6,13 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/09 17:30:00 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:49:55 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
+
+//MULTI EXPORT $TIM $THEO
 
 int	check_is_alpha(char c)
 {

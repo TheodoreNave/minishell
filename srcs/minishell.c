@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 18:37:12 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:50:55 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,71 +46,71 @@ void	mem(t_utils *utils, t_shell *shell)
 	ft_memset(shell, 0, sizeof(t_shell));
 }
 
-void	opt_exec_mini(char **environ, t_utils *utils, t_utils_list *tmp)
-{
-	pid_t	pid;
+// void	opt_exec_mini(char **environ, t_utils *utils, t_utils_list *tmp)
+// {
+// 	pid_t	pid;
 
-	pid = fork();
-	if (pid < 0)
-		ft_error(0, strerror(errno), utils);
-	if (pid == 0)
-	{
-		if (!tmp->prev)
-			dup2(utils->fd_one, STDIN);
-		else
-			dup2(tmp->prev->pfd[STDIN], STDIN);
-		if (tmp->next)
-			dup2(tmp->pfd[STDOUT], STDOUT);
-		else
-			dup2(utils->fd_two, STDOUT);
-		execve(tmp->path, tmp->cmd_opt, environ);
-		exit(127);
-	}
-	else
-		child(pid, utils, tmp);
-}
+// 	pid = fork();
+// 	if (pid < 0)
+// 		ft_error(0, strerror(errno), utils);
+// 	if (pid == 0)
+// 	{
+// 		if (!tmp->prev)
+// 			dup2(utils->fd_one, STDIN);
+// 		else
+// 			dup2(tmp->prev->pfd[STDIN], STDIN);
+// 		if (tmp->next)
+// 			dup2(tmp->pfd[STDOUT], STDOUT);
+// 		else
+// 			dup2(utils->fd_two, STDOUT);
+// 		execve(tmp->path, tmp->cmd_opt, environ);
+// 		exit(127);
+// 	}
+// 	else
+// 		child(pid, utils, tmp);
+// }
 
-void		suite_pipex(t_utils *utils, char **environ)
-{
-	t_utils_list *tmp;
+// void		suite_pipex(t_utils *utils, char **environ)
+// {
+// 	t_utils_list *tmp;
 
-	tmp = utils->lst;
-	while (tmp)
-	{
-		if (tmp->next)
-		{
-			if (pipe(tmp->pfd) == -1)
-				ft_error(0, strerror(errno), utils);
-		}
-		opt_exec_mini(environ, utils, tmp);
-		tmp = tmp->next;
-	}
-}
+// 	tmp = utils->lst;
+// 	while (tmp)
+// 	{
+// 		if (tmp->next)
+// 		{
+// 			if (pipe(tmp->pfd) == -1)
+// 				ft_error(0, strerror(errno), utils);
+// 		}
+// 		opt_exec_mini(environ, utils, tmp);
+// 		tmp = tmp->next;
+// 	}
+// }
 
-void		ft_check_access_mini(char **environ, int i, t_shell *shell, t_utils *utils)
-{
-	while (utils->parse_env && utils->parse_env[i])
-	{
-		utils->join = ft_strjoin_three(utils->parse_env[i],
-			"/", shell->action->opt[0]);
-			printf("========\n");
-		printf("[%s]\n", utils->join);
-			printf("========\n");
-		if (access(utils->join, F_OK) == 0)
-		{
-			printf("cool\n");
-			ft_lstadd_back(&utils->lst, ft_lstnew(shell->action->opt,
-				ft_strdup(utils->join)));
-		}
-		else
-		{
-			printf("PAS BON LA COMMANDE\n");
-			// break;
-		}
-		i++;
-	}
-	suite_pipex(utils, environ);
-}
+// void		ft_check_access_mini(char **environ, int i, t_shell *shell, t_utils *utils)
+// {
+// 	while (utils->parse_env && utils->parse_env[i])
+// 	{
+// 		utils->join = ft_strjoin_three(utils->parse_env[i],
+// 			"/", shell->action->opt[0]);
+// 			printf("========\n");
+// 		printf("[%s]\n", utils->join);
+// 			printf("========\n");
+// 		if (access(utils->join, F_OK) == 0)
+// 		{
+// 			printf("cool\n");
+// 			ft_lstadd_back(&utils->lst, ft_lstnew(shell->action->opt,
+// 				ft_strdup(utils->join)));
+// 		}
+// 		else
+// 		{
+// 			printf("PAS BON LA COMMANDE\n");
+// 			// break;
+// 		}
+// 		i++;
+// 	}
+// 	suite_pipex(utils, environ);
+// }
 
 int main(int ac, char **av, char **env)
 {
@@ -134,6 +134,8 @@ int main(int ac, char **av, char **env)
 		add_history(rl_line_buffer);
 		if (!parsing_shit(rl_line_buffer, &shell))
 			return (0);
+		parsing_dollars(&shell);
+		// print_list_z(shell.token);
 		if (parsing_shit_two(&shell))
 			fill_cmd(&shell);
 
@@ -156,8 +158,8 @@ int main(int ac, char **av, char **env)
 		// free(rl_line_buffer); //free dans une fonction pour la norme
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
+		ft_lstclear_dol(&shell.dol);
 		// print_new_lst(shell.action);
-		// print_list_z(shell.token);
 	}
     write(1, "ciao\n", 5);
 	return (0);

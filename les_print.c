@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 15:45:28 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 17:38:07 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:17:16 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,26 @@ void 	print_list_z(t_token_list *token)
 	}
 
 }
+
+void 	print_list_dol(t_dol *token)
+{
+	t_dol *tmp;
+
+	tmp = token;
+
+	while (tmp)
+	{
+		printf("========================\n");
+		printf("prev = [%p]\n", tmp->prev);
+		printf("temp = [%p]\n", tmp);
+		printf("dol_var = [%s]\n", tmp->dol_var);
+		printf("next = [%p]\n", tmp->next);
+		printf("========================\n");
+		tmp = tmp->next;
+	}
+
+}
+
 
 void	print_env_lst(t_env *env, int indic)			// If option -> ft_error
 {

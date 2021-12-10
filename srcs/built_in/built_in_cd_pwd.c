@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:11:02 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/09 19:55:10 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/10 15:12:39 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,5 @@ int		built_in_pwd(t_shell *shell)
 			tmp = tmp->next;
 		}
 	}
-	// 
 	return (0);
 }

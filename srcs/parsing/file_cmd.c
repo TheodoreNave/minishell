@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:24:23 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 01:52:21 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/10 14:44:12 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,5 @@ int		fill_cmd(t_shell *shell)
 		}
 		tmp = tmp->next;
 	}
-	// print_new_lst(shell->action);
 	return (0);
 }

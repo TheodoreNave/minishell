@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:58:05 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 17:13:41 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/10 16:18:54 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,16 @@ void	clear_buff(t_shell *shell)
 
 void		empty_buff_in_lst(t_shell *shell, char symbole)
 {
+	if (shell->simple_quote == 1)
+	{
+		if (ft_strlen(shell->buff_temp) > 0)
+		{
+			ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_SIMPLE_QUOTE, shell->buff_temp));
+			clear_buff(shell);
+			shell->x = 0;
+			shell->simple_quote = 0;
+		}
+	}
 	if (ft_strlen(shell->buff_temp) > 0)
 	{
 		ft_lstadd_back_shell(&shell->token, ft_lstnew_shell(TYPE_WORD, shell->buff_temp));

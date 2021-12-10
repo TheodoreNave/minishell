@@ -6,7 +6,7 @@
 #    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/09 16:23:27 by tigerber         ###   ########.fr        #
+#    Updated: 2021/12/10 17:58:10 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,15 +14,18 @@ NAME = minishell
 
 SRCS =  srcs/minishell.c								\
 		srcs/prompt.c									\
-		srcs/utils.c									\
+		srcs/utils.c 									\
+		srcs/error.c 									\
 		srcs/parsing/environement.c						\
 		srcs/parsing/parsing.c							\
+		srcs/parsing/parsing_dollars.c					\
 		srcs/parsing/parsing2.c 						\
 		srcs/parsing/file_cmd.c 						\
 		srcs/parsing/file_cmd_redir.c 					\
 		srcs/utils_lst/ft_lst_env.c 					\
 		srcs/utils_lst/ft_lst_action.c 					\
 		srcs/utils_lst/ft_lst_shell.c 					\
+		srcs/utils_lst/ft_lst_dollars.c 				\
 		srcs/built_in/built_in.c 						\
 		srcs/built_in/built_in_cd_pwd.c 				\
 		srcs/built_in/built_in_export.c 				\

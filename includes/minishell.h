@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 17:35:23 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/10 18:52:39 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@
 # define BUFF_MAX 2048
 # define TYPE_WORD 1
 # define TYPE_SIMPLE_QUOTE 2
-# define TYPE_DOUBLE_QUOTE 3
 # define TYPE_PIPE 4
 # define TYPE_REDIR 5
 # define TYPE_REDIR_LEFT 6
@@ -42,6 +41,14 @@
 # define TYPE_DOLLARS 9
 # define TYPE_HEREDOC 10
 # define TYPE_END 11
+
+typedef struct s_dol
+{
+	char *dol_var;
+	struct s_dol *next;
+	struct s_dol *prev;
+}				t_dol;
+
 
 typedef struct	s_env
 {
@@ -82,17 +89,37 @@ typedef struct s_shell				// MAIN STRUCTURE
 	int				quote;
 	t_token_list	*token;
 	t_cmd_list		*action;
+	t_dol 			*dol;
 	int				on;
 	char			*pwd_temp;
 	t_env 			*environ;
+	int				simple_quote;
+	char			*dollar_var;
+	//int			$?
 
 }	t_shell;
 
+t_dol	*ft_lstnew_dol(char *word);
+
+void	ft_lstadd_back_dol(t_dol **dol, t_dol *new);
+
+void	ft_lstclear_dol(t_dol **dol);
+
+void 	print_list_dol(t_dol *token);
+
+int		ft_strlen_space(char *str);
+
+void 	convert_dollars(char *word, t_shell *shell);
+
+int	check_dollars(t_shell *shell, char *word);
+
+int 	parsing_dollars(t_shell *shell);
+
 int	 	ft_putstr_quotes(char *str);
 
-int	ft_strncmpp(const char *s1, const char *s2, size_t n);
+int		ft_strncmpp(const char *s1, const char *s2, size_t n);
 
-int	ft_strlen_egal(char *str);
+int		ft_strlen_egal(char *str);
 
 int		count_env_lst(t_env *env);
 
