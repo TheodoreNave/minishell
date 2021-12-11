@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/10 18:52:39 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/11 19:57:16 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@
 
 typedef struct s_dol
 {
-	char *dol_var;
+	char *word_dol;
+	
 	struct s_dol *next;
 	struct s_dol *prev;
 }				t_dol;
@@ -95,9 +96,14 @@ typedef struct s_shell				// MAIN STRUCTURE
 	t_env 			*environ;
 	int				simple_quote;
 	char			*dollar_var;
+	int				is_dol;
 	//int			$?
 
 }	t_shell;
+
+char	*join_dollars(t_shell *shell);
+
+void 	new_token_dollars(char *word, t_shell *shell);
 
 t_dol	*ft_lstnew_dol(char *word);
 
@@ -109,7 +115,7 @@ void 	print_list_dol(t_dol *token);
 
 int		ft_strlen_space(char *str);
 
-void 	convert_dollars(char *word, t_shell *shell);
+char 	*convert_dollars(char *word, t_shell *shell);
 
 int	check_dollars(t_shell *shell, char *word);
 

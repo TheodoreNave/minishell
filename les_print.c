@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 15:45:28 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/10 18:17:16 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:11:18 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void 	print_list_dol(t_dol *token)
 		printf("========================\n");
 		printf("prev = [%p]\n", tmp->prev);
 		printf("temp = [%p]\n", tmp);
-		printf("dol_var = [%s]\n", tmp->dol_var);
+		printf("dol_var = [%s]\n", tmp->word_dol);
 		printf("next = [%p]\n", tmp->next);
 		printf("========================\n");
 		tmp = tmp->next;

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 17:52:31 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/10 18:05:32 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/11 18:13:01 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ t_dol	*ft_lstnew_dol(char *word)
 	new_list = malloc(sizeof(t_dol));
 	if (!(new_list))
 		return (NULL);
-	new_list->dol_var = word;
+	new_list->word_dol = word;
 	new_list->next = NULL;
 	return (new_list);
 }
@@ -54,10 +54,10 @@ void	ft_lstclear_dol(t_dol **dol)
 	while (*dol != NULL)
 	{
 		end_list = *dol;
-		if (end_list->dol_var)
+		if (end_list->word_dol)
 		{
-			free(end_list->dol_var);
-			end_list->dol_var = NULL;
+			free(end_list->word_dol);
+			end_list->word_dol = NULL;
 		}
 		*dol = end_list->next;
 		free(end_list);

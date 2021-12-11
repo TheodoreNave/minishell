@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 11:38:16 by tnave             #+#    #+#             */
-/*   Updated: 2021/10/15 15:25:05 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/11 19:38:40 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,6 +38,8 @@ char	*ft_strdup(char *s1)
 	int		i;
 
 	i = 0;
+	if (!s1)
+		return (NULL);
 	dest = malloc(sizeof(char) * ft_strlen(s1) + 1);
 	if (!(dest))
 		return (NULL);
