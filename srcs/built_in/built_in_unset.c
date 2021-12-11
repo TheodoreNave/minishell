@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:28:41 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/09 16:34:49 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/11 20:28:08 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	built_in_unset(t_shell *shell, char **opt)
 {
+	//MULTI UNSET ERROR CARCTERE NON ALPHABETIQUE
 	t_env *tmp;
 
 	tmp = shell->environ;
