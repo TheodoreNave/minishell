@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/10 16:20:44 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:09:03 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,7 @@ int	parsing_shit(char *prompt, t_shell *shell)
 		if (prompt[i] == 34 || prompt[i] == 39)
 		{
 			if (prompt[i] == 39)
-				shell->simple_quote = 1;		
+				shell->simple_quote = 1;
 			i += add_to_buff_quote(&prompt[i], prompt[i], shell);
 			if (shell->quote == -1)
 				return (ft_error_two(NULL, shell, 2));

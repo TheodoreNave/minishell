@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/10 18:49:55 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:11:23 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,7 @@ int	check_name_variable(char *str, t_shell *shell)
 	{
 		ft_error_two(str, shell, 4);
 		return (1);
-	}	
+	}
 	while (str[i] && str[i] != '=')
 	{
 		if (!check_is_alpha(str[i]) && !(str[i] >= '0' && str[i] <= '9'))

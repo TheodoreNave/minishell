@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:22:13 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/09 17:51:53 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:11:28 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,10 +33,10 @@ char		**sort_tab_env(char **tab, int size)
 				tab[i + 1] = tmp;
 				is_ok = 0;
 			}
-			i++;	
+			i++;
 		}
 		size--;
-	}	
+	}
 	return (tab);
 }
 

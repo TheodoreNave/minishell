@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
+#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/10 17:58:10 by tigerber         ###   ########.fr        #
+#    Updated: 2021/12/12 13:20:59 by tnave            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,8 +52,12 @@ OBJ = $(SRCS:%.c=%.o)
 
 LIBS = -lreadline
 
+ADDED = echo "\033[92m⚙️ ⚙️ ⚙️ ⚙️ ⚙️ SUCCESS\033[0m"
+
 $(NAME): $(OBJ)
-	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME) $(LIBS) && $(ADDED)
+
+MAKEFLAGS += --silent
 
 all: $(NAME)
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_dollars.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:20:59 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/11 20:14:12 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/12 14:11:09 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ char	*ft_strndup(char *str, int size)
 	i = 0;
 	dest = malloc(sizeof(char) * (size + 1));
 	if (!(dest))
-		return (NULL);		
+		return (NULL);
 	while (str[i] && i < size)
 	{
 		dest[i] = str[i];
