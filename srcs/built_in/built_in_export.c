@@ -6,13 +6,13 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/12 14:11:23 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/13 11:28:51 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-//MULTI EXPORT $TIM $THEO
+//MULTI EXPORT $TIM $THEO				double free quand "$THEO             $THEO" + non reconnaissance ' '
 
 int	check_is_alpha(char c)
 {
@@ -69,9 +69,11 @@ int	built_in_export(char **opt, t_env *environ, t_shell *shell)
 {
 	int i;
 	int j;
+	int k;
 
 	i = 1;
 	j = 0;
+	k = 0;
 	if (!opt[1])
 	{
 		print_sort_env(environ);
@@ -88,7 +90,6 @@ int	built_in_export(char **opt, t_env *environ, t_shell *shell)
 			if (opt[i][j] == '=')
 			{
 				ft_lstadd_back_env(&environ, ft_lstnew_env(opt[i]));
-				return (0);
 			}
 			j++;
 		}
