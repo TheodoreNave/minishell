@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:16:14 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/10 15:17:19 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:48:40 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,8 +32,12 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 	{
 		printf("bash: export: `%s': not a valid identifier\n", str);
 	}
-	ft_lstclear_shell(&shell->token);
-	ft_lstclear_action(&shell->action);
+	if (error == 5)
+	{
+		printf("bash: unset: `%s': not a valid identifier\n", str);
+	}
+	// ft_lstclear_shell(&shell->token);
+	// ft_lstclear_action(&shell->action);
 	// strerror(errno) plus tard
 	return (0);
 }

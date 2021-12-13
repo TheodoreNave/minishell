@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:23:56 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/10 14:35:30 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:11:22 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,12 @@ char	*prompt(t_shell *shell, char *buff)
 {
 	char *temp;
 	char *join_temp;
-
+	
+	if (buff)
+	{
+		free(buff);
+		buff = NULL;
+	}
 	if (!shell->on) // shell->on == 0
 	{
 		// free shell->pwd_temp ???
@@ -42,6 +47,8 @@ char	*prompt(t_shell *shell, char *buff)
 	}
 	if (!buff)
 	{
+		if (shell->environ)
+			ft_lstclear_env(&shell->environ);
 		write(1, "exit\n", 5);
 		exit(0);
 	}

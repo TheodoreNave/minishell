@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:25:42 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/09 19:56:21 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 12:03:24 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,11 +59,11 @@ int 	parse_pwd_two(t_shell *shell)
 
 int 	parse_pwd(t_shell *shell)
 {
-	int i;
+	// int i;
 	t_env *tmp;
 
 	tmp = shell->environ;
-	i = 0;
+	// i = 0;
 
 	while (tmp)
 	{
@@ -90,10 +90,10 @@ int 	parse_pwd(t_shell *shell)
 int		stock_env(char **env, t_shell *shell)
 {
 	int i;
-	int j;
+	// int j;
 
 	i = 0;
-	j = 1;
+	// j = 1;
 	while (env[i])
 	{
 		ft_lstadd_back_env(&shell->environ, ft_lstnew_env(env[i]));

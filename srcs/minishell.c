@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/12 13:21:05 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/13 16:45:30 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-int	parse_env_minishell(char **env, t_utils *utils) // ?????
+int	parse_env_minishell(char **env, t_utils *utils)
 {
 	int	i;
 
@@ -116,7 +116,7 @@ int main(int ac, char **av, char **env)
 {
     t_utils utils;
 	t_shell shell;
-
+	static char	*buffer = (char *)NULL;
 	(void)ac;
 	(void)av;
 	// int i = 0;
@@ -130,9 +130,11 @@ int main(int ac, char **av, char **env)
 	// print_env_lst(shell.environ);
     while (1)
     {
-		rl_line_buffer = prompt(&shell, rl_line_buffer);
-		add_history(rl_line_buffer);
-		if (!parsing_shit(rl_line_buffer, &shell))
+
+		buffer = prompt(&shell, buffer);
+		if (buffer)
+			add_history(buffer);
+		if (!parsing_shit(buffer, &shell))
 			return (0);
 		parsing_dollars(&shell);
 		// print_list_z(shell.token);
@@ -155,10 +157,11 @@ int main(int ac, char **av, char **env)
 				// stock dans une liste et balancer dans pipex si necessaire au dernier moment
 			}
 		}
+				printf("TEST\n");
+
 		// free(rl_line_buffer); //free dans une fonction pour la norme
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
-		ft_lstclear_dol(&shell.dol);
 		// print_new_lst(shell.action);
 	}
     write(1, "ciao\n", 5);

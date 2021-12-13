@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 11:10:03 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/13 16:46:44 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,6 +101,14 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 }	t_shell;
 
+int		check_name_variable(char *str, t_shell *shell, int j);
+
+int 	built_in_unset(t_shell *shell, char **opt);
+
+void	ft_lstclear_env(t_env **env);
+
+char	*add_space(int size);
+
 int		built_in_echo_n(char **opt);
 
 char	*join_dollars(t_shell *shell);
@@ -143,7 +151,7 @@ int		built_in_exit(t_shell *shell);
 
 int		built_in_echo(char **opt);
 
-int		built_in_unset(t_shell *shell, char **opt);
+int		while_unset(t_shell *shell, char *opt);
 
 int 	built_in_export(char **opt, t_env *environ, t_shell *shell);
 

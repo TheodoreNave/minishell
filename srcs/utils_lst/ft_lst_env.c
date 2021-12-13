@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:46:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 15:20:59 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 16:04:40 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,4 +73,24 @@ int	ft_lstsize_shell(t_token_list *lst)
 		i++;
 	}
 	return (i);
+}
+
+void	ft_lstclear_env(t_env **env)
+{
+	t_env	*end_list;
+
+	if (!env)
+		return ;
+	while (*env != NULL)
+	{
+		end_list = *env;
+		if (end_list->var_env)
+		{
+			free(end_list->var_env);
+			end_list->var_env = NULL;
+		}
+		*env = end_list->next;
+		free(end_list);
+	}
+	*env = NULL;
 }

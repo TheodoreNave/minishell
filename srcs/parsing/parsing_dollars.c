@@ -3,28 +3,28 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_dollars.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:20:59 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/12 14:11:09 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/13 15:27:54 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// int	ft_strlen_space(char *str)
-// {
-// 	int i;
+int	ft_strlen_space(char *str)
+{
+	int i;
 
-// 	i = 0;
-// 	while (str[i])
-// 	{
-// 		if (str[i] == '\0' || str[i] == ' ' || str[i] == '$')
-// 			return (i);
-// 		i++;
-// 	}
-// 	return (i);
-// }
+	i = 0;
+	while (str[i])
+	{
+		if (str[i] == '\0' || str[i] == ' ' || str[i] == '$')
+			return (i);
+		i++;
+	}
+	return (i);
+}
 
 char	*ft_strndup(char *str, int size)
 {
@@ -44,25 +44,50 @@ char	*ft_strndup(char *str, int size)
 	return (dest);
 }
 
+char	*add_space(int size)
+{
+	char *str;
+	int 	i;
+
+	i = 0;
+	str = malloc(sizeof(char) * (size + 1));
+	if (!str)
+		return (NULL);
+	while (size > 0)
+	{
+		str[i] = ' ';
+		i++;	
+		size--;
+	}
+	str[i] = '\0';
+	return (str);
+}
+
+
 char *convert_dollars(char *word, t_shell *shell)
 {
 	t_env *tmp;
 	int size;
+	// int size_two;
+	// char *space;
+	char *join;
 
 	tmp = shell->environ;
-	size = strlen(word);
-	
+	size = ft_strlen_space(word);
+	// size_two = ft_strlen(word) - size;
+	join = NULL;
+
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->var_env, word, size) == 0)
 		{
-			
-		 	if (tmp->var_env[size] == '=')
-				return (&tmp->var_env[ft_strlen(word) + 1]);
+			if ((tmp->var_env[size] == '='))
+				join = ft_strjoin(&tmp->var_env[size + 1], &word[size]);		// Ne pas chercher les mots ici	+ UNSET stop fonctionnement apres execution
+			return (join);
 		}
 		tmp = tmp->next;
 	}
-	return (ft_strdup(""));
+	return (ft_strjoin("", &word[size]));
 }
 
 int	check_dollars(t_shell *shell, char *word)
@@ -100,11 +125,11 @@ void	recup_dollars(t_shell *shell)
 	{
 		if (tmp->word_dol[0] == '$' && (!is_whitespace(tmp->word_dol[1])) && tmp->word_dol[1] != '\0')
 		{	
-			temporary = ft_strdup(convert_dollars(&tmp->word_dol[1], shell));
+			temporary = convert_dollars(&tmp->word_dol[1], shell);
 			if (temporary != NULL)
 			{
 				free(tmp->word_dol);
-				tmp->word_dol = temporary;
+				tmp->word_dol = temporary;		// tmp->word_dol = 42
 			}
 		}
 		tmp = tmp->next;
@@ -135,7 +160,7 @@ void 	new_token_dollars(char *word, t_shell *shell)
 		i++;
 	}
 	ft_lstadd_back_dol(&shell->dol, ft_lstnew_dol(ft_strndup(&word[j], i - j)));
-	shell->is_dol = 0;
+	shell->is_dol = 0;	
 }
 
 char	*join_dollars(t_shell *shell)
@@ -147,14 +172,16 @@ char	*join_dollars(t_shell *shell)
 	new_str = ft_strdup("");
 	temp = NULL;
 	tmp = shell->dol;
+	// print_list_dol(shell->dol);
 	while (tmp)
 	{
 		temp = new_str;
+		// printf("tmp->word_dol = [%s]\n", tmp->word_dol);
 		new_str = ft_strjoin(new_str, tmp->word_dol);
+		// printf("new_str = [%s]\n", new_str);
 		free(temp);
 		tmp = tmp->next;
 	}
-	printf("new_str = [%s]\n", new_str);
 	return (new_str);
 }
 
@@ -171,14 +198,29 @@ int parsing_dollars(t_shell *shell)
 			{
 				new_token_dollars(tmp->word, shell);
 				recup_dollars(shell);
-				free(tmp->word);
+				if (tmp->word)
+					free(tmp->word);
 				tmp->word = join_dollars(shell);
+				if (shell->dol)
+					ft_lstclear_dol(&shell->dol);
 			}
 		}
 		tmp = tmp->next;
 	}
-	print_list_dol(shell->dol);
-	print_list_z(shell->token);
+	// print_list_dol(shell->dol);
+	// print_list_z(shell->token);
+	tmp = shell->token;
+	while (tmp)
+	{
+		if (tmp->type == TYPE_SIMPLE_QUOTE)
+		{
+			tmp->type = TYPE_WORD;
+		}
+		tmp = tmp->next;
+	}
+	// print_list_dol(shell->dol);
+	// print_list_z(shell->token);
+	
 	return (0);
 }
 
