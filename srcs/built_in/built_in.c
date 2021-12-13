@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 15:37:13 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:02:45 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,16 +26,17 @@ int		built_in_check(char **built_in, t_shell *shell)
 		built_in_export(built_in, shell->environ, shell);
 	else if (!strncmp(built_in[0], "echo", 4))
 	{
-		if (!strncmp(built_in[1], "-n", 3))		// seulement -n
-			built_in_echo_n(&built_in[2]);
+		if (!strncmp(built_in[1], "-n", 3))
+			built_in_echo_n(&built_in[2], shell);
 		else
-			built_in_echo(&built_in[1]);
+			built_in_echo(&built_in[1], shell);
 	}
 	else if (!strncmp(built_in[0], "exit", 4))
 		built_in_exit(shell);
 	else
 		return (0);
 	return (1);
+}
 
 // int	is_built_in(char *cmd)
 // {
@@ -49,11 +50,10 @@ int		built_in_check(char **built_in, t_shell *shell)
 // 		return (1);
 // 	else if (!strncmp(cmd, "unset", 5))
 // 		return (1);
-// 	// else if (!strncmp(cmd, "exit", 4))
-// 	// 	return (1);
-// 	// else if (!strncmp(cmd, "echo", 4))
-// 	// 	return (1);
+	// else if (!strncmp(cmd, "exit", 4))
+	// 	return (1);
+	// else if (!strncmp(cmd, "echo", 4))
+	// 	return (1);
 // 	else
 // 		return (0);
 // }
-}

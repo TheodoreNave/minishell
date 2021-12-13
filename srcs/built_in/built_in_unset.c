@@ -3,20 +3,17 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:28:41 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 16:44:19 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:28:52 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-
-
-int	while_unset(t_shell *shell, char *opt)
+int	boucle_unset(t_shell *shell, char *opt)
 {
-	//MULTI UNSET ERROR CARCTERE NON ALPHABETIQUE
 	t_env *tmp;
 
 	tmp = shell->environ;
@@ -43,7 +40,7 @@ int 	built_in_unset(t_shell *shell, char **opt)
 	while (opt[i])
 	{
 
-		if (!while_unset(shell, opt[i]))
+		if (!boucle_unset(shell, opt[i]))
 		{
 			if (!check_name_variable(opt[i], shell, 5))
 				ft_error_two(opt[i], shell, 5);
@@ -52,6 +49,3 @@ int 	built_in_unset(t_shell *shell, char **opt)
 	}
 	return (0);
 }
-// .TIMOTHEE=98
-
-// TIMOTHEE=42

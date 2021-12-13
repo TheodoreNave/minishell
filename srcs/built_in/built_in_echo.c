@@ -6,19 +6,19 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:20 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 11:32:39 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/13 18:05:56 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-// MULTI ARGUMENT ECHOE
-
-int		built_in_echo(char **opt)
+int		built_in_echo(char **opt, t_shell *shell)
 {
 	int i = 0;
 	if (!opt)
 		return (0);
+	if (!strncmp(opt[i], "$?", 3))
+		printf("carre = [%d]", shell->dol->question_dol);
 	while (opt[i])
 	{
 		write(1, opt[i], ft_strlen(opt[i]));
@@ -29,13 +29,15 @@ int		built_in_echo(char **opt)
 	return (0);
 }
 
-int		built_in_echo_n(char **opt)
+int		built_in_echo_n(char **opt, t_shell *shell)
 {
 	int i;
 
 	i = 0;
 	if (!opt)
 		return (0);
+	if (!strncmp(opt[i], "$?", 3))
+		printf("%d", shell->dol->question_dol);
 	while (opt[i])
 	{
 		write(1, opt[i], ft_strlen(opt[i]));

@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:58:05 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/12 14:10:37 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/13 17:35:00 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -99,4 +99,15 @@ int	ft_strlen_egal(char *str)
 		i++;
 	}
 	return (0);
+}
+
+
+int		ft_strcmp(char *s1, char *s2)
+{
+	int i;
+
+	i = 0;
+	while (s1[i] == s2[i] && s1[i] && s2[i])
+		i++;
+	return ((unsigned char)s1[i] - (unsigned char)s2[i]);
 }

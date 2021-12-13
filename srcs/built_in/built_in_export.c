@@ -3,16 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 16:46:32 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:28:19 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
-
-//MULTI EXPORT $TIM $THEO				double free quand "$THEO             $THEO" + non reconnaissance ' '
 
 int	check_is_alpha(char c)
 {
@@ -47,10 +45,8 @@ int	check_name_variable(char *str, t_shell *shell, int j)
 
 int	check_var_in_env(t_env *env, char *opt)
 {
-	// int i;
 	t_env *tmp;
 
-	// i = 0;
 	tmp = env;
 	while (tmp)
 	{
@@ -69,11 +65,9 @@ int	built_in_export(char **opt, t_env *environ, t_shell *shell)
 {
 	int i;
 	int j;
-	// int k;
 
 	i = 1;
 	j = 0;
-	// k = 0;
 	if (!opt[1])
 	{
 		print_sort_env(environ);
@@ -81,7 +75,6 @@ int	built_in_export(char **opt, t_env *environ, t_shell *shell)
 	}
 	while (opt[i])
 	{
-		
 		if (check_var_in_env(environ, opt[i]))
 		{
 			if (check_name_variable(opt[i], shell, 4))

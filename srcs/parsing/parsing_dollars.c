@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_dollars.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:20:59 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 15:27:54 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:06:41 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,37 +44,14 @@ char	*ft_strndup(char *str, int size)
 	return (dest);
 }
 
-char	*add_space(int size)
-{
-	char *str;
-	int 	i;
-
-	i = 0;
-	str = malloc(sizeof(char) * (size + 1));
-	if (!str)
-		return (NULL);
-	while (size > 0)
-	{
-		str[i] = ' ';
-		i++;	
-		size--;
-	}
-	str[i] = '\0';
-	return (str);
-}
-
-
 char *convert_dollars(char *word, t_shell *shell)
 {
 	t_env *tmp;
 	int size;
-	// int size_two;
-	// char *space;
 	char *join;
 
 	tmp = shell->environ;
 	size = ft_strlen_space(word);
-	// size_two = ft_strlen(word) - size;
 	join = NULL;
 
 	while (tmp)
@@ -82,7 +59,7 @@ char *convert_dollars(char *word, t_shell *shell)
 		if (ft_strncmp(tmp->var_env, word, size) == 0)
 		{
 			if ((tmp->var_env[size] == '='))
-				join = ft_strjoin(&tmp->var_env[size + 1], &word[size]);		// Ne pas chercher les mots ici	+ UNSET stop fonctionnement apres execution
+				join = ft_strjoin(&tmp->var_env[size + 1], &word[size]);
 			return (join);
 		}
 		tmp = tmp->next;
@@ -113,23 +90,32 @@ int	is_whitespace(int c)
 			|| c == '\r');
 }
 
+int		dollars_question(t_shell *shell)
+{
+	shell->dol->question_dol = 1;
+	return (0);
+}
+
 void	recup_dollars(t_shell *shell)
 {
-	// ADD ELSE IF $? //
 	t_dol *tmp;
 	char *temporary;
-	
+
 	temporary = NULL;
 	tmp = shell->dol;
 	while (tmp)
 	{
+		if (tmp->word_dol[0] == '$' && tmp->word_dol[1] == '?' && tmp->word_dol[2] == '\0')
+		{
+			dollars_question(shell);
+		}
 		if (tmp->word_dol[0] == '$' && (!is_whitespace(tmp->word_dol[1])) && tmp->word_dol[1] != '\0')
-		{	
+		{
 			temporary = convert_dollars(&tmp->word_dol[1], shell);
 			if (temporary != NULL)
 			{
 				free(tmp->word_dol);
-				tmp->word_dol = temporary;		// tmp->word_dol = 42
+				tmp->word_dol = temporary;
 			}
 		}
 		tmp = tmp->next;
@@ -160,7 +146,7 @@ void 	new_token_dollars(char *word, t_shell *shell)
 		i++;
 	}
 	ft_lstadd_back_dol(&shell->dol, ft_lstnew_dol(ft_strndup(&word[j], i - j)));
-	shell->is_dol = 0;	
+	shell->is_dol = 0;
 }
 
 char	*join_dollars(t_shell *shell)
@@ -168,7 +154,7 @@ char	*join_dollars(t_shell *shell)
 	t_dol *tmp;
 	char  *new_str;
 	char  *temp;
-	
+
 	new_str = ft_strdup("");
 	temp = NULL;
 	tmp = shell->dol;
@@ -176,9 +162,7 @@ char	*join_dollars(t_shell *shell)
 	while (tmp)
 	{
 		temp = new_str;
-		// printf("tmp->word_dol = [%s]\n", tmp->word_dol);
 		new_str = ft_strjoin(new_str, tmp->word_dol);
-		// printf("new_str = [%s]\n", new_str);
 		free(temp);
 		tmp = tmp->next;
 	}
@@ -220,8 +204,6 @@ int parsing_dollars(t_shell *shell)
 	}
 	// print_list_dol(shell->dol);
 	// print_list_z(shell->token);
-	
+
 	return (0);
 }
-
-// "salut [$theos] $TIM" if good keep and change else KO 

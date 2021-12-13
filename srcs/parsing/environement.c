@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environement.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:25:42 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 12:03:24 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:29:57 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 int 	parse_pwd_two(t_shell *shell)
 {
 	int i;
+	char *pwd_temp;
 	t_env *tmp;
 	t_env *tempo;
-	char *pwd_temp;
-	
+
 	i = 0;
 	pwd_temp = NULL;
 	tmp = shell->environ;
@@ -47,7 +47,7 @@ int 	parse_pwd_two(t_shell *shell)
 			{
 				free(tmp->var_env);
 				tmp->var_env = ft_strjoin("PWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
-			}	
+			}
 		}
 		i++;
 		tmp = tmp->next;
@@ -59,12 +59,9 @@ int 	parse_pwd_two(t_shell *shell)
 
 int 	parse_pwd(t_shell *shell)
 {
-	// int i;
 	t_env *tmp;
 
 	tmp = shell->environ;
-	// i = 0;
-
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->var_env, "PWD=", 4) == 0)
@@ -90,10 +87,8 @@ int 	parse_pwd(t_shell *shell)
 int		stock_env(char **env, t_shell *shell)
 {
 	int i;
-	// int j;
 
 	i = 0;
-	// j = 1;
 	while (env[i])
 	{
 		ft_lstadd_back_env(&shell->environ, ft_lstnew_env(env[i]));

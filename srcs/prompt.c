@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:23:56 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 16:11:22 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:32:36 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,13 +16,13 @@ char	*prompt(t_shell *shell, char *buff)
 {
 	char *temp;
 	char *join_temp;
-	
+
 	if (buff)
 	{
 		free(buff);
 		buff = NULL;
 	}
-	if (!shell->on) // shell->on == 0
+	if (!shell->on)
 	{
 		// free shell->pwd_temp ???
 		shell->pwd_temp = getcwd(shell->buff_pwd, sizeof(shell->buff_pwd));

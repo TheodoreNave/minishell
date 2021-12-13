@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 16:45:30 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 17:47:09 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,13 +119,13 @@ int main(int ac, char **av, char **env)
 	static char	*buffer = (char *)NULL;
 	(void)ac;
 	(void)av;
-	// int i = 0;
 	mem(&utils, &shell);
 	if (chdir(getenv("HOME")) == -1)
 		ft_error_two("chdir()", &shell, 1);
 
 	signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signals);
+	if (signal(SIGINT, signals))
+		shell.dol->question_dol = 130;
 	stock_env(env, &shell);
 	// print_env_lst(shell.environ);
     while (1)
@@ -142,7 +142,7 @@ int main(int ac, char **av, char **env)
 			fill_cmd(&shell);
 
 		// parse_env_minishell(env, &utils);
-		// // if (pipe)
+		// if (pipe)
 		// while (i <= 3)	// while tant que env existe encore
 		// {
 		// 	ft_check_access_mini(env, i, &shell, &utils);	// 2 commandes ou plus
@@ -157,13 +157,9 @@ int main(int ac, char **av, char **env)
 				// stock dans une liste et balancer dans pipex si necessaire au dernier moment
 			}
 		}
-				printf("TEST\n");
-
-		// free(rl_line_buffer); //free dans une fonction pour la norme
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
 		// print_new_lst(shell.action);
 	}
-    write(1, "ciao\n", 5);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:22:13 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/12 14:11:28 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/13 17:33:39 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,8 @@
 char		**sort_tab_env(char **tab, int size)
 {
 	int i;
-	char *tmp;
 	int is_ok;
+	char *tmp;
 
 	i = 0;
 	is_ok = 0;
@@ -26,7 +26,7 @@ char		**sort_tab_env(char **tab, int size)
 		i = 0;
 		while (i < size - 1)
 		{
-			if (strcmp(tab[i], tab[i + 1]) > 0)
+			if (ft_strcmp(tab[i], tab[i + 1]) > 0)			// Change to ft_strcmp, need to change for diff
 			{
 				tmp = tab[i];
 				tab[i] = tab[i + 1];

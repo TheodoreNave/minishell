@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 16:46:44 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/13 18:05:22 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,8 @@
 
 typedef struct s_dol
 {
-	char *word_dol;
+	char	*word_dol;
+	int		question_dol;
 
 	struct s_dol *next;
 	struct s_dol *prev;
@@ -72,7 +73,7 @@ typedef	struct s_token_list			// TOKEN PARSING
 typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 {
 	//char 	*cmd;
-	int 	type_start;		// <
+	int 	type_start;
 	char	*fichier;
 	char 	**opt;
 	int 	type_end;
@@ -97,9 +98,12 @@ typedef struct s_shell				// MAIN STRUCTURE
 	int				simple_quote;
 	char			*dollar_var;
 	int				is_dol;
-	//int			$?
 
 }	t_shell;
+
+int		dollars_question(t_shell *shell);
+
+int		ft_strcmp(char *s1, char *s2);
 
 int		check_name_variable(char *str, t_shell *shell, int j);
 
@@ -107,9 +111,7 @@ int 	built_in_unset(t_shell *shell, char **opt);
 
 void	ft_lstclear_env(t_env **env);
 
-char	*add_space(int size);
-
-int		built_in_echo_n(char **opt);
+int		built_in_echo_n(char **opt, t_shell *shell);
 
 char	*join_dollars(t_shell *shell);
 
@@ -149,9 +151,9 @@ void	empty_buff_in_lst(t_shell *shell, char symbole);
 
 int		built_in_exit(t_shell *shell);
 
-int		built_in_echo(char **opt);
+int		built_in_echo(char **opt, t_shell *shell);
 
-int		while_unset(t_shell *shell, char *opt);
+int		boucle_unset(t_shell *shell, char *opt);
 
 int 	built_in_export(char **opt, t_env *environ, t_shell *shell);
 
