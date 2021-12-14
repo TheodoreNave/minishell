@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:20:59 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 18:06:41 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/14 12:49:22 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strlen_space(char *str)
 	i = 0;
 	while (str[i])
 	{
-		if (str[i] == '\0' || str[i] == ' ' || str[i] == '$')
+		if (!ft_isalnum(str[i]))
 			return (i);
 		i++;
 	}
@@ -84,16 +84,22 @@ int	check_dollars(t_shell *shell, char *word)
 	return (0);
 }
 
+char 	*dollars_question(char *word, t_shell *shell)
+{
+	char *temp;
+	char *temporary;
+
+	temp = NULL;
+	temp = ft_itoa(shell->error_dol);
+	temporary = ft_strjoin(temp, word);
+	free(temp);
+	return (temporary);
+}
+
 int	is_whitespace(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
 			|| c == '\r');
-}
-
-int		dollars_question(t_shell *shell)
-{
-	shell->dol->question_dol = 1;
-	return (0);
 }
 
 void	recup_dollars(t_shell *shell)
@@ -105,11 +111,13 @@ void	recup_dollars(t_shell *shell)
 	tmp = shell->dol;
 	while (tmp)
 	{
-		if (tmp->word_dol[0] == '$' && tmp->word_dol[1] == '?' && tmp->word_dol[2] == '\0')
+		if (tmp->word_dol[0] == '$' && tmp->word_dol[1] == '?')
 		{
-			dollars_question(shell);
+			temporary = dollars_question(&tmp->word_dol[2], shell);
+			free(tmp->word_dol);
+			tmp->word_dol = temporary;
 		}
-		if (tmp->word_dol[0] == '$' && (!is_whitespace(tmp->word_dol[1])) && tmp->word_dol[1] != '\0')
+		else if (tmp->word_dol[0] == '$' && !ft_isalnum(tmp->word_dol[1] && tmp->word_dol[1] != '\0'))
 		{
 			temporary = convert_dollars(&tmp->word_dol[1], shell);
 			if (temporary != NULL)
@@ -131,7 +139,7 @@ void 	new_token_dollars(char *word, t_shell *shell)
 	j = 0;
 	while (word[i])
 	{
-		if (shell->is_dol && is_whitespace(word[i]))
+		if (shell->is_dol && is_whitespace(word[i]) && ft_isalnum(word[i]))
 		{
 			ft_lstadd_back_dol(&shell->dol, ft_lstnew_dol(ft_strndup(&word[j], i - j)));
 			j = i;
@@ -181,6 +189,7 @@ int parsing_dollars(t_shell *shell)
 			if (check_dollars(shell, tmp->word))
 			{
 				new_token_dollars(tmp->word, shell);
+				// print_list_dol(shell->dol);
 				recup_dollars(shell);
 				if (tmp->word)
 					free(tmp->word);
@@ -191,7 +200,6 @@ int parsing_dollars(t_shell *shell)
 		}
 		tmp = tmp->next;
 	}
-	// print_list_dol(shell->dol);
 	// print_list_z(shell->token);
 	tmp = shell->token;
 	while (tmp)

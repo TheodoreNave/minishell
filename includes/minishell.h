@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 18:05:22 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/14 18:16:50 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,6 @@
 typedef struct s_dol
 {
 	char	*word_dol;
-	int		question_dol;
 
 	struct s_dol *next;
 	struct s_dol *prev;
@@ -77,6 +76,7 @@ typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 	char	*fichier;
 	char 	**opt;
 	int 	type_end;
+	int		fd;
 
 	struct s_cmd_list *next;
 	struct s_cmd_list *prev;
@@ -98,10 +98,31 @@ typedef struct s_shell				// MAIN STRUCTURE
 	int				simple_quote;
 	char			*dollar_var;
 	int				is_dol;
+	int 			error_dol;
+	t_utils			*utils;
+	char			**parse_env;
+	char			*join;
+	char			**opt2;
 
 }	t_shell;
 
-int		dollars_question(t_shell *shell);
+void 	parse_les_redirections(t_shell *shell);
+
+int		parse_env_2(char **env, t_shell *shell);
+
+int		test_execve(t_shell *shell);
+
+void	ft_check_access_mini(int i, t_shell *shell, char **tab, char **opt_test);
+
+int		ft_isalnum(int c);
+
+char	*ft_strrev(char *str);
+
+int		ft_count_nbr(long int nb);
+
+char	*ft_itoa(int n);
+
+char 	*dollars_question(char *word, t_shell *shell);
 
 int		ft_strcmp(char *s1, char *s2);
 
@@ -111,7 +132,7 @@ int 	built_in_unset(t_shell *shell, char **opt);
 
 void	ft_lstclear_env(t_env **env);
 
-int		built_in_echo_n(char **opt, t_shell *shell);
+int		built_in_echo_n(char **opt);
 
 char	*join_dollars(t_shell *shell);
 
@@ -129,7 +150,7 @@ int		ft_strlen_space(char *str);
 
 char 	*convert_dollars(char *word, t_shell *shell);
 
-int	check_dollars(t_shell *shell, char *word);
+int		check_dollars(t_shell *shell, char *word);
 
 int 	parsing_dollars(t_shell *shell);
 
@@ -151,7 +172,7 @@ void	empty_buff_in_lst(t_shell *shell, char symbole);
 
 int		built_in_exit(t_shell *shell);
 
-int		built_in_echo(char **opt, t_shell *shell);
+int		built_in_echo(char **opt);
 
 int		boucle_unset(t_shell *shell, char *opt);
 

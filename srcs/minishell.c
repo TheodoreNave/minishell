@@ -6,28 +6,11 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 17:47:09 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/14 18:39:59 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-int	parse_env_minishell(char **env, t_utils *utils)
-{
-	int	i;
-
-	i = 0;
-	while (env[i])
-	{
-		if (ft_strncmp(env[i], "PATH=", 5) == 0)
-		{
-			utils->parse_env = ft_split(is_slash(env[i]), ':');
-			return (1);
-		}
-		i++;
-	}
-	return (0);
-}
 
 void	signals(int sig)
 {
@@ -87,9 +70,9 @@ void	mem(t_utils *utils, t_shell *shell)
 // 	}
 // }
 
-// void		ft_check_access_mini(char **environ, int i, t_shell *shell, t_utils *utils)
+// void		ft_check_access_mini(int i, t_shell *shell, t_utils *utils)
 // {
-// 	while (utils->parse_env && utils->parse_env[i])
+// 	while (shell->environ && shell->environ[i])
 // 	{
 // 		utils->join = ft_strjoin_three(utils->parse_env[i],
 // 			"/", shell->action->opt[0]);
@@ -124,8 +107,7 @@ int main(int ac, char **av, char **env)
 		ft_error_two("chdir()", &shell, 1);
 
 	signal(SIGQUIT, SIG_IGN);
-	if (signal(SIGINT, signals))
-		shell.dol->question_dol = 130;
+	signal(SIGINT, signals);
 	stock_env(env, &shell);
 	// print_env_lst(shell.environ);
     while (1)
@@ -140,26 +122,28 @@ int main(int ac, char **av, char **env)
 		// print_list_z(shell.token);
 		if (parsing_shit_two(&shell))
 			fill_cmd(&shell);
-
-		// parse_env_minishell(env, &utils);
-		// if (pipe)
-		// while (i <= 3)	// while tant que env existe encore
-		// {
-		// 	ft_check_access_mini(env, i, &shell, &utils);	// 2 commandes ou plus
-		// 	i++;
-		// }
-		// if (!pipe)
 		if (shell.action)
 		{
-			if (!built_in_check(shell.action->opt, &shell))
-			{
-				printf("cmd is not built_in\n");
-				// stock dans une liste et balancer dans pipex si necessaire au dernier moment
-			}
+			test_execve(&shell);
+			// if (!built_in_check(shell.action->opt, &shell))
+			// {
+			// 	printf("cmd is not built_in\n");
+			// 	// stock dans une liste et balancer dans pipex si necessaire au dernier moment
+			// }
 		}
+
+		// print_new_lst(shell.action);
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
-		// print_new_lst(shell.action);
 	}
 	return (0);
 }
+
+
+// < fichier == O_RDONLY
+
+// < == O_RDONLY
+// ls < fichier
+// cat < fichier
+// [cat] [fichier]
+// [ls] [fichier]

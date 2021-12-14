@@ -6,19 +6,17 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:20 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 18:05:56 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/14 12:22:13 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int		built_in_echo(char **opt, t_shell *shell)
+int		built_in_echo(char **opt)
 {
 	int i = 0;
 	if (!opt)
 		return (0);
-	if (!strncmp(opt[i], "$?", 3))
-		printf("carre = [%d]", shell->dol->question_dol);
 	while (opt[i])
 	{
 		write(1, opt[i], ft_strlen(opt[i]));
@@ -29,15 +27,13 @@ int		built_in_echo(char **opt, t_shell *shell)
 	return (0);
 }
 
-int		built_in_echo_n(char **opt, t_shell *shell)
+int		built_in_echo_n(char **opt)
 {
 	int i;
 
 	i = 0;
 	if (!opt)
 		return (0);
-	if (!strncmp(opt[i], "$?", 3))
-		printf("%d", shell->dol->question_dol);
 	while (opt[i])
 	{
 		write(1, opt[i], ft_strlen(opt[i]));

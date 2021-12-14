@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:39:18 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 02:08:38 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/14 12:47:59 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,8 @@
 
 void	fd_exist(char **av, int ac, t_utils *utils)
 {
-	utils->fd_one = open(av[1], O_RDONLY);			// < file1 pwd
-	utils->fd_two = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU
-			| S_IRGRP | S_IROTH);
+	utils->fd_one = open(av[1], O_RDONLY);									// <
+	utils->fd_two = open(av[ac - 1], O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU, S_IRGRP, S_IROTH); // >
 	if (utils->fd_one < 0)
 	{
 		write(2, "bash: ", 6);

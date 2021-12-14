@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 18:02:45 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/14 12:22:40 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,9 @@ int		built_in_check(char **built_in, t_shell *shell)
 	else if (!strncmp(built_in[0], "echo", 4))
 	{
 		if (!strncmp(built_in[1], "-n", 3))
-			built_in_echo_n(&built_in[2], shell);
+			built_in_echo_n(&built_in[2]);
 		else
-			built_in_echo(&built_in[1], shell);
+			built_in_echo(&built_in[1]);
 	}
 	else if (!strncmp(built_in[0], "exit", 4))
 		built_in_exit(shell);

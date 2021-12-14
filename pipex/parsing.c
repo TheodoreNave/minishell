@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:56:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/09 02:13:13 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/14 15:17:48 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,8 @@ int	parse_env(char **env, t_utils *utils)
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
 		{
+			printf("env[i] = %s\n", env[i]);
+			printf("parse_env[i] = %p\n", utils->parse_env);
 			utils->parse_env = ft_split(is_slash(env[i]), ':');
 			return (1);
 		}

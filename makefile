@@ -3,18 +3,20 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
+#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/13 15:35:39 by tigerber         ###   ########.fr        #
+#    Updated: 2021/12/14 14:56:16 by tnave            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRCS =  srcs/minishell.c								\
+		srcs/test_execve.c								\
 		srcs/prompt.c									\
 		srcs/utils.c 									\
+		srcs/outils.c 									\
 		srcs/error.c 									\
 		srcs/parsing/environement.c						\
 		srcs/parsing/parsing.c							\
