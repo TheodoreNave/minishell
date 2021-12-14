@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/14 18:41:23 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/14 18:43:10 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -102,8 +102,8 @@ char	**new_opt_action(t_shell *shell)
 	}
 	tmp = shell->action;
 	i = 0;
-	temp = malloc(sizeof(char *) * i + 1);
-	if (temp)
+	temp = malloc(sizeof(char *) * (i + 1));
+	if (!temp)
 		return (NULL);
 	while (tmp && tmp->type_start != TYPE_PIPE)
 	{
