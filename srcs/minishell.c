@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/14 18:39:59 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/15 15:40:00 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,7 +132,7 @@ int main(int ac, char **av, char **env)
 			// }
 		}
 
-		// print_new_lst(shell.action);
+		print_new_lst(shell.action);
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
 	}

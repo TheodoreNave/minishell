@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/14 18:43:10 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/15 15:40:14 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,8 +42,8 @@ void		ft_check_access_mini(int i, t_shell *shell, char **tab, char **opt_test)
 		{
 			printf("OK\n");
 			// ft_lstadd_back(&utils->lst, ft_lstnew(shell->action->opt, ft_strdup(utils->join)));
-			// execve(shell->join, shell->action->opt, tab);
 			execve(shell->join, opt_test, tab);
+			// execve(shell->join, opt_test, tab);
 		}
 		i++;
 	}
@@ -181,8 +181,8 @@ int	test_execve(t_shell *shell)
 	printf("test\n");
 	if (parse_env_2(tab, shell))
 	{
-		ft_check_access_mini(0, shell, tab, opt_test);
-		// ft_check_access_mini(0, shell, tab, shell->action->opt);
+		// ft_check_access_mini(0, shell, tab, opt_test);
+		ft_check_access_mini(0, shell, tab, shell->opt2);
 	}
 	else
 		printf("PATH NOT GOOD\n");

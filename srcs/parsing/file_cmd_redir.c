@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:09:08 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/09 01:01:37 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/15 15:39:53 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,7 @@ int	init_lst_redir(t_shell *shell, t_token_list **tmp, t_cmd_list *tpmp)
 		{
 			tpmp->type_end = TYPE_END;
 			ft_lstadd_back_action(&shell->action, tpmp);
+			return (0);
 		}
 	}
 	return (1);
