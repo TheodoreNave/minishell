@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/14 18:16:50 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/15 17:26:41 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,8 @@
 # define TYPE_HEREDOC 10
 # define TYPE_END 11
 
+# define STDIN 0
+# define STDOUT 1
 typedef struct s_dol
 {
 	char	*word_dol;
@@ -76,7 +78,9 @@ typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 	char	*fichier;
 	char 	**opt;
 	int 	type_end;
-	int		fd;
+	int		fd_in;
+	int		fd_out;
+	int 	pfd[2];
 
 	struct s_cmd_list *next;
 	struct s_cmd_list *prev;
@@ -105,6 +109,10 @@ typedef struct s_shell				// MAIN STRUCTURE
 	char			**opt2;
 
 }	t_shell;
+
+void	child_minishell(pid_t pid, t_cmd_list *tmp);
+
+void 	pipe_or_not(t_shell *shell, char **tab, char **opt, t_cmd_list *tmp);
 
 void 	parse_les_redirections(t_shell *shell);
 

@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/15 15:40:00 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/15 18:19:14 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -103,12 +103,12 @@ int main(int ac, char **av, char **env)
 	(void)ac;
 	(void)av;
 	mem(&utils, &shell);
+	stock_env(env, &shell);
 	if (chdir(getenv("HOME")) == -1)
-		ft_error_two("chdir()", &shell, 1);
+		ft_error_two("", &shell, 6);
 
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signals);
-	stock_env(env, &shell);
 	// print_env_lst(shell.environ);
     while (1)
     {
@@ -132,7 +132,7 @@ int main(int ac, char **av, char **env)
 			// }
 		}
 
-		print_new_lst(shell.action);
+		// print_new_lst(shell.action);
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
 	}

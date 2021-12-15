@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:16:14 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 16:48:40 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/15 18:17:03 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 	if (error == 5)
 	{
 		printf("bash: unset: `%s': not a valid identifier\n", str);
+	}
+	if (error == 6)
+	{
+		printf("NO ENV FOUND SORRY NEED TO QUIT %s\n", str);
+		exit(127);
 	}
 	// ft_lstclear_shell(&shell->token);
 	// ft_lstclear_action(&shell->action);

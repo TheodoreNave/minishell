@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:39:18 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/14 12:47:59 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/15 16:22:36 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ void	opt_exec(char **av, char **environ, t_utils *utils, t_utils_list *tmp)
 		execve(tmp->path, tmp->cmd_opt, environ);
 		exit(127);
 	}
-	else
+	else													// < fichier > fichier 2
 		child(pid, utils, tmp);
 }
 

@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/15 15:40:14 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/15 18:22:07 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,23 +29,72 @@ int	parse_env_2(char **env, t_shell *shell)
 	return (0);
 }
 
+// void		pipe_or_not(t_shell *shell, char **tab, char **opt, t_cmd_list *tmp)
+// {
+// 	pid_t	pid;
+
+// 	pid = fork();
+// 	if (pid < 0)
+// 		ft_error_two("ERROR FORK\n", shell, 1);
+// 	if (pid == 0)
+// 	{
+// 		if (!tmp->prev)
+// 			dup2(tmp->fd_in, STDIN);
+// 		else
+// 			dup2(tmp->prev->pfd[STDIN], STDIN);
+// 		if (tmp->next)
+// 			dup2(tmp->pfd[STDOUT], STDOUT);
+// 		else
+// 			dup2(tmp->fd_out, STDOUT);
+// 		execve(shell->join, opt, tab);
+// 		exit(127);
+// 	}
+// 	else													// < fichier > fichier 2
+// 		child_minishell(pid, tmp);
+// }
+
+// void	child_minishell(pid_t pid, t_cmd_list *tmp)
+// {
+// 	(void)tmp;
+// 	waitpid(pid, NULL, 0);
+// 	if (tmp->prev)
+// 		close(tmp->prev->pfd[STDIN]);
+// 	if (tmp->next)
+// 		close(tmp->pfd[STDOUT]);
+// 	if (!tmp->next)
+// 		printf("ERROR\n");
+// }
+
 
 
 void		ft_check_access_mini(int i, t_shell *shell, char **tab, char **opt_test)
 {
 	(void)opt_test;
-	while (shell->parse_env && shell->parse_env[i])
+	t_cmd_list *tmp;
+
+	tmp = shell->action;
+	while (tmp)
 	{
-		// shell->join = ft_strjoin_three(shell->parse_env[i], "/", shell->action->opt[0]);
-		shell->join = ft_strjoin_three(shell->parse_env[i], "/", opt_test[0]);
-		if (access(shell->join, F_OK) == 0)
+		if (tmp->type_start == TYPE_REDIR_LEFT)
 		{
-			printf("OK\n");
-			// ft_lstadd_back(&utils->lst, ft_lstnew(shell->action->opt, ft_strdup(utils->join)));
-			execve(shell->join, opt_test, tab);
-			// execve(shell->join, opt_test, tab);
+			while (shell->parse_env && shell->parse_env[i])
+			{
+				// shell->join = ft_strjoin_three(shell->parse_env[i], "/", shell->action->opt[0]);
+				shell->join = ft_strjoin_three(shell->parse_env[i], "/", opt_test[0]);
+				if (access(shell->join, F_OK) == 0)
+				{
+					dup2(tmp->fd_out, STDOUT);
+					execve(shell->join, opt_test, tab);
+				}
+					// if (pipe(tmp->pfd) == -1)
+					// 	ft_error_two("C NULL\n", shell, 1);
+					// pipe_or_not(shell, opt_test, tab, tmp);
+					// ft_lstadd_back(&utils->lst, ft_lstnew(shell->action->opt, ft_strdup(utils->join)));
+					// execve(shell->join, opt_test, tab);
+				i++;
+			}
 		}
-		i++;
+		tmp = tmp->next;
 	}
 	// suite_pipex(utils, environ);
 }
@@ -60,17 +109,19 @@ void 	parse_les_redirections(t_shell *shell)
 	{
 		if (tmp->type_start == TYPE_REDIR_LEFT && tmp->fichier != NULL)
 		{
-			tmp->fd = open(tmp->fichier, O_RDONLY);
-			printf("fd = %d\n", tmp->fd);
+			tmp->fd_in = open(tmp->fichier, O_RDONLY);
+			printf("fd = %d\n", tmp->fd_in);
 		}
-		else if (tmp->type_start == TYPE_REDIR_RIGHT && tmp->fichier != NULL)
+		else if (tmp->type_start == TYPE_REDIR_RIGHT && (tmp->fichier != NULL || tmp->fichier == NULL))
 		{
-			tmp->fd = open(tmp->fichier, O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU, S_IRGRP, S_IROTH);
+			tmp->fd_out = open(tmp->fichier, O_WRONLY | O_TRUNC | O_CREAT);
+			printf("fd_out = %d\n", tmp->fd_out);
 		}
-		// else if (tmp->type_start == TYPE_REDIR && tmp->fichier != NULL)
-		// {
-		// 	tmp->fd = open(tmp->fichier, O_WRONLY | O_APPEND)
-		// }
+		else if (tmp->type_start == TYPE_REDIR && tmp->fichier != NULL)
+		{
+			tmp->fd_out = open(tmp->fichier, O_WRONLY | O_APPEND | O_CREAT);
+			printf("fd_out = %d\n", tmp->fd_out);
+		}
 		// else if (tmp->type_start == TYPE_HEREDOC && tmp->fichier != NULL)
 		// {
 
@@ -115,11 +166,6 @@ char	**new_opt_action(t_shell *shell)
 				j++;
 				i++;
 			}
-		}
-		if (tmp->fichier != NULL)
-		{
-			temp[i] = tmp->fichier;
-			i++;
 		}
 		tmp = tmp->next;
 		j = 0;
@@ -177,8 +223,8 @@ int	test_execve(t_shell *shell)
 	shell->opt2 = new_opt_action(shell);
 	// if (!shell->opt2)
 	// 	return (0);
-	print_new_opt(shell->opt2);
-	printf("test\n");
+	// print_new_opt(shell->opt2);
+	// printf("test\n");s
 	if (parse_env_2(tab, shell))
 	{
 		// ft_check_access_mini(0, shell, tab, opt_test);
