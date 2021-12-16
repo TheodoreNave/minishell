@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 17:28:19 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/16 13:22:53 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,12 +45,12 @@ int	check_name_variable(char *str, t_shell *shell, int j)
 
 int	check_var_in_env(t_env *env, char *opt)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = env;
 	while (tmp)
 	{
-		if ((ft_strncmpp(tmp->var_env, opt, ft_strlen_egal(opt)) == 0))
+		if ((ft_strncmpp(tmp->var_env, opt, ft_strlen_char(opt, '=')) == 0))
 		{
 			free(tmp->var_env);
 			tmp->var_env = strdup(opt);

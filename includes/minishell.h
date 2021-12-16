@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/15 17:26:41 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/16 18:50:56 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -107,20 +107,41 @@ typedef struct s_shell				// MAIN STRUCTURE
 	char			**parse_env;
 	char			*join;
 	char			**opt2;
+	char			**new_env_tab;
+	int 			fd;
+	int 			fdout;
 
 }	t_shell;
+
+char	**new_env_tab(t_shell *shell);
+
+char	**new_opt_action(t_cmd_list *action);
+
+void	print_new_opt(char **tab);
+
+int		is_type_redir(int type);
+
+int		go_to_home(t_shell *shell);
+
+int		check_dollars(t_shell *shell, char *word);
+
+int		is_whitespace(int c);
+
+int		ft_strlen_space(char *str);
+
+char	*ft_strndup(char *str, int size);
 
 void	child_minishell(pid_t pid, t_cmd_list *tmp);
 
 void 	pipe_or_not(t_shell *shell, char **tab, char **opt, t_cmd_list *tmp);
 
-void 	parse_les_redirections(t_shell *shell);
+void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell);
 
-int		parse_env_2(char **env, t_shell *shell);
+int		parse_env_2(t_shell *shell);
 
 int		test_execve(t_shell *shell);
 
-void	ft_check_access_mini(int i, t_shell *shell, char **tab, char **opt_test);
+void	ft_check_access_mini(int i, t_shell *shell, char **env);
 
 int		ft_isalnum(int c);
 
@@ -166,7 +187,7 @@ int	 	ft_putstr_quotes(char *str);
 
 int		ft_strncmpp(const char *s1, const char *s2, size_t n);
 
-int		ft_strlen_egal(char *str);
+int		ft_strlen_char(char *str, char c);
 
 int		count_env_lst(t_env *env);
 
@@ -228,11 +249,11 @@ void	ft_lstclear_action(t_cmd_list **action);
 
 void	ft_lstadd_back_action(t_cmd_list **action, t_cmd_list *new);
 
-void 	print_list_z(t_token_list * token);
+void 	print_token_list(t_token_list * token);
 
 void	clear_buff(t_shell *shell);
 
-int 	parsing_shit_two(t_shell *shell);
+int 	parsing_errors_token(t_shell *shell);
 
 t_token_list	*ft_lstnew_shell(int type, char *word);
 
@@ -246,7 +267,7 @@ void	add_to_buff_no_space(t_shell *shell, char c);
 
 void	add_to_buff(t_shell *shell, char c);
 
-int		parsing_shit(char *buff, t_shell *shell);
+int		make_token_lst(char *buff, t_shell *shell);
 
 void	mem(t_utils *utils, t_shell *shell);
 

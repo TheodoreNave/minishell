@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing.c                                          :+:      :+:    :+:   */
+/*   parsing_for_token.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/14 17:43:05 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/16 16:30:06 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ int	add_to_buff_redir(char c, t_shell *shell)
 	return (1);
 }
 
-int	parsing_shit(char *prompt, t_shell *shell)
+int	make_token_lst(char *prompt, t_shell *shell)
 {
 	int i;
 
@@ -85,4 +85,3 @@ int	parsing_shit(char *prompt, t_shell *shell)
 	}
 	return (1);
 }
-

@@ -3,16 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   les_print.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 15:45:28 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 17:32:54 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/16 19:01:32 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "includes/minishell.h"
 
-void 	print_list_z(t_token_list *token)
+void	print_new_opt(char **tab)
+{
+	int i;
+
+	i = 0;
+	printf("---------------------****----------------------\n");
+	while (tab[i])
+	{
+		printf("new_opt = [%s]\n", tab[i]);
+		i++;
+	}
+	printf("-----------------------------------------------\n");
+	return ;
+}
+
+void 	print_token_list(t_token_list *token)
 {
 	t_token_list *tmp;
 

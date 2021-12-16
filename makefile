@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
+#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/14 14:56:16 by tnave            ###   ########.fr        #
+#    Updated: 2021/12/16 16:29:47 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -19,9 +19,10 @@ SRCS =  srcs/minishell.c								\
 		srcs/outils.c 									\
 		srcs/error.c 									\
 		srcs/parsing/environement.c						\
-		srcs/parsing/parsing.c							\
+		srcs/parsing/parsing_for_token.c				\
 		srcs/parsing/parsing_dollars.c					\
-		srcs/parsing/parsing2.c 						\
+		srcs/parsing/utils_parsing_dollars.c			\
+		srcs/parsing/parsing_error_token.c 				\
 		srcs/parsing/file_cmd.c 						\
 		srcs/parsing/file_cmd_redir.c 					\
 		srcs/utils_lst/ft_lst_env.c 					\

@@ -6,22 +6,30 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:21:10 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/10 15:17:25 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/16 16:27:08 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int parsing_shit_two(t_shell *shell)
+int	is_type_redir(int type)
+{
+	if (type == TYPE_REDIR || type == TYPE_REDIR_LEFT
+		|| type == TYPE_REDIR_RIGHT || type == TYPE_HEREDOC)
+		return (1);
+	return (0);
+}
+
+int parsing_errors_token(t_shell *shell)
 {
 	t_token_list *tmp;
 
 	tmp = shell->token;
 	while (tmp)
 	{
-		if ((tmp->type == TYPE_REDIR_LEFT || tmp->type == TYPE_REDIR_RIGHT) && tmp->next)
+		if (is_type_redir(tmp->type) && tmp->next)
 		{
-			if (tmp->next->type == TYPE_PIPE || tmp->next->type == TYPE_REDIR_LEFT || tmp->next->type == TYPE_REDIR_RIGHT)
+			if (tmp->next->type == TYPE_PIPE || is_type_redir(tmp->next->type))
 				return (ft_error_two(tmp->next->word, shell, 1));
 		}
 		else if (tmp->type == TYPE_PIPE && tmp->prev == NULL)
@@ -38,7 +46,7 @@ int parsing_shit_two(t_shell *shell)
 			printf(">\n");
 			return (0);
 		}
-		else if ((tmp->type == TYPE_REDIR_LEFT || tmp->type == TYPE_REDIR_RIGHT) && tmp->next == NULL)
+		else if (is_type_redir(tmp->type) && tmp->next == NULL)
 		{
 			return (ft_error_two("newline", shell, 1));
 		}

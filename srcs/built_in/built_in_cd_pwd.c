@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_cd_pwd.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:11:02 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 17:23:57 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/16 15:29:19 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,10 @@ int		built_in_cd(t_shell *shell, char **opt)
 	// Strerror ?
 	if (!opt[1])
 	{
-		if (chdir(getenv("HOME")) == -1)
-			ft_error_two("chdir()", shell, 1);
-		parse_pwd_two(shell);
+		if (!go_to_home(shell))
+			ft_error_two("bash: cd: HOME not set\n", shell, 7);
+		else
+			parse_pwd_two(shell);
 	}
 	else
 	{
