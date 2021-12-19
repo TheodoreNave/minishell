@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_dollars.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:20:59 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/16 15:34:34 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/19 19:14:58 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ char *convert_dollars(char *word, t_shell *shell)
 	{
 		if (ft_strncmp(tmp->var_env, word, size) == 0)
 		{
-			if ((tmp->var_env[size] == '='))
+			if ((tmp->var_env[size] = '='))
 				join = ft_strjoin(&tmp->var_env[size + 1], &word[size]);
 			else
 				join = ft_strjoin("",  &word[size]);

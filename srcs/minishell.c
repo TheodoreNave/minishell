@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/16 19:02:09 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:46:37 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,7 +34,7 @@ int main(int ac, char **av, char **env)
     t_utils utils;
 	t_shell shell;
 	static char	*buffer = (char *)NULL;
-	
+
 	(void)ac;
 	(void)av;
 	mem(&utils, &shell);
@@ -60,9 +60,9 @@ int main(int ac, char **av, char **env)
 			// 	// stock dans une liste et balancer dans pipex si necessaire au dernier moment
 			// }
 		}
+		// print_new_lst(shell.action);
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
-		// print_new_lst(shell.action);
 		// print_token_list(shell.token);
 		// print_env_lst(shell.environ);
 	}

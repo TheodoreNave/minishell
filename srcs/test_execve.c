@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   test_execve.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/16 19:04:44 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/19 20:46:15 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,10 +79,10 @@ char	**new_opt_action(t_cmd_list *action)
 		tmp = tmp->next;
 	}
 	tmp = action;
-	i = 0;
 	temp = malloc(sizeof(char *) * (i + 1));
 	if (!temp)
 		return (NULL);
+	i = 0;
 	while (tmp && tmp->type_start != TYPE_PIPE)
 	{
 		if (tmp->opt)
@@ -99,6 +99,30 @@ char	**new_opt_action(t_cmd_list *action)
 	}
 	temp[i] = NULL;
 	return (temp);
+}
+
+void 	ft_heredoc(t_shell *shell, t_cmd_list *tmp)
+{
+		int i;
+
+		i = 0;
+		// (void)tmp;
+		static char	*buffer_doc = (char *)NULL;
+		char *new_line;
+		char *line;
+		line = ft_strdup("");
+		while (1)
+		{
+			shell->prompt_heredoc = 1;
+			buffer_doc = prompt(shell, buffer_doc);
+			new_line = ft_strjoin(line, buffer_doc);
+			printf("new_line = %s\n", new_line);
+			if (!ft_strncmp(tmp->fichier, buffer_doc, ft_strlen(tmp->fichier)))
+			{
+				printf("Ca fonctionne\n");
+				exit(1);
+			}
+		}
 }
 
 void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell)
@@ -122,10 +146,12 @@ void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell)
 		{
 			shell->fdout = open(tmp->fichier, O_WRONLY | O_APPEND | O_CREAT, S_IRWXU, S_IRGRP, S_IROTH);
 		}
-		// else if (tmp->type_start == TYPE_HEREDOC && tmp->fichier != NULL)
-		// {
-
-		// }
+		else if (tmp->type_start == TYPE_HEREDOC && tmp->fichier != NULL)	// ADD cat exception
+		{
+			ft_heredoc(shell, tmp);
+			// if (ft_strncmp(shell->opt2, "cat", 3)
+				// ft_heredoc_cat()
+		}
 		tmp = tmp->next;
 	}
 }
@@ -148,7 +174,7 @@ int	parse_env_2(t_shell *shell)
 }
 
 int	test_execve(t_shell *shell)
-{	
+{
 	shell->new_env_tab = new_env_tab(shell);
 	if (!shell->new_env_tab)
 		return (0);
