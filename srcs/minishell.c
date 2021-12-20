@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/19 20:46:37 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/20 18:46:43 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,6 +53,7 @@ int main(int ac, char **av, char **env)
 			fill_cmd(&shell);
 		if (shell.action)
 		{
+			print_new_lst(shell.action);
 			test_execve(&shell);
 			// if (!built_in_check(shell.action->opt, &shell))
 			// {
@@ -60,7 +61,6 @@ int main(int ac, char **av, char **env)
 			// 	// stock dans une liste et balancer dans pipex si necessaire au dernier moment
 			// }
 		}
-		// print_new_lst(shell.action);
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
 		// print_token_list(shell.token);

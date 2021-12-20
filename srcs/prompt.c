@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:23:56 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/19 19:41:12 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/20 17:59:20 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,16 +17,16 @@ char	*prompt(t_shell *shell, char *buff)
 	char *temp;
 	char *join_temp;
 
-	if (shell->prompt_heredoc == 1)
-	{
-		buff = readline("> ");
-		return (buff);
-	}
 	if (buff)
 	{
 		free(buff);
 		buff = NULL;
 	}
+	// if (shell->prompt_heredoc == 1)
+	// {
+	// 	buff = readline("> ");
+	// 	return (buff);
+	// }
 	if (!shell->on)
 	{
 		// free shell->pwd_temp ???

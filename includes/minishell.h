@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/19 19:36:43 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/20 19:48:36 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,7 +80,7 @@ typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 	int 	type_end;
 	int		fd_in;
 	int		fd_out;
-	int 	pfd[2];
+	
 
 	struct s_cmd_list *next;
 	struct s_cmd_list *prev;
@@ -108,11 +108,19 @@ typedef struct s_shell				// MAIN STRUCTURE
 	char			*join;
 	char			**opt2;
 	char			**new_env_tab;
-	int 			fd;
-	int 			fdout;
+	int 			fd_in;
+	int 			fd_out;
+	int				fd_temp;
+	char			*fichier_temp;
 	int 			prompt_heredoc;
-
+	int 			pfd[2];
 }	t_shell;
+
+void	testfork(char **environ, t_shell *shell, t_cmd_list *tmp);
+
+void	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp);
+
+void	child_mini(pid_t pid, t_shell *shell, t_cmd_list *tmp);
 
 char	**new_env_tab(t_shell *shell);
 
@@ -283,7 +291,5 @@ void	ft_check_access_two_minishell(char *buff, int i, int j, t_utils *utils);
 void	utils_cmd_ok_minishell(char *buff, int j, t_utils *utils);
 
 void	opt_exec_minishell(char **environ, t_utils *utils, t_utils_list *tmp);
-
-void	child_mini(pid_t pid, t_utils *utils, t_utils_list *tmp);
 
 #endif
