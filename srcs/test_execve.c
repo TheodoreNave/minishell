@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/20 19:48:11 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/21 19:00:56 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,11 @@
 
 void		ft_check_access_mini(int i, t_shell *shell, char **env)
 {
+	int j = 0;
+	pid_t last_pid;
 	t_cmd_list *tmp;
-
 	tmp = shell->action;
-	if (built_in_check(shell->action->opt, shell))
+	if (0)//built_in_check(shell->action->opt, shell))
 	{
 		printf("cmd is built_in\n");
 	}
@@ -33,42 +34,51 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 				return ;
 				// print_new_opt(shell->opt2);
 				parse_les_redirections(tmp, shell);
-				printf("fd = %d\n", shell->fd_temp);
+				printf("fd_out = %d\n", shell->fd_out);
+				printf("fd_in = %d\n", shell->fd_in);
 			}
 			if (tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END)
 			{
+				j += 1;	
 				while (shell->parse_env && shell->parse_env[i])
 				{
 					shell->join = ft_strjoin_three(shell->parse_env[i], "/", shell->opt2[0]);
 					if (access(shell->join, F_OK) == 0)
 					{
-						if (tmp->type_start == TYPE_PIPE)
-						{
-							(void)env;
+						// if (tmp->type_start == TYPE_PIPE)
+						// {
 							if (pipe(shell->pfd) == -1)
 								printf("Error pipe\n");				
-						}
-						testfork(env, shell, tmp);					
-						// opt_exec_mini(env, shell, tmp);					
-						// execve(shell->join, shell->opt2, env);
+						// }
+						last_pid = opt_exec_mini(env, shell, tmp);
+						break ;				
 					}
-					// else
-					// {
-					// 	// dup2(shell->fd, STDIN);
-					// 	// built_in_check(shell->opt2, shell);
-					// }
 					i++;
 				}
 				free_split(shell->opt2);
 				shell->opt2 = NULL;
-				shell->fd_in = 0;
-				shell->fd_out = 1;
+				shell->fd_in = -1;
+				shell->fd_out = -1;
 				shell->fd_temp = -1;
 			}
 			i = 0;
 			tmp = tmp->next;
 		}
 	}
+	if (shell->fd_base > 0)
+		close(shell->fd_base);
+	// close(shell->pfd[0]);
+	// close(shell->pfd[1]);
+	i = 0;
+	printf ("j : %d\n",j);
+	while (i < j - 1)
+	{
+		waitpid(-1, NULL, 0);
+		i++;
+	}
+	int ret;
+	waitpid(last_pid, &ret, 0);
+	printf("ret = %d\n", WEXITSTATUS(ret));
 }
 
 
@@ -161,14 +171,17 @@ void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell)
 			shell->fd_in = open(tmp->fichier, O_RDONLY);
 			if (shell->fd_in < 0)
 				printf("bash: %s: No such file or directory\n", tmp->fichier);
+			shell->fd_out = -1;
 		}
 		else if (tmp->type_start == TYPE_REDIR_RIGHT)
 		{
 			shell->fd_out = open(tmp->fichier, O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU, S_IRGRP, S_IROTH);
+			shell->fd_in = -1;
 		}
 		else if (tmp->type_start == TYPE_REDIR)
 		{
 			shell->fd_out = open(tmp->fichier, O_WRONLY | O_APPEND | O_CREAT, S_IRWXU, S_IRGRP, S_IROTH);
+			shell->fd_in = -1;
 		}
 		else if (tmp->type_start == TYPE_HEREDOC && tmp->fichier != NULL)	// ADD cat exception
 		{

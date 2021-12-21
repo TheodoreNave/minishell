@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:23:56 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/20 17:59:20 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:54:03 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,11 +22,6 @@ char	*prompt(t_shell *shell, char *buff)
 		free(buff);
 		buff = NULL;
 	}
-	// if (shell->prompt_heredoc == 1)
-	// {
-	// 	buff = readline("> ");
-	// 	return (buff);
-	// }
 	if (!shell->on)
 	{
 		// free shell->pwd_temp ???

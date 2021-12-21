@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/20 19:48:36 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/21 18:37:32 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,6 +108,7 @@ typedef struct s_shell				// MAIN STRUCTURE
 	char			*join;
 	char			**opt2;
 	char			**new_env_tab;
+	int				fd_base;
 	int 			fd_in;
 	int 			fd_out;
 	int				fd_temp;
@@ -118,7 +119,7 @@ typedef struct s_shell				// MAIN STRUCTURE
 
 void	testfork(char **environ, t_shell *shell, t_cmd_list *tmp);
 
-void	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp);
+pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp);
 
 void	child_mini(pid_t pid, t_shell *shell, t_cmd_list *tmp);
 

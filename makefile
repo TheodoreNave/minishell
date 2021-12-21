@@ -6,7 +6,7 @@
 #    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/20 18:41:12 by tigerber         ###   ########.fr        #
+#    Updated: 2021/12/21 14:37:07 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -46,9 +46,9 @@ SRCS =  srcs/minishell.c								\
 		pipex/utils_two.c								\
 		pipex/utils.c
 
-CC = gcc
+CC = clang
 
-CFLAGS = -Wall -Wextra -Werror -I ./include/
+CFLAGS = -Wall -Wextra -Werror -I ./include/ -g3
 
 HEADER = -I ./includes/
 

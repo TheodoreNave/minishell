@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_echo.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:20 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/14 12:22:13 by tnave            ###   ########.fr       */
+/*   Updated: 2021/12/21 14:36:05 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,6 @@
 int		built_in_echo(char **opt)
 {
 	int i = 0;
-	if (!opt)
-		return (0);
 	while (opt[i])
 	{
 		write(1, opt[i], ft_strlen(opt[i]));
