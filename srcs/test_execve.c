@@ -6,11 +6,14 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/21 19:00:56 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/22 18:59:06 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+// gerer a.out execve(./a.out, ./a.out, environement); si il y a un / (ex: ./fichier) le path devien ./fichier et
+																					//la commamde devien ./fichier 
 
 void		ft_check_access_mini(int i, t_shell *shell, char **env)
 {
@@ -34,27 +37,24 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 				return ;
 				// print_new_opt(shell->opt2);
 				parse_les_redirections(tmp, shell);
-				printf("fd_out = %d\n", shell->fd_out);
-				printf("fd_in = %d\n", shell->fd_in);
 			}
 			if (tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END)
 			{
 				j += 1;	
+				if (pipe(shell->pfd) == -1)
+							printf("Error pipe\n");				
 				while (shell->parse_env && shell->parse_env[i])
 				{
 					shell->join = ft_strjoin_three(shell->parse_env[i], "/", shell->opt2[0]);
 					if (access(shell->join, F_OK) == 0)
-					{
-						// if (tmp->type_start == TYPE_PIPE)
-						// {
-							if (pipe(shell->pfd) == -1)
-								printf("Error pipe\n");				
-						// }
+					{			
 						last_pid = opt_exec_mini(env, shell, tmp);
 						break ;				
 					}
 					i++;
 				}
+				// last_pid = opt_exec_mini(env, shell, tmp);
+				//perror("bash");
 				free_split(shell->opt2);
 				shell->opt2 = NULL;
 				shell->fd_in = -1;
@@ -67,11 +67,8 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 	}
 	if (shell->fd_base > 0)
 		close(shell->fd_base);
-	// close(shell->pfd[0]);
-	// close(shell->pfd[1]);
 	i = 0;
-	printf ("j : %d\n",j);
-	while (i < j - 1)
+	while (i < j)
 	{
 		waitpid(-1, NULL, 0);
 		i++;
@@ -166,7 +163,7 @@ void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell)
 	tmp = temp;
 	while (tmp && tmp->type_start != TYPE_PIPE)
 	{
-		if (tmp->type_start == TYPE_REDIR_LEFT && shell->fd_in != -1)
+		if (tmp->type_start == TYPE_REDIR_LEFT)
 		{
 			shell->fd_in = open(tmp->fichier, O_RDONLY);
 			if (shell->fd_in < 0)

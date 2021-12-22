@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/21 14:38:54 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/21 19:38:34 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,23 +42,3 @@ int		built_in_check(char **built_in, t_shell *shell)
 		return (0);
 	return (1);
 }
-
-// int	is_built_in(char *cmd)
-// {
-// 	if (!strcmp(cmd, "cd"))
-// 		return (1);
-// 	else if (!strcmp(cmd, "pwd"))
-// 		return (1);
-// 	else if (!strncmp(cmd, "env", 3))
-// 		return (1);
-// 	else if (!strncmp(cmd, "export", 6))
-// 		return (1);
-// 	else if (!strncmp(cmd, "unset", 5))
-// 		return (1);
-	// else if (!strncmp(cmd, "exit", 4))
-	// 	return (1);
-	// else if (!strncmp(cmd, "echo", 4))
-	// 	return (1);
-// 	else
-// 		return (0);
-// }

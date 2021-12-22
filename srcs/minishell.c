@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/21 15:59:40 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/21 19:41:50 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ int main(int ac, char **av, char **env)
     while (1)
     {
 		shell.fd_base = 0;
-		// if (!buffer)
-			buffer = prompt(&shell, buffer);
+		buffer = prompt(&shell, buffer);
 		if (buffer)
 			add_history(buffer);
 		if (buffer && !make_token_lst(buffer, &shell))
@@ -57,15 +56,7 @@ int main(int ac, char **av, char **env)
 		{
 			// print_new_lst(shell.action);
 			test_execve(&shell);
-			// if (!built_in_check(shell.action->opt, &shell))
-			// {
-			// 	printf("cmd is not built_in\n");
-			// 	// stock dans une liste et balancer dans pipex si necessaire au dernier moment
-			// }
 		}
-		if (!buffer)
-			buffer = ft_strdup("");
-		//dup2(STDIN, shell.fd_base);
 		ft_lstclear_shell(&shell.token);
 		ft_lstclear_action(&shell.action);
 		// print_token_list(shell.token);
