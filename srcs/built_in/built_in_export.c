@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/16 13:22:53 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/24 13:41:47 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,6 +63,7 @@ int	check_var_in_env(t_env *env, char *opt)
 
 int	built_in_export(char **opt, t_env *environ, t_shell *shell)
 {
+	printf("JE SUIS  DANS EXPORT\n");
 	int i;
 	int j;
 

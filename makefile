@@ -6,14 +6,15 @@
 #    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/21 14:37:07 by tigerber         ###   ########.fr        #
+#    Updated: 2021/12/24 12:36:05 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = minishell
 
 SRCS =  srcs/minishell.c								\
-		srcs/test_execve.c								\
+		srcs/execve.c									\
+		srcs/utils_execve.c								\
 		srcs/opt_exec_mini.c							\
 		srcs/prompt.c									\
 		srcs/utils.c 									\

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/21 18:37:32 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/24 16:14:22 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,9 +115,14 @@ typedef struct s_shell				// MAIN STRUCTURE
 	char			*fichier_temp;
 	int 			prompt_heredoc;
 	int 			pfd[2];
+	int				pipe;
 }	t_shell;
 
+int		ft_strchr(char *str, char c);
+
 void	testfork(char **environ, t_shell *shell, t_cmd_list *tmp);
+
+pid_t	opt_exec_mini_without_pipe(char **environ, t_shell *shell, t_cmd_list *tmp);
 
 pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp);
 
