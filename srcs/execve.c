@@ -6,13 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/24 19:07:42 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/31 14:36:29 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-// PROBLEM REDIRECTION QUAND Y A PAS DE PIPE 
 
 void		ft_check_access_mini(int i, t_shell *shell, char **env)
 {
@@ -25,45 +23,21 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 	{
 		if (!shell->opt2)
 		{
-			shell->opt2 = new_opt_action(tmp);
-				if (!shell->opt2)
-			return ;
-			parse_les_redirections(tmp, shell);
-			parse_env_2(shell);
+			init_value(shell, tmp);
 		}
-		if ((tmp->type_end == TYPE_END) && shell->pipe == 0)
+		if ((tmp->type_end == TYPE_END) && shell->pipe == 0 && (built_in_check_2(shell->opt2, shell)))
 		{
 			shell->pipe = -1;
-			
-			if (shell->fd_in > 0 )
-				dup2(shell->fd_in, STDIN);
-			if (shell->fd_out > 0)
-				dup2(shell->fd_out, STDOUT);
-			
-			if (!built_in_check(shell->opt2, shell))
-				last_pid = opt_exec_mini_without_pipe(env, shell, tmp);
-			
-			free_split(shell->opt2);
-			shell->opt2 = NULL;
-			shell->fd_in = -1;
-			shell->fd_out = -1;
-			shell->fd_temp = -1;
+			reset_value(shell);
 		}
 		if ((tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END) && shell->pipe != -1)
 		{
-			shell->pipe = 1;
-			
 			j += 1;	
+			shell->pipe = 1;
 			if (pipe(shell->pfd) == -1)
 				printf("Error pipe\n");						
-			
 			last_pid = opt_exec_mini(env, shell, tmp);
-			
-			free_split(shell->opt2);
-			shell->opt2 = NULL;
-			shell->fd_in = -1;
-			shell->fd_out = -1;
-			shell->fd_temp = -1;
+			reset_value(shell);
 		}
 		tmp = tmp->next;
 	}
@@ -106,9 +80,7 @@ int	parse_env_2(t_shell *shell)
 		shell->join = NULL;
 	}
 	if (!shell->join)
-	{
 		shell->join = ft_strdup(shell->opt2[0]);
-	}
 	return (0);
 }
 

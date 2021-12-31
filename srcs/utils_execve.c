@@ -6,11 +6,32 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 12:36:35 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/24 18:41:27 by tigerber         ###   ########.fr       */
+/*   Updated: 2021/12/31 14:26:10 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+void	init_value(t_shell *shell, t_cmd_list *tmp)
+{
+	shell->opt2 = new_opt_action(tmp);
+		if (!shell->opt2)
+	return ;
+	parse_les_redirections(tmp, shell);
+	parse_env_2(shell);	
+}
+
+void	reset_value(t_shell *shell)
+{
+	free(shell->join);
+	shell->join = NULL;
+	free_split(shell->opt2);
+	shell->opt2 = NULL;
+	shell->fd_in = -1;
+	shell->fd_out = -1;
+	shell->fd_temp = -1;
+	return ;
+}	
 
 char	**new_opt_action(t_cmd_list *action)
 {
