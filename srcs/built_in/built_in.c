@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/31 14:16:53 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/03 11:52:11 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@ int		built_in_check(char **built_in, t_shell *shell)
 		if (built_in[1])
 		{
 			if (!strncmp(built_in[1], "-n", 3))
-				built_in_echo_n(&built_in[2]);
+				built_in_echo_n(&built_in[2], shell);
 			else
-				built_in_echo(&built_in[1]);
+				built_in_echo(&built_in[1], shell);
 		}
 		else
 			write(1, "\n", 1);

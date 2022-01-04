@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/31 14:26:49 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/03 11:53:37 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -182,7 +182,7 @@ int 	built_in_unset(t_shell *shell, char **opt);
 
 void	ft_lstclear_env(t_env **env);
 
-int		built_in_echo_n(char **opt);
+int		built_in_echo_n(char **opt, t_shell *shell);
 
 char	*join_dollars(t_shell *shell);
 
@@ -222,7 +222,7 @@ void	empty_buff_in_lst(t_shell *shell, char symbole);
 
 int		built_in_exit(t_shell *shell);
 
-int		built_in_echo(char **opt);
+int		built_in_echo(char **opt, t_shell *shell);
 
 int		boucle_unset(t_shell *shell, char *opt);
 

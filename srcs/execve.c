@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/31 14:36:29 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/04 17:18:36 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,14 +45,18 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 	if (shell->fd_base > 0)
 		close(shell->fd_base);
 	i = 0;
+	int ret;
 	while (i < j)
 	{
-		waitpid(-1, NULL, 0);
+		if (waitpid(-1, &ret, 0) == last_pid)
+			shell->error_dol = WEXITSTATUS(ret);
 		i++;
 	}
-	int ret;
-	waitpid(last_pid, &ret, 0);
-	// printf("ret = %d\n", WEXITSTATUS(ret));
+	
+	dprintf(2, "pid2 :%d \n", last_pid);
+	//waitpid(last_pid, &ret, 0);
+	//WIFEXITED()
+	//WIFSIGNALED()
 }
 
 int	parse_env_2(t_shell *shell)
