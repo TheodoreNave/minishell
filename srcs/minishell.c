@@ -3,14 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/24 18:17:08 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:20:51 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
+
+typedef struct 	s_global
+{
+	int			error_dollars;
+
+}				t_global;
 
 void	signals(int sig)
 {
@@ -18,8 +24,10 @@ void	signals(int sig)
 	{
 		write(1, "\n", 1);
 		rl_on_new_line();
-		rl_replace_line("", 0);
+		// rl_replace_line("", 0);
 		rl_redisplay();
+		// shell->error_dol = 1;
+		// Error message 130 si script sinon simple retour ligne message 1
 	}
 }
 

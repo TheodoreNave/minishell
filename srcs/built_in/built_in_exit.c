@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:47 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/13 17:26:35 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/05 14:12:32 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,4 +22,5 @@ int	built_in_exit(t_shell *shell)
 		ft_lstclear_dol(&shell->dol);
 	printf("exit\n");
 	exit(0);
+	// calcul a faire en fonction de l'exit si non compries entre 0 et 255 sinon renvoyer valeur entre 0 et 255
 }

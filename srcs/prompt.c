@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   prompt.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:23:56 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/21 18:54:03 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:19:40 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ char	*prompt(t_shell *shell, char *buff)
 		if (shell->environ)
 			ft_lstclear_env(&shell->environ);
 		write(1, "exit\n", 5);
-		exit(0);
+		exit(0);							// error message ?
 	}
 	shell->on = 0;
 	return (buff);

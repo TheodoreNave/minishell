@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parsing2.c                                         :+:      :+:    :+:   */
+/*   parsing_error_token.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:21:10 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/16 16:27:08 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/05 13:23:12 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,20 +35,25 @@ int parsing_errors_token(t_shell *shell)
 		else if (tmp->type == TYPE_PIPE && tmp->prev == NULL)
 		{
 			return(ft_error_two(tmp->word, shell, 1));
+			// Error message 258 need modulo
 		}
 		else if (tmp->type == TYPE_PIPE && tmp->next)
 		{
 			if (tmp->next->type == TYPE_PIPE)
 				return (ft_error_two(tmp->next->word, shell, 1));
+			// Error message 258 need modulo
+
 		}
 		else if (tmp->type == TYPE_PIPE && tmp->next == NULL)
 		{
 			printf(">\n");
 			return (0);
+			// Display new line ?
 		}
 		else if (is_type_redir(tmp->type) && tmp->next == NULL)
 		{
 			return (ft_error_two("newline", shell, 1));
+			// Error message 258 need modulo
 		}
 		tmp = tmp->next;
 	}

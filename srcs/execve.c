@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/04 17:18:36 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/05 14:24:34 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 	int j = 0;
 	pid_t last_pid;
 	t_cmd_list *tmp;
-	
+
 	tmp = shell->action;
 	while (tmp)
 	{
@@ -32,10 +32,13 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 		}
 		if ((tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END) && shell->pipe != -1)
 		{
-			j += 1;	
+			j += 1;
 			shell->pipe = 1;
 			if (pipe(shell->pfd) == -1)
-				printf("Error pipe\n");						
+			{
+				printf("Error pipe\n"); // exit Message 1 ?
+				shell->error_dol = 1; // Sure ??
+			}
 			last_pid = opt_exec_mini(env, shell, tmp);
 			reset_value(shell);
 		}
@@ -52,7 +55,7 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 			shell->error_dol = WEXITSTATUS(ret);
 		i++;
 	}
-	
+
 	dprintf(2, "pid2 :%d \n", last_pid);
 	//waitpid(last_pid, &ret, 0);
 	//WIFEXITED()
