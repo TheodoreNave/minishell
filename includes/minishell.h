@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/06 17:12:07 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/06 19:09:44 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -228,7 +228,7 @@ int		is_symbol(char c);
 
 void	empty_buff_in_lst(t_shell *shell, char symbole);
 
-int		built_in_exit(t_shell *shell);
+int		built_in_exit(t_shell *shell, char **opt);
 
 int		built_in_echo(char **opt, t_shell *shell);
 

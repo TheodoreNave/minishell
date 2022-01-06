@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/03 11:52:11 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/06 19:10:20 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ int		built_in_check(char **built_in, t_shell *shell)
 			write(1, "\n", 1);
 	}
 	else if (!strncmp(built_in[0], "exit", 4))
-		built_in_exit(shell);
+		built_in_exit(shell, built_in);
 	else
 		return (0);
 	return (1);
@@ -52,7 +52,7 @@ int		built_in_check_2(char **built_in, t_shell *shell)
 	else if (!strncmp(built_in[0], "export", 6))
 		built_in_export(built_in, shell->environ, shell);
 	else if (!strncmp(built_in[0], "exit", 4))
-		built_in_exit(shell);
+		built_in_exit(shell, built_in);
 	else
 		return (0);
 	return (1);
