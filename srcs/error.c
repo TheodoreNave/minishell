@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:16:14 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/06 14:55:18 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/06 16:07:25 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 	if (error == 1)
 	{	
 		ft_putstr_fderr("bash: syntax error near unexpected token `%s'\n", str);
-		shell->error_dol = 258;
+		shell->error_dol = 2;
 	}
 	if (error == 2)
 	{

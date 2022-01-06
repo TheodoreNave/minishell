@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error_token.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:21:10 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/05 13:23:12 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/06 16:12:00 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,8 +46,11 @@ int parsing_errors_token(t_shell *shell)
 		}
 		else if (tmp->type == TYPE_PIPE && tmp->next == NULL)
 		{
-			printf(">\n");
-			return (0);
+			write(1, ">\n", 1);
+			// rl_on_new_line();
+			// rl_replace_line(">\n", 0);
+			// rl_redisplay();
+			// rl_replace_line(">\n");
 			// Display new line ?
 		}
 		else if (is_type_redir(tmp->type) && tmp->next == NULL)
