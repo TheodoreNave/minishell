@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opt_exec_mini.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:40:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/06 15:59:57 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/06 17:23:18 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,12 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 					ft_putstr_fderr("bash: %s: ", shell->opt2[0]);
 					ft_putstr_fderr("%s\n", strerror(errno));
 					exit(127);
+				}
+				else if (access(shell->join, R_OK | W_OK | X_OK))
+				{
+					ft_putstr_fderr("bash: %s: ", shell->opt2[0]);
+					ft_putstr_fderr("%s\n", strerror(errno));
+					exit(126);
 				}
 			}
 		}

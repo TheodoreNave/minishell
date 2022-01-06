@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/06 12:32:20 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/06 17:12:07 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,10 @@ typedef struct s_dol
 	struct s_dol *prev;
 }				t_dol;
 
+typedef struct s_global
+{
+	int 	error_dollars;
+}				t_global;
 
 typedef struct	s_env
 {
@@ -80,7 +84,6 @@ typedef struct s_cmd_list			// MAIN CMD LIST PARSE
 	int 	type_end;
 	int		fd_in;
 	int		fd_out;
-	
 
 	struct s_cmd_list *next;
 	struct s_cmd_list *prev;
@@ -116,6 +119,7 @@ typedef struct s_shell				// MAIN STRUCTURE
 	int 			prompt_heredoc;
 	int 			pfd[2];
 	int				pipe;
+	int 			prompt;
 }	t_shell;
 
 void	ft_strcpy(char *buff, char *str);
@@ -307,5 +311,7 @@ void	ft_check_access_two_minishell(char *buff, int i, int j, t_utils *utils);
 void	utils_cmd_ok_minishell(char *buff, int j, t_utils *utils);
 
 void	opt_exec_minishell(char **environ, t_utils *utils, t_utils_list *tmp);
+
+extern t_global global;
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:20:59 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/19 19:14:58 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/06 17:08:00 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,12 @@
 
 char 	*dollars_question(char *word, t_shell *shell)
 {
+	(void)shell;
 	char *temp;
 	char *temporary;
 
 	temp = NULL;
-	temp = ft_itoa(shell->error_dol);
+	temp = ft_itoa(global.error_dollars);
 	temporary = ft_strjoin(temp, word);
 	free(temp);
 	return (temporary);

@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:23:56 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/05 14:19:40 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/06 16:27:29 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,12 @@ char	*prompt(t_shell *shell, char *buff)
 	char *temp;
 	char *join_temp;
 
+	if (shell->prompt)
+	{
+		buff = readline(">\n");
+		shell->prompt = 0;
+		return (buff);
+	}
 	if (buff)
 	{
 		free(buff);

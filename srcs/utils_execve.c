@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 12:36:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/05 14:22:50 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/06 17:08:00 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,7 +123,7 @@ void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell)
 			if (shell->fd_in < 0)
 			{
 				printf("bash: %s: No such file or directory\n", tmp->fichier);
-				shell->error_dol = 1;
+				global.error_dollars = 1;
 				shell->pipe = -1;
 			}
 			shell->fd_out = -1;

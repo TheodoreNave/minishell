@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error_token.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:21:10 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/06 16:12:00 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/06 16:47:11 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,9 @@ int	is_type_redir(int type)
 int parsing_errors_token(t_shell *shell)
 {
 	t_token_list *tmp;
+	char *buf;
 
+	buf = NULL;
 	tmp = shell->token;
 	while (tmp)
 	{
@@ -46,7 +48,9 @@ int parsing_errors_token(t_shell *shell)
 		}
 		else if (tmp->type == TYPE_PIPE && tmp->next == NULL)
 		{
-			write(1, ">\n", 1);
+			return (ft_error_two(tmp->word, shell, 1));
+			// buf = readline(">");
+			// ft_strjoin()
 			// rl_on_new_line();
 			// rl_replace_line(">\n", 0);
 			// rl_redisplay();

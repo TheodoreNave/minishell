@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:47 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/05 14:12:32 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/06 17:34:35 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 int	built_in_exit(t_shell *shell)
 {
+	int i = 0;
 	if (shell->environ)
 		ft_lstclear_env(&shell->environ);
 	if (shell->action)
@@ -21,6 +22,10 @@ int	built_in_exit(t_shell *shell)
 	if (shell->dol)
 		ft_lstclear_dol(&shell->dol);
 	printf("exit\n");
-	exit(0);
+	if (i > 255)
+		i = i % 256;
+	else if (i < 0)
+		i = i % 256;
+	exit(i);
 	// calcul a faire en fonction de l'exit si non compries entre 0 et 255 sinon renvoyer valeur entre 0 et 255
 }
