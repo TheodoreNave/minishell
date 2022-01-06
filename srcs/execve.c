@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/05 14:24:34 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/06 15:49:16 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,11 +55,18 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 			shell->error_dol = WEXITSTATUS(ret);
 		i++;
 	}
+}
 
-	dprintf(2, "pid2 :%d \n", last_pid);
-	//waitpid(last_pid, &ret, 0);
-	//WIFEXITED()
-	//WIFSIGNALED()
+void	printenv(char **tab)
+{
+	int i = 0;
+	
+	while (tab[i])
+	{
+		dprintf(2, "[%s]\n", tab[i]);
+		i++;
+	}
+	return ;
 }
 
 int	parse_env_2(t_shell *shell)
@@ -81,13 +88,20 @@ int	parse_env_2(t_shell *shell)
 	{
 		shell->join = ft_strjoin_three(shell->parse_env[i], "/", shell->opt2[0]);
 		if (access(shell->join, F_OK) == 0)
+		{
 			break ;
+		}
 		i++;
 		free(shell->join);
 		shell->join = NULL;
 	}
 	if (!shell->join)
 		shell->join = ft_strdup(shell->opt2[0]);
+	if (shell->parse_env)
+	{
+		free(shell->parse_env);
+		shell->parse_env = NULL;
+	}
 	return (0);
 }
 

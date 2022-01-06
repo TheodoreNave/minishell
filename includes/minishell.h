@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/03 11:53:37 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/06 12:32:20 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,10 @@ typedef struct s_shell				// MAIN STRUCTURE
 	int 			pfd[2];
 	int				pipe;
 }	t_shell;
+
+void	ft_strcpy(char *buff, char *str);
+
+void	ft_putstr_fderr(char *str, char *str2);
 
 void	init_value(t_shell *shell, t_cmd_list *tmp);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opt_exec_mini.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:40:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/05 14:22:44 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/06 15:59:57 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,8 +19,8 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 	pid = fork();
 	if (pid < 0)
 	{
-		printf("Error PID\n"); // Error message 127
-		shell->error_dol = 127;
+		ft_putstr_fderr(strerror(errno), NULL);
+		return (0);
 	}
 	if (pid == 0)
 	{
@@ -44,14 +44,13 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 			{
 				if (access(shell->join, F_OK))
 				{
-					write(2, "bash2: command not found\n", 25); // Error Message 127
-					shell->error_dol = 127;
+					ft_putstr_fderr("bash: %s: ", shell->opt2[0]);
+					ft_putstr_fderr("%s\n", strerror(errno));
+					exit(127);
 				}
-				// else
-				// 	perror("bash3");
 			}
 		}
-		exit(127);
+		exit(0);
 	}
 	else if(tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END)
 	{
