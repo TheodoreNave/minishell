@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_execve.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 12:36:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/06 17:08:00 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/07 17:11:16 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,10 +92,8 @@ void 	ft_heredoc(t_shell *shell, t_cmd_list *tmp)
 			if (!ft_strncmp(tmp->fichier, buffer_doc, ft_strlen(tmp->fichier)))
 			{
 				// shell->prompt_heredoc = 0;
-				printf("Ca fonctionne\n");
 				// rl_on_new_line();
 				// rl_replace_line("", 0);
-				printf("break\n");
 				break ;
 			}
 			write(shell->fd_temp, buffer_doc, ft_strlen(buffer_doc));
@@ -103,7 +101,7 @@ void 	ft_heredoc(t_shell *shell, t_cmd_list *tmp)
 			// rl_on_new_line();
 			// rl_replace_line("", 0);
 		}
-		printf("after break\n");
+		// printf("after break\n");
 		shell->fd_temp = open(tmp->fichier, O_RDONLY);
 		free(buffer_doc);
 		// return (shell->fd_temp);
@@ -143,6 +141,8 @@ void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell)
 			ft_heredoc(shell, tmp);
 			// if (ft_strncmp(shell->opt2, "cat", 3)
 			// ft_heredoc_cat()
+			shell->fd_out = shell->fd_temp;
+			shell->fd_in = -1;
 		}
 		tmp = tmp->next;
 	}
