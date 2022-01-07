@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/06 19:09:44 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/07 16:45:38 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,6 +55,7 @@ typedef struct s_dol
 typedef struct s_global
 {
 	int 	error_dollars;
+	int 	minus;
 }				t_global;
 
 typedef struct	s_env
@@ -121,6 +122,8 @@ typedef struct s_shell				// MAIN STRUCTURE
 	int				pipe;
 	int 			prompt;
 }	t_shell;
+
+void	signals2(int sig);
 
 void	ft_strcpy(char *buff, char *str);
 

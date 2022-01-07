@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/06 17:08:00 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/07 16:52:55 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,10 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 	while (i < j)
 	{
 		if (waitpid(-1, &ret, 0) == last_pid)
-			global.error_dollars = WEXITSTATUS(ret);
+		{
+			if (WIFEXITED(ret))
+				global.error_dollars = WEXITSTATUS(ret);
+		}
 		i++;
 	}
 	printf("global.error_dollars = %d\n", global.error_dollars);

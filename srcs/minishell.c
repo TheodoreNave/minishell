@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/06 17:30:38 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/07 16:53:33 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,8 +23,23 @@ void	signals(int sig)
 		rl_replace_line("", 0);
 		rl_redisplay();
 		global.error_dollars = 130;
+
 	}
 }
+
+void	signals2(int sig)
+{
+	if (sig == SIGINT)
+	{
+		write(1, "\n", 1);
+		rl_on_new_line();
+		rl_replace_line("", 0);
+		rl_redisplay();
+		exit(130);
+	
+	}
+}
+
 
 void	mem(t_utils *utils, t_shell *shell)
 {
