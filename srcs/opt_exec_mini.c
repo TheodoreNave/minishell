@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   opt_exec_mini.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:40:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 12:24:29 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:19:08 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,8 +16,6 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 {
 	pid_t	pid;
 	pid = fork();
-	// signal(SIGQUIT, SIG_IGN);
-	signal(SIGINT, signals);
 	if (pid < 0)
 	{
 		ft_putstr_fderr(strerror(errno), NULL);
@@ -64,10 +62,11 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 		}
 		exit(0);
 	}
-	else if (tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END)
+	// else if (tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END)
+	else
 	{
-		// dprintf(2, "SALUT2222\n");
-		global.error_dollars = 130;
+		g_global.no_ctrlc = 1;
+		g_global.error_dollars = 130;
 		if (shell->fd_base > 0)
 			close(shell->fd_base);
 		shell->fd_base = shell->pfd[0];

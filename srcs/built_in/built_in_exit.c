@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:47 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 13:13:10 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:44:36 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int	ft_check_is_digit(char *str)
 	i = 0;
 	if (str[i] == '-')
 	{
-		global.minus = 1;
+		g_global.minus = 1;
 		i++;
 	}
 	while (str[i])
@@ -78,13 +78,13 @@ int	built_in_exit(t_shell *shell, char **opt)
 	}
 	if (opt[1])
 	{
-		if (ft_check_is_digit(opt[1]) || (ft_strlen(opt[1]) > 18 && !global.minus))
+		if (ft_check_is_digit(opt[1]) || (ft_strlen(opt[1]) > 18 && !g_global.minus))
 		{
 			write(2, "exit\n", 6);
 			ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
 			exit(2);
 		}
-		else if (global.minus && ft_strlen(opt[1]) > 19)
+		else if (g_global.minus && ft_strlen(opt[1]) > 19)
 		{
 			write(2, "exit\n", 6);
 			ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);

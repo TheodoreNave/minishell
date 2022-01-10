@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:16:14 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/06 17:08:00 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 15:44:27 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 	if (error == 1)
 	{
 		ft_putstr_fderr("bash: syntax error near unexpected token `%s'\n", str);
-		global.error_dollars = 2;
+		g_global.error_dollars = 2;
 	}
 	if (error == 2)
 	{
@@ -66,29 +66,29 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 	if (error == 3)
 	{
 		ft_putstr_fderr("bash: cd: %s: No such file or directory\n", str);
-		global.error_dollars = 1;
+		g_global.error_dollars = 1;
 		shell->on = 1;
 	}
 	if (error == 4)
 	{
 		ft_putstr_fderr("bash: export: `%s': not a valid identifier\n", str);
-		global.error_dollars = 1;
+		g_global.error_dollars = 1;
 	}
 	if (error == 5)
 	{
 		ft_putstr_fderr("bash: unset: `%s': not a valid identifier\n", str);
-		global.error_dollars = 1;
+		g_global.error_dollars = 1;
 	}
 	if (error == 6)
 	{
 		ft_putstr_fderr("NO ENV FOUND SORRY NEED TO QUIT %s\n", str);
-		// global.error_dollars = 127;
+		// g_global.error_dollars = 127;
 		exit(127);
 	}
 	if (error == 7)
 	{
 		ft_putstr_fderr("%s", str);
-		global.error_dollars = 1;
+		g_global.error_dollars = 1;
 	}
 	return (0);
 }

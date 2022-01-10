@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_dollars.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:20:59 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 12:25:34 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:44:37 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ char 	*dollars_question(char *word, t_shell *shell)
 	char *temporary;
 
 	temp = NULL;
-	temp = ft_itoa(global.error_dollars);
+	temp = ft_itoa(g_global.error_dollars);
 	temporary = ft_strjoin(temp, word);
 	free(temp);
 	return (temporary);

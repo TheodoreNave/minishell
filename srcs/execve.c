@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 12:24:25 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 15:44:32 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,7 +37,7 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 			if (pipe(shell->pfd) == -1)
 			{
 				printf("Error pipe\n"); // exit Message 1 ?
-				global.error_dollars = 1; // Sure ??
+				g_global.error_dollars = 1; // Sure ??
 			}
 			last_pid = opt_exec_mini(env, shell, tmp);
 			reset_value(shell);
@@ -54,11 +54,11 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 		if (waitpid(-1, &ret, 0) == last_pid)
 		{
 			if (WIFEXITED(ret))
-				global.error_dollars = WEXITSTATUS(ret);
+				g_global.error_dollars = WEXITSTATUS(ret);
 		}
 		i++;
 	}
-	// printf("global.error_dollars = %d\n", global.error_dollars);
+	// printf("g_global.error_dollars = %d\n", g_global.error_dollars);
 }
 
 void	printenv(char **tab)

@@ -3,43 +3,31 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 13:03:40 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 17:18:25 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
 
-t_global global;
+t_global	g_global;
 
 void	signals(int sig)
 {
 	if (sig == SIGINT)
 	{
 		write(2, "\n", 1);
-		rl_on_new_line();
-		rl_replace_line("", 0);
-		rl_redisplay();
-		global.error_dollars = 130;
-
+		if (!g_global.no_ctrlc)
+		{
+			rl_on_new_line();
+			rl_replace_line("", 0);
+			rl_redisplay();
+		}
+		g_global.error_dollars = 130;
 	}
 }
-
-// void	signals2(int sig)
-// {
-// 	if (sig == SIGINT)
-// 	{
-// 		write(1, "\n", 1);
-// 		rl_on_new_line();
-// 		rl_replace_line("", 0);
-// 		rl_redisplay();
-// 		exit(130);
-	
-// 	}
-// }
-
 
 void	mem(t_utils *utils, t_shell *shell)
 {
@@ -47,21 +35,33 @@ void	mem(t_utils *utils, t_shell *shell)
 	ft_memset(shell, 0, sizeof(t_shell));
 }
 
-int main(int ac, char **av, char **env)
+static void	setup(char **env, t_utils *utils, t_shell *shell)
 {
-    t_utils utils;
-	t_shell shell;
-	static char	*buffer = (char *)NULL;
-
-	(void)ac;
-	(void)av;
-	mem(&utils, &shell);
-	stock_env(env, &shell);
+	mem(utils, shell);
+	stock_env(env, shell);
 	signal(SIGQUIT, SIG_IGN);
 	signal(SIGINT, signals);
+}
+
+static	void	clear(t_shell *shell)
+{
+	ft_lstclear_shell(&shell->token);
+	ft_lstclear_action(&shell->action);
+}
+
+int	main(int ac, char **av, char **env)
+{
+	t_utils		utils;
+	t_shell		shell;
+	static char	*buffer;
+
+	buffer = (char *) NULL;
+	(void)ac;
+	(void)av;
+	setup(env, &utils, &shell);
 	rl_outstream = stderr;
-    while (1)
-    {
+	while (1)
+	{
 		shell.fd_base = 0;
 		buffer = prompt(&shell, buffer);
 		if (buffer)
@@ -73,8 +73,7 @@ int main(int ac, char **av, char **env)
 			fill_cmd(&shell);
 		if (shell.action)
 			test_execve(&shell);
-		ft_lstclear_shell(&shell.token);
-		ft_lstclear_action(&shell.action);
+		clear(&shell);
 	}
 	return (0);
 }
