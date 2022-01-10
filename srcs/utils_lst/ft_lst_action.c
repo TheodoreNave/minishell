@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   ft_lst_action.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:32:07 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/08 19:46:50 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 20:09:23 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,6 @@ void	ft_lstadd_back_action(t_cmd_list **action, t_cmd_list *new)
 
 void	ft_lstclear_action(t_cmd_list **action)
 {
-	// printf("FREE_action\n");
 	t_cmd_list	*temp;
 
 	if (!action)
@@ -43,11 +42,6 @@ void	ft_lstclear_action(t_cmd_list **action)
 	while (*action != NULL)
 	{
 		temp = *action;
-		// if (temp->cmd)
-		// {
-		// 	free(temp->cmd);
-		// 	temp->cmd = NULL;
-		// }
 		if (temp->fichier)
 		{
 			free(temp->fichier);
@@ -56,7 +50,6 @@ void	ft_lstclear_action(t_cmd_list **action)
 		if (temp->opt)
 		{
 			free_split(temp->opt);
-			// free(temp->opt);
 			temp->opt = NULL;
 		}
 		*action = temp->next;

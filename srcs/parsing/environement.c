@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environement.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:25:42 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 13:46:16 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 20:08:50 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,7 +46,8 @@ int	parse_pwd_two(t_shell *shell)
 			if (shell->on == 0)
 			{
 				free(tmp->var_env);
-				tmp->var_env = ft_strjoin("PWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
+				tmp->var_env = ft_strjoin("PWD=", getcwd(shell->buff_pwd,
+							sizeof(shell->buff_pwd)));
 			}
 		}
 		i++;
@@ -67,12 +68,14 @@ int	parse_pwd(t_shell *shell)
 		if (ft_strncmp(tmp->var_env, "PWD=", 4) == 0)
 		{
 			free(tmp->var_env);
-			tmp->var_env = ft_strjoin("PWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
+			tmp->var_env = ft_strjoin("PWD=", getcwd(shell->buff_pwd,
+						sizeof(shell->buff_pwd)));
 		}
 		if (ft_strncmp(tmp->var_env, "OLDPWD=", 7) == 0)
 		{
 			free(tmp->var_env);
-			tmp->var_env = ft_strjoin("OLDPWD=", getcwd(shell->buff_pwd, sizeof(shell->buff_pwd)));
+			tmp->var_env = ft_strjoin("OLDPWD=", getcwd(shell->buff_pwd,
+						sizeof(shell->buff_pwd)));
 		}
 		if (ft_strncmp(tmp->var_env, "_=", 2) == 0)
 		{
@@ -113,7 +116,6 @@ int	stock_env(char **env, t_shell *shell)
 		ft_lstadd_back_env(&shell->environ, ft_lstnew_env(env[i]));
 		i++;
 	}
-	// go_to_home(shell);
 	parse_pwd(shell);
 	return (1);
 }

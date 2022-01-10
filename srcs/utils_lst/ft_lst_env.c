@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 14:46:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/14 16:05:07 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 20:09:36 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,8 +62,8 @@ void	ft_lstadd_back_env(t_env **environ, t_env *new)
 
 int	ft_lstsize_shell(t_token_list *lst)
 {
-	int		i;
 	t_token_list	*tmp;
+	int				i;
 
 	i = 0;
 	tmp = lst;

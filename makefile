@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
+#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2021/12/24 12:36:05 by tigerber         ###   ########.fr        #
+#    Updated: 2022/01/10 20:14:05 by tnave            ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,6 +18,7 @@ SRCS =  srcs/minishell.c								\
 		srcs/opt_exec_mini.c							\
 		srcs/prompt.c									\
 		srcs/utils.c 									\
+		srcs/utils_two.c								\
 		srcs/outils.c 									\
 		srcs/error.c 									\
 		srcs/parsing/environement.c						\
@@ -45,7 +46,7 @@ SRCS =  srcs/minishell.c								\
 		pipex/parsing.c 								\
 		pipex/pipex.c									\
 		pipex/utils_two.c								\
-		pipex/utils.c
+		pipex/utils.c									\
 
 CC = clang
 

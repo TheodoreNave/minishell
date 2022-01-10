@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing_dollars.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 13:25:28 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/16 13:34:11 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 20:05:21 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int	is_whitespace(int c)
 {
 	return (c == ' ' || c == '\t' || c == '\n' || c == '\v' || c == '\f'
-			|| c == '\r');
+		|| c == '\r');
 }
 
 int	ft_strlen_space(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -50,18 +50,15 @@ char	*ft_strndup(char *str, int size)
 	return (dest);
 }
 
-int	check_dollars(t_shell *shell, char *word)
+int	check_dollars(char *word)
 {
-	(void)shell;
-	int i;
+	int	i;
 
 	i = 0;
 	while (word[i])
 	{
 		if (word[i] == '$')
-		{
 			return (1);
-		}
 		i++;
 	}
 	return (0);

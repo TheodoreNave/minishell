@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:40:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 17:19:08 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 20:11:00 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 {
 	pid_t	pid;
+
 	pid = fork();
 	if (pid < 0)
 	{
@@ -23,12 +24,13 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 	}
 	if (pid == 0)
 	{
-		if (tmp->type_start == TYPE_PIPE )
+		if (tmp->type_start == TYPE_PIPE)
 		{
 			close(shell->pfd[0]);
 			dup2(shell->pfd[1], STDOUT);
 		}
-		if (shell->fd_base > 0 && (tmp->type_end == TYPE_PIPE || tmp->type_end == TYPE_END))
+		if (shell->fd_base > 0 && (tmp->type_end == TYPE_PIPE
+				|| tmp->type_end == TYPE_END))
 		{
 			close(shell->pfd[1]);
 			dup2(shell->fd_base, STDIN);
@@ -36,6 +38,8 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 		if (shell->fd_in > 0 )
 			dup2(shell->fd_in, STDIN);
 		if (shell->fd_out > 0)
+			dup2(shell->fd_out, STDOUT);
+		if (shell->fd_temp > 0)
 			dup2(shell->fd_out, STDOUT);
 		if (!built_in_check(shell->opt2, shell))
 		{
@@ -55,7 +59,8 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 				}
 				else
 				{
-					ft_putstr_fderr("bash: %s: Is a directory: \n", shell->opt2[0]);
+					ft_putstr_fderr("bash: %s: Is a directory: \n",
+						shell->opt2[0]);
 					exit(126);
 				}
 			}
@@ -67,6 +72,8 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 	{
 		g_global.no_ctrlc = 1;
 		g_global.error_dollars = 130;
+		if (shell->fd_temp > 0)
+			close(shell->fd_temp);
 		if (shell->fd_base > 0)
 			close(shell->fd_base);
 		shell->fd_base = shell->pfd[0];

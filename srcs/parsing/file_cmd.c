@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   file_cmd.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/02 15:24:23 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/16 15:55:25 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 19:59:11 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int		fill_cmd(t_shell *shell)
 {
-	t_token_list *tmp;
+	t_token_list	*tmp;
+	t_cmd_list		*tpmp;
 
 	tmp = shell->token;
 	while (tmp)
 	{
-		t_cmd_list *tpmp;
 		tpmp = malloc(sizeof(t_cmd_list));
 		if (!tpmp)
 			return (0);
-		ft_memset(tpmp, 0, sizeof(t_cmd_list));		// changer de place ??
+		ft_memset(tpmp, 0, sizeof(t_cmd_list));
 		tpmp->next = NULL;
 		if (is_type_redir(tmp->type))
 		{

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
+/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 13:16:04 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 20:06:16 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,9 +82,7 @@ int	built_in_export(char **opt, t_env *environ, t_shell *shell)
 			while (opt[i][j])
 			{
 				if (opt[i][j] == '=')
-				{
 					ft_lstadd_back_env(&environ, ft_lstnew_env(opt[i]));
-				}
 				j++;
 			}
 			j = 0;

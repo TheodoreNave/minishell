@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 17:46:02 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 20:05:39 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -157,7 +157,7 @@ int				is_type_redir(int type);
 
 int				go_to_home(t_shell *shell);
 
-int				check_dollars(t_shell *shell, char *word);
+int				check_dollars(char *word);
 
 int				is_whitespace(int c);
 
@@ -186,7 +186,7 @@ int				ft_count_nbr(long int nb);
 
 char			*ft_itoa(int n);
 
-char			*dollars_question(char *word, t_shell *shell);
+char			*dollars_question(char *word);
 
 int				ft_strcmp(char *s1, char *s2);
 
@@ -213,8 +213,6 @@ void			print_list_dol(t_dol *token);
 int				ft_strlen_space(char *str);
 
 char			*convert_dollars(char *word, t_shell *shell);
-
-int				check_dollars(t_shell *shell, char *word);
 
 int				parsing_dollars(t_shell *shell);
 

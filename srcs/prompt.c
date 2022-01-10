@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:23:56 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/06 16:27:29 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 20:11:12 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,8 @@
 
 char	*prompt(t_shell *shell, char *buff)
 {
-	char *temp;
-	char *join_temp;
+	char	*temp;
+	char	*join_temp;
 
 	if (shell->prompt)
 	{
@@ -30,7 +30,6 @@ char	*prompt(t_shell *shell, char *buff)
 	}
 	if (!shell->on)
 	{
-		// free shell->pwd_temp ???
 		shell->pwd_temp = getcwd(shell->buff_pwd, sizeof(shell->buff_pwd));
 		if (!shell->pwd_temp)
 			free(shell->pwd_temp);
@@ -47,7 +46,7 @@ char	*prompt(t_shell *shell, char *buff)
 		temp = getcwd(shell->buff_pwd, sizeof(shell->buff_pwd));
 		if (!temp)
 			free(temp);
-		join_temp = ft_strjoin(temp , " $> ");
+		join_temp = ft_strjoin(temp, " $> ");
 		buff = readline(join_temp);
 		free(join_temp);
 	}
@@ -56,7 +55,7 @@ char	*prompt(t_shell *shell, char *buff)
 		if (shell->environ)
 			ft_lstclear_env(&shell->environ);
 		write(1, "exit\n", 5);
-		exit(0);							// error message ?
+		exit(0);
 	}
 	shell->on = 0;
 	return (buff);

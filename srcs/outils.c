@@ -6,7 +6,7 @@
 /*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:17:05 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/15 18:10:04 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 20:12:25 by tnave            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,20 @@ int	ft_isalnum(int c)
 		|| (c == '_'))
 		return (1);
 	return (0);
+}
+
+int	ft_strchr(char *str, char c)
+{
+	int	i;
+
+	i = 0;
+	if (!str)
+		return (-1);
+	while (str[i])
+	{
+		if (str[i] == c)
+			return (0);
+		i++;
+	}
+	return (1);
 }
