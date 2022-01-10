@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:47 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/07 16:10:52 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:13:10 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,9 @@
 
 long	ft_atoi(const char *nptr)
 {
-	long i;
-	long res;
-	long neg;
+	long	i;
+	long	res;
+	long	neg;
 
 	i = 0;
 	res = 0;
@@ -42,7 +42,7 @@ long	ft_atoi(const char *nptr)
 
 int	ft_check_is_digit(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == '-')
@@ -61,7 +61,7 @@ int	ft_check_is_digit(char *str)
 
 int	built_in_exit(t_shell *shell, char **opt)
 {
-	long error;
+	long	error;
 
 	error = 0;
 	if (shell->environ)
@@ -80,7 +80,6 @@ int	built_in_exit(t_shell *shell, char **opt)
 	{
 		if (ft_check_is_digit(opt[1]) || (ft_strlen(opt[1]) > 18 && !global.minus))
 		{
-			
 			write(2, "exit\n", 6);
 			ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
 			exit(2);
@@ -100,7 +99,6 @@ int	built_in_exit(t_shell *shell, char **opt)
 		write(2, "exit\n", 6);
 		exit(error);
 	}
-	printf("exit\n");
+	write(2, "exit\n", 6);
 	exit(0);
-	// calcul a faire en fonction de l'exit si non compries entre 0 et 255 sinon renvoyer valeur entre 0 et 255
 }

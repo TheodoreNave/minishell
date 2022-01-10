@@ -6,16 +6,18 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:20 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/06 15:57:19 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:12:04 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int		built_in_echo(char **opt, t_shell *shell)
+int	built_in_echo(char **opt, t_shell *shell)
 {
+	int	i;
+
+	i = 0;
 	(void)shell;
-	int i = 0;
 	while (opt[i])
 	{
 		if (write(1, opt[i], ft_strlen(opt[i])) == -1)
@@ -31,12 +33,12 @@ int		built_in_echo(char **opt, t_shell *shell)
 	return (0);
 }
 
-int		built_in_echo_n(char **opt, t_shell *shell)
+int	built_in_echo_n(char **opt, t_shell *shell)
 {
-	(void)shell;
-	int i;
+	int	i;
 
 	i = 0;
+	(void)shell;
 	if (!opt)
 		return (0);
 	while (opt[i])

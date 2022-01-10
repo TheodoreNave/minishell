@@ -6,13 +6,13 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/06 19:10:20 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:43:31 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int		built_in_check(char **built_in, t_shell *shell)
+int	built_in_check(char **built_in, t_shell *shell)
 {
 	if (!strcmp(built_in[0], "cd"))
 		built_in_cd(shell, built_in);
@@ -43,7 +43,7 @@ int		built_in_check(char **built_in, t_shell *shell)
 	return (1);
 }
 
-int		built_in_check_2(char **built_in, t_shell *shell)
+int	built_in_check_2(char **built_in, t_shell *shell)
 {
 	if (!strcmp(built_in[0], "cd"))
 		built_in_cd(shell, built_in);

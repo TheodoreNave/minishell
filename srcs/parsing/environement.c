@@ -6,18 +6,18 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:25:42 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/16 18:50:47 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:46:16 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int 	parse_pwd_two(t_shell *shell)
+int	parse_pwd_two(t_shell *shell)
 {
-	int i;
-	char *pwd_temp;
-	t_env *tmp;
-	t_env *tempo;
+	t_env	*tempo;
+	t_env	*tmp;
+	char	*pwd_temp;
+	int		i;
 
 	i = 0;
 	pwd_temp = NULL;
@@ -57,9 +57,9 @@ int 	parse_pwd_two(t_shell *shell)
 	return (0);
 }
 
-int 	parse_pwd(t_shell *shell)
+int	parse_pwd(t_shell *shell)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = shell->environ;
 	while (tmp)
@@ -84,9 +84,9 @@ int 	parse_pwd(t_shell *shell)
 	return (0);
 }
 
-int		go_to_home(t_shell *shell)
+int	go_to_home(t_shell *shell)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = shell->environ;
 	while (tmp)
@@ -101,9 +101,9 @@ int		go_to_home(t_shell *shell)
 	return (0);
 }
 
-int		stock_env(char **env, t_shell *shell)
+int	stock_env(char **env, t_shell *shell)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!env)
@@ -113,22 +113,22 @@ int		stock_env(char **env, t_shell *shell)
 		ft_lstadd_back_env(&shell->environ, ft_lstnew_env(env[i]));
 		i++;
 	}
-	go_to_home(shell);
+	// go_to_home(shell);
 	parse_pwd(shell);
 	return (1);
 }
 
 char	**new_env_tab(t_shell *shell)
 {
-	char **tab;
-	int size;
-	int i;
-	t_env *tmp;
+	t_env	*tmp;
+	char	**tab;
+	int		size;
+	int		i;
 
 	tmp = shell->environ;
 	i = 0;
 	size = count_env_lst(tmp);
-	tab = malloc(sizeof(char*) * (size + 1));
+	tab = malloc(sizeof(char *) * (size + 1));
 	if (!tab)
 		return (0);
 	while (tmp)

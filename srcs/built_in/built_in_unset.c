@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_unset.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:28:41 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 17:28:52 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 13:17:19 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,9 @@
 
 int	boucle_unset(t_shell *shell, char *opt)
 {
-	t_env *tmp;
+	t_env	*tmp;
 
 	tmp = shell->environ;
-
 	while (tmp)
 	{
 		if ((ft_strncmp(tmp->var_env, opt, ft_strlen(opt)) == 0)
@@ -32,14 +31,13 @@ int	boucle_unset(t_shell *shell, char *opt)
 	return (0);
 }
 
-int 	built_in_unset(t_shell *shell, char **opt)
+int	built_in_unset(t_shell *shell, char **opt)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	while (opt[i])
 	{
-
 		if (!boucle_unset(shell, opt[i]))
 		{
 			if (!check_name_variable(opt[i], shell, 5))

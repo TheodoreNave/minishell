@@ -6,15 +6,14 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:11:02 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/16 15:29:19 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 14:06:23 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int		built_in_cd(t_shell *shell, char **opt)
+int	built_in_cd(t_shell *shell, char **opt)
 {
-	// Strerror ?
 	if (!opt[1])
 	{
 		if (!go_to_home(shell))
@@ -31,9 +30,8 @@ int		built_in_cd(t_shell *shell, char **opt)
 	return (0);
 }
 
-int		built_in_pwd(t_shell *shell)
+int	built_in_pwd(t_shell *shell)
 {
-	// Strerror
 	t_env	*tmp;
 	char	current[BUFF_MAX];
 

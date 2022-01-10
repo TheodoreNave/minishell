@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/24 13:41:47 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 13:16:04 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ int	check_is_alpha(char c)
 
 int	check_name_variable(char *str, t_shell *shell, int j)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (!check_is_alpha(str[i]) || (str[i] >= '0' && str[i] <= '9'))
@@ -63,9 +63,8 @@ int	check_var_in_env(t_env *env, char *opt)
 
 int	built_in_export(char **opt, t_env *environ, t_shell *shell)
 {
-	printf("JE SUIS  DANS EXPORT\n");
-	int i;
-	int j;
+	int	i;
+	int	j;
 
 	i = 1;
 	j = 0;

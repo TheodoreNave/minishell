@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:40:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/07 16:49:15 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 12:24:29 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 	}
 	else if (tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END)
 	{
-		dprintf(2, "SALUT2222\n");
+		// dprintf(2, "SALUT2222\n");
 		global.error_dollars = 130;
 		if (shell->fd_base > 0)
 			close(shell->fd_base);

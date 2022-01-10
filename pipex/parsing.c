@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:56:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/14 15:17:48 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 12:23:56 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ int	parse_env(char **env, t_utils *utils)
 	{
 		if (ft_strncmp(env[i], "PATH=", 5) == 0)
 		{
-			printf("env[i] = %s\n", env[i]);
-			printf("parse_env[i] = %p\n", utils->parse_env);
+			// printf("env[i] = %s\n", env[i]);
+			// printf("parse_env[i] = %p\n", utils->parse_env);
 			utils->parse_env = ft_split(is_slash(env[i]), ':');
 			return (1);
 		}
@@ -78,7 +78,7 @@ void	ft_check_access_two(char **av, int i, int j, t_utils *utils)
 
 void	error_msg(t_utils *utils)
 {
-	printf("salut\n");
+	// printf("salut\n");
 	if (utils->error_msg)
 	{
 		free(utils->error_msg);

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/07 16:52:55 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 12:24:25 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -58,7 +58,7 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 		}
 		i++;
 	}
-	printf("global.error_dollars = %d\n", global.error_dollars);
+	// printf("global.error_dollars = %d\n", global.error_dollars);
 }
 
 void	printenv(char **tab)
@@ -67,7 +67,7 @@ void	printenv(char **tab)
 
 	while (tab[i])
 	{
-		dprintf(2, "[%s]\n", tab[i]);
+		// dprintf(2, "[%s]\n", tab[i]);
 		i++;
 	}
 	return ;

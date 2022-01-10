@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:20:59 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/07 16:45:24 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/10 12:25:34 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -137,7 +137,7 @@ int parsing_dollars(t_shell *shell)
 			if (check_dollars(shell, tmp->word))
 			{
 				new_token_dollars(tmp->word, shell);
-				print_list_dol(shell->dol);
+				// print_list_dol(shell->dol);
 				recup_dollars(shell);
 				if (tmp->word)
 					free(tmp->word);

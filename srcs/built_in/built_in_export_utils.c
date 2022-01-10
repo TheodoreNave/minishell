@@ -3,20 +3,20 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export_utils.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:22:13 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/13 17:33:39 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 13:15:31 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-char		**sort_tab_env(char **tab, int size)
+char	**sort_tab_env(char **tab, int size)
 {
-	int i;
-	int is_ok;
-	char *tmp;
+	char	*tmp;
+	int		i;
+	int		is_ok;
 
 	i = 0;
 	is_ok = 0;
@@ -26,7 +26,7 @@ char		**sort_tab_env(char **tab, int size)
 		i = 0;
 		while (i < size - 1)
 		{
-			if (ft_strcmp(tab[i], tab[i + 1]) > 0)			// Change to ft_strcmp, need to change for diff
+			if (ft_strcmp(tab[i], tab[i + 1]) > 0)
 			{
 				tmp = tab[i];
 				tab[i] = tab[i + 1];
@@ -40,9 +40,9 @@ char		**sort_tab_env(char **tab, int size)
 	return (tab);
 }
 
-int	 	ft_putstr_quotes(char *str)
+int	ft_putstr_quotes(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (str[i])
@@ -60,9 +60,9 @@ int	 	ft_putstr_quotes(char *str)
 	return (0);
 }
 
-int		print_new_sort_tab(char **tab)
+int	print_new_sort_tab(char **tab)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (tab[i])
@@ -81,17 +81,17 @@ int		print_new_sort_tab(char **tab)
 	return (0);
 }
 
-int 	print_sort_env(t_env *env)
+int	print_sort_env(t_env *env)
 {
-	int size;
-	char **tab;
-	int i;
-	t_env *tmp;
+	char	**tab;
+	int		size;
+	int		i;
+	t_env	*tmp;
 
 	tmp = env;
 	i = 0;
 	size = count_env_lst(env);
-	tab = malloc(sizeof(char*) * (size + 1));
+	tab = malloc(sizeof(char *) * (size + 1));
 	if (!tab)
 		return (0);
 	while (tmp)

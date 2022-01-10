@@ -3,19 +3,19 @@
 /*                                                        :::      ::::::::   */
 /*   file_cmd_redir.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:09:08 by tigerber          #+#    #+#             */
-/*   Updated: 2021/12/15 15:39:53 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/10 13:47:00 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-void		malloc_opt(t_token_list **tmp, t_cmd_list *tpmp)
+void	malloc_opt(t_token_list **tmp, t_cmd_list *tpmp)
 {
-	int i;
-	int size;
+	int	i;
+	int	size;
 
 	i = 0;
 	size = ft_lstsize_shell(*tmp);
@@ -41,7 +41,7 @@ int	init_lst_redir(t_shell *shell, t_token_list **tmp, t_cmd_list *tpmp)
 		*tmp = (*tmp)->next;
 		if (*tmp)
 		{
-			if ((*tmp)->type == TYPE_WORD)							// SI commande et/ou options
+			if ((*tmp)->type == TYPE_WORD)
 				malloc_opt(tmp, tpmp);
 			if (*tmp)
 			{
