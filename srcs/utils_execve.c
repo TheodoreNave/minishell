@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 12:36:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/11 17:11:49 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/12 00:09:36 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,8 +78,10 @@ char	**new_opt_action(t_cmd_list *action)
 
 int 	ft_heredoc(t_shell *shell, t_cmd_list *tmp)
 {
-		shell->tmp_file = tmp->fichier;
-		shell->fd_out = open(tmp->fichier, O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU, S_IRGRP, S_IROTH);
+		if (shell->tmp_file)
+			unlink(shell->tmp_file);
+		shell->tmp_file = ft_strjoin(".", tmp->fichier);
+		shell->fd_in = open(shell->tmp_file, O_WRONLY | O_TRUNC | O_CREAT, S_IRWXU, S_IRGRP, S_IROTH);
 		static char	*buffer_doc = (char *)NULL;
 		while (1)
 		{
@@ -89,10 +91,12 @@ int 	ft_heredoc(t_shell *shell, t_cmd_list *tmp)
 				g_global.read_here_doc = 1;
 				break ;
 			}
-			write(shell->fd_out, buffer_doc, ft_strlen(buffer_doc));
-			write(shell->fd_out, "\n", 1);
+			write(shell->fd_in, buffer_doc, ft_strlen(buffer_doc));
+			write(shell->fd_in, "\n", 1);
 			
 		}
+		close(shell->fd_in);
+		shell->fd_in = open(shell->tmp_file, O_RDONLY);
 		return (0);
 }
 
@@ -122,7 +126,7 @@ void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell)
 				ft_putstr_fderr("bash: %s: No such file or directory\n", tmp->fichier);
 				g_global.error_dollars = 1;
 			}
-			printf("%d\n", shell->fd_out);
+			printf("fd = %d\n", shell->fd_out);
 			shell->fd_in = -1;
 		}
 		else if (tmp->type_start == TYPE_REDIR)
@@ -138,12 +142,12 @@ void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell)
 		else if (tmp->type_start == TYPE_HEREDOC && tmp->fichier != NULL)
 		{
 			ft_heredoc(shell, tmp);
-			if (shell->fd_out < 0)
+			if (shell->fd_in < 0)
 			{
 				ft_putstr_fderr("bash: %s: No such file or directory\n", tmp->fichier);
 				g_global.error_dollars = 1;
 			}
-			shell->fd_in = -1;
+			shell->fd_out = -1;
 		}
 		tmp = tmp->next;
 	}

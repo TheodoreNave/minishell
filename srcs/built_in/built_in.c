@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/11 16:34:39 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/11 21:24:41 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ int	built_in_check(char **built_in, t_shell *shell)
 	else if (!ft_strcmp(built_in[0], "export"))
 		built_in_export(built_in, shell->environ, shell);
 	else if (!ft_strcmp(built_in[0], "echo"))
-		builtin_echo(built_in, shell);// gerer -nnnnnnnn
+		builtin_echo(built_in, shell);
 	else if (!ft_strcmp(built_in[0], "exit"))
 		built_in_exit(shell, built_in);
 	else

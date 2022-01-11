@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:40:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/11 16:59:05 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/12 00:07:28 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 			close(shell->pfd[1]);
 			dup2(shell->fd_base, STDIN);
 		}
-		if (shell->fd_in > 0 )
+		if (shell->fd_in >= 0 )
 			dup2(shell->fd_in, STDIN);
 		if (shell->fd_out > 0)
 			dup2(shell->fd_out, STDOUT);
