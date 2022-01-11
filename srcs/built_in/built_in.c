@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/06 10:44:39 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 20:07:54 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/11 12:40:34 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	built_in_check(char **built_in, t_shell *shell)
 		built_in_export(built_in, shell->environ, shell);
 	else if (!strncmp(built_in[0], "echo", 4))
 	{
+		// gerer -nnnnnnnn
 		if (built_in[1])
 		{
 			if (!strncmp(built_in[1], "-n", 3))

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   execve.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 20:10:27 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/11 12:26:33 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,14 +25,12 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 	{
 		if (!shell->opt2)
 			init_value(shell, tmp);
-		if ((tmp->type_end == TYPE_END)
-			&& shell->pipe == 0 && (built_in_check_2(shell->opt2, shell)))
+		if ((tmp->type_end == TYPE_END) && shell->pipe == 0 && (built_in_check_2(shell->opt2, shell)))
 		{
 			shell->pipe = -1;
 			reset_value(shell);
 		}
-		if ((tmp->type_start == TYPE_PIPE
-				|| tmp->type_end == TYPE_END) && shell->pipe != -1)
+		if ((tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END) && shell->pipe != -1)
 		{
 			j += 1;
 			shell->pipe = 1;

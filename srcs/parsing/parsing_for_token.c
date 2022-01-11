@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_for_token.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 13:34:22 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 20:14:49 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/11 13:03:21 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,12 @@ int	make_token_lst(char *prompt, t_shell *shell)
 				shell->simple_quote = 1;
 			i += add_to_buff_quote(&prompt[i], prompt[i], shell);
 			if (shell->quote == -1)
+			{
+				shell->quote = 0;
+				shell->simple_quote = 0;
+				clear_buff(shell);
 				return (ft_error_two(NULL, shell, 2));
+			}
 		}
 		else if (is_double_redir(prompt[i], prompt[i + 1]))
 		{

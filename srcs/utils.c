@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:58:05 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 20:13:05 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/11 12:55:15 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,8 +52,8 @@ void	empty_buff_in_lst(t_shell *shell, char symbole)
 				ft_lstnew_shell(TYPE_SIMPLE_QUOTE, shell->buff_temp));
 			clear_buff(shell);
 			shell->x = 0;
-			shell->simple_quote = 0;
 		}
+		shell->simple_quote = 0;
 	}
 	if (ft_strlen(shell->buff_temp) > 0)
 	{

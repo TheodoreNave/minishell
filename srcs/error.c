@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:16:14 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 19:53:57 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/11 12:15:07 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,9 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 		g_global.error_dollars = 2;
 	}
 	if (error == 2)
+	{
 		ft_putstr_fderr(">\n", NULL);
+	}
 	if (error == 3)
 	{
 		ft_putstr_fderr("bash: cd: %s: No such file or directory\n", str);
