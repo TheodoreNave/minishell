@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:28:41 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/11 12:22:52 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:35:45 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	boucle_unset(t_shell *shell, char *opt)
 		if ((ft_strncmp(tmp->var_env, opt, ft_strlen(opt)) == 0) && (tmp->var_env[(int)ft_strlen(opt)] == '='))
 		{
 			free(tmp->var_env);
-			tmp->var_env = strdup("");
+			tmp->var_env = ft_strdup("");
 			return (1);
 		}
 		tmp = tmp->next;

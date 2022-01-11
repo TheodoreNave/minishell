@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   minishell.h                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 20:05:39 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/11 16:54:23 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -122,7 +122,10 @@ typedef struct s_shell
 	int				pfd[2];
 	int				pipe;
 	int				prompt;
+	char			*tmp_file;
 }					t_shell;
+
+void			builtin_echo(char **opt, t_shell *shell);
 
 void			signals2(int sig);
 

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   environement.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:25:42 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 20:08:50 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/11 16:35:49 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -135,7 +135,7 @@ char	**new_env_tab(t_shell *shell)
 		return (0);
 	while (tmp)
 	{
-		tab[i] = strdup(tmp->var_env);
+		tab[i] = ft_strdup(tmp->var_env);
 		i++;
 		tmp = tmp->next;
 	}

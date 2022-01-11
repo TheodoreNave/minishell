@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_export.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 20:06:16 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/11 16:35:36 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,7 +53,7 @@ int	check_var_in_env(t_env *env, char *opt)
 		if ((ft_strncmpp(tmp->var_env, opt, ft_strlen_char(opt, '=')) == 0))
 		{
 			free(tmp->var_env);
-			tmp->var_env = strdup(opt);
+			tmp->var_env = ft_strdup(opt);
 			return (0);
 		}
 		tmp = tmp->next;

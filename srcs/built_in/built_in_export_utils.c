@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 16:22:13 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 13:15:31 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:35:29 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	print_sort_env(t_env *env)
 		return (0);
 	while (tmp)
 	{
-		tab[i] = strdup(tmp->var_env);
+		tab[i] = ft_strdup(tmp->var_env);
 		i++;
 		tmp = tmp->next;
 	}

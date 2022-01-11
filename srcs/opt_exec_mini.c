@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/20 18:40:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/11 12:05:26 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/11 16:59:05 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,8 +69,8 @@ pid_t	opt_exec_mini(char **environ, t_shell *shell, t_cmd_list *tmp)
 	{
 		g_global.no_ctrlc = 1;
 		g_global.error_dollars = 130;
-		if (shell->fd_temp > 0)
-			close(shell->fd_temp);
+		// if (shell->fd_temp > 0)
+		// 	close(shell->fd_temp);
 		if (shell->fd_base > 0)
 			close(shell->fd_base);
 		shell->fd_base = shell->pfd[0];
