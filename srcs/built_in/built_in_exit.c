@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   built_in_exit.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:47 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 15:44:36 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/12 18:42:18 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,8 +72,10 @@ int	built_in_exit(t_shell *shell, char **opt)
 		ft_lstclear_dol(&shell->dol);
 	if (opt[2])
 	{
+		dprintf(2, "exit = %s\n", opt[2]);
 		write(2, "exit\n", 6);
 		ft_putstr_fderr("bash: exit: too many arguments\n", NULL);
+		clear(shell);
 		exit(1);
 	}
 	if (opt[1])
@@ -82,23 +84,28 @@ int	built_in_exit(t_shell *shell, char **opt)
 		{
 			write(2, "exit\n", 6);
 			ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
+			clear(shell);
 			exit(2);
 		}
 		else if (g_global.minus && ft_strlen(opt[1]) > 19)
 		{
 			write(2, "exit\n", 6);
 			ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
+			clear(shell);
 			exit(2);
 		}
 		error = ft_atoi(opt[1]);
 		if (error > 255 || error < 0)
 		{
 			write(2, "exit\n", 6);
+			clear(shell);
 			exit(error % 256);
 		}
 		write(2, "exit\n", 6);
+		clear(shell);
 		exit(error);
 	}
 	write(2, "exit\n", 6);
+	clear(shell);
 	exit(0);
 }

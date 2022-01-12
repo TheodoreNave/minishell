@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/12 00:15:33 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:43:05 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,6 +95,7 @@ typedef struct s_shell
 {
 	char			buff_temp[BUFF_MAX];
 	char			buff_pwd[BUFF_MAX];
+	char			buffer_king[BUFF_MAX];
 	int				x;
 	int				i;
 	int				quote;
@@ -123,7 +124,18 @@ typedef struct s_shell
 	int				pipe;
 	int				prompt;
 	char			*tmp_file;
+	char			*home;
 }					t_shell;
+
+void			clear(t_shell *shell);
+
+int 			parse_dollars_heredoc(char *str, t_shell *shell, char *tmp);
+
+void			clear_buffer_king(t_shell *shell);
+
+void 			add_to_buff_king(t_shell *shell, char c, long *j);
+
+int				ft_strlen_no_space(char *str);
 
 void			builtin_echo(char **opt, t_shell *shell);
 

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:20 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/11 16:28:54 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:41:48 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,7 @@ int	built_in_echo(char **opt, t_shell *shell)
 		if (write(1, opt[i], ft_strlen(opt[i])) == -1)
 		{
 			ft_putstr_fderr("bash: echo: write error: %s\n", strerror(errno));
+			clear(shell);
 			exit(1);
 		}
 		if (!(opt[i + 1] == NULL))
@@ -84,6 +85,7 @@ int	built_in_echo_n(char **opt, t_shell *shell)
 		if (write(1, opt[i], ft_strlen(opt[i])) == -1)
 		{
 			ft_putstr_fderr("bash: echo: write error: %s\n", strerror(errno));
+			clear(shell);
 			exit(1);
 		}
 		if (!(opt[i + 1] == NULL))

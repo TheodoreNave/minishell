@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_dollars.c                                  :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 16:20:59 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 20:09:05 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/12 12:15:36 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,10 @@ int	parsing_dollars(t_shell *shell)
 	tmp = shell->token;
 	while (tmp)
 	{
+		if (tmp->type == TYPE_HEREDOC && tmp->next->type == TYPE_WORD)
+		{
+			tmp->next->type = TYPE_SIMPLE_QUOTE;
+		}
 		if (tmp->type == TYPE_WORD)
 		{
 			if (check_dollars(tmp->word))

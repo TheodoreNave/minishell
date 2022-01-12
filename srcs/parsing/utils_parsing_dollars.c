@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils_parsing_dollars.c                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/16 13:25:28 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 20:05:21 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/12 14:51:27 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,20 @@ int	ft_strlen_space(char *str)
 	while (str[i])
 	{
 		if (!ft_isalnum(str[i]))
+			return (i);
+		i++;
+	}
+	return (i);
+}
+
+int	ft_strlen_no_space(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		if (ft_isalnum(str[i]))
 			return (i);
 		i++;
 	}

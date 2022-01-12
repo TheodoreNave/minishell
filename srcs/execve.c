@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/12 00:15:17 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:16:40 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,12 +19,16 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 	int			ret;
 	int			j;
 
+	ret = 0;
 	j = 0;
 	tmp = shell->action;
 	while (tmp)
 	{
 		if (!shell->opt2)
+		{
+			dprintf(2, "OPT2\n");
 			init_value(shell, tmp);
+		}
 		if ((tmp->type_end == TYPE_END) && shell->pipe == 0 && (built_in_check_2(shell->opt2, shell)))
 		{
 			shell->pipe = -1;
@@ -32,18 +36,23 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 		}
 		if ((tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END) && shell->pipe != -1)
 		{
+			dprintf(2, "fd = %d\n", shell->fd_in);
+			printf("ALOOOOO\n");
 			j += 1;
 			shell->pipe = 1;
 			if (pipe(shell->pfd) == -1)
 			{
-				printf("Error pipe\n");
+				write(2, "bash: Error pipe\n", 18);
 				g_global.error_dollars = 1;
 			}
 			last_pid = opt_exec_mini(env, shell, tmp);
 			reset_value(shell);
 		}
+		if ((tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END) && shell->pipe == -1)
+			reset_value(shell);
 		tmp = tmp->next;
 	}
+	// init_value(shell, tmp);
 	shell->pipe = 0;
 	if (shell->fd_base > 0)
 		close(shell->fd_base);
@@ -109,6 +118,8 @@ int	parse_env_2(t_shell *shell)
 
 int	test_execve(t_shell *shell)
 {
+	if (shell->new_env_tab)
+		free_split(shell->new_env_tab);
 	shell->new_env_tab = new_env_tab(shell);
 	if (!shell->new_env_tab)
 		return (0);

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:16:14 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/11 12:15:07 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/12 18:41:13 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,12 +81,18 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 	if (error == 6)
 	{
 		ft_putstr_fderr("NO ENV FOUND SORRY NEED TO QUIT %s\n", str);
+		clear(shell);
 		exit(127);
 	}
 	if (error == 7)
 	{
 		ft_putstr_fderr("%s", str);
 		g_global.error_dollars = 1;
+	}
+	if (error == 8)
+	{
+		ft_putstr_fderr("bash: warning: here-document delimited by end-of-file (wanted `%s')\n", str);
+		g_global.error_dollars = 0;
 	}
 	return (0);
 }

@@ -6,14 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/12 00:19:34 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/12 19:11:49 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// PROB EXIT exit simple affiche tpp many argument
-// PROB CD cd ~ doit fonctionner
 // PROB wc -c fichier non existant ensuite wc -c fichier valide 
-// prob HereDoc varaible env s'affiche avec cat apres EOF
 #include "../includes/minishell.h"
 
 t_global	g_global;
@@ -47,11 +44,25 @@ static void	setup(char **env, t_utils *utils, t_shell *shell)
 	stock_env(env, shell);
 }
 
-static	void	clear(t_shell *shell)
+void	clear(t_shell *shell)
 {
 	ft_lstclear_shell(&shell->token);
 	ft_lstclear_action(&shell->action);
-
+	if (shell->opt2)
+	{
+		free_split(shell->opt2);
+		shell->opt2 = NULL;	
+	}
+	if (shell->parse_env)
+	{
+		free_split(shell->parse_env);
+		shell->parse_env = NULL;
+	}
+	if (shell->join)
+	{
+		free(shell->join);
+		shell->join = NULL;
+	}
 }
 
 int	main(int ac, char **av, char **env)
@@ -61,8 +72,9 @@ int	main(int ac, char **av, char **env)
 	static char	*buffer;
 
 	buffer = (char *) NULL;
-	if (ac != 1)
-		return (0);
+	// if (ac != 1)
+	// 	return (0);
+	(void)ac;
 	(void)av;
 	mem(&utils, &shell);
 	setup(env, &utils, &shell);
@@ -77,7 +89,7 @@ int	main(int ac, char **av, char **env)
 		if (make_token_lst(buffer, &shell))
 		{
 			// dprintf(2, "ALLOO\n");
-			// print_token_list(shell.token);
+			print_token_list(shell.token);
 			parsing_dollars(&shell);
 			if (parsing_errors_token(&shell))
 				fill_cmd(&shell);
@@ -85,6 +97,13 @@ int	main(int ac, char **av, char **env)
 				test_execve(&shell);
 		}
 		clear(&shell);
+	}
+	clear(&shell);
+	ft_lstclear_env(&shell.environ);
+	if (shell.home)
+	{
+		free(shell.home);
+		shell.home = NULL;
 	}
 	return (0);
 }

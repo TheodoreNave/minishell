@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 19:25:42 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/11 16:35:49 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/12 12:07:03 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -104,6 +104,22 @@ int	go_to_home(t_shell *shell)
 	return (0);
 }
 
+void	stock_home(t_shell *shell)
+{
+	t_env	*tmp;
+
+	tmp = shell->environ;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->var_env, "HOME=", 5) == 0)
+		{
+			shell->home = ft_strdup(&tmp->var_env[5]);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
+
 int	stock_env(char **env, t_shell *shell)
 {
 	int	i;
@@ -117,6 +133,7 @@ int	stock_env(char **env, t_shell *shell)
 		i++;
 	}
 	parse_pwd(shell);
+	stock_home(shell);
 	return (1);
 }
 
