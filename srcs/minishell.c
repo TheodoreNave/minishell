@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/12 19:11:49 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:36:03 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,11 @@ void	clear(t_shell *shell)
 {
 	ft_lstclear_shell(&shell->token);
 	ft_lstclear_action(&shell->action);
+	if (shell->new_env_tab)
+	{
+		free_split(shell->new_env_tab);
+		shell->new_env_tab = NULL;
+	}
 	if (shell->opt2)
 	{
 		free_split(shell->opt2);
@@ -65,6 +70,17 @@ void	clear(t_shell *shell)
 	}
 }
 
+void	clear_end(t_shell *shell)
+{
+	clear(shell);
+	ft_lstclear_env(&shell->environ);
+	if (shell->home)
+	{
+		free(shell->home);
+		shell->home = NULL;
+	}
+}
+
 int	main(int ac, char **av, char **env)
 {
 	t_utils		utils;
@@ -72,10 +88,9 @@ int	main(int ac, char **av, char **env)
 	static char	*buffer;
 
 	buffer = (char *) NULL;
-	// if (ac != 1)
-	// 	return (0);
-	(void)ac;
 	(void)av;
+	if (ac != 1)
+		return (0);
 	mem(&utils, &shell);
 	setup(env, &utils, &shell);
 	rl_outstream = stderr;
@@ -85,11 +100,8 @@ int	main(int ac, char **av, char **env)
 		buffer = prompt(&shell, buffer);
 		if (buffer)
 			add_history(buffer);
-		// dprintf(2, "buffer = %s\n", buffer);
 		if (make_token_lst(buffer, &shell))
 		{
-			// dprintf(2, "ALLOO\n");
-			print_token_list(shell.token);
 			parsing_dollars(&shell);
 			if (parsing_errors_token(&shell))
 				fill_cmd(&shell);
@@ -98,12 +110,6 @@ int	main(int ac, char **av, char **env)
 		}
 		clear(&shell);
 	}
-	clear(&shell);
-	ft_lstclear_env(&shell.environ);
-	if (shell.home)
-	{
-		free(shell.home);
-		shell.home = NULL;
-	}
+	clear_end(&shell);
 	return (0);
 }

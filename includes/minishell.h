@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/12 18:43:05 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:36:31 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -126,6 +126,8 @@ typedef struct s_shell
 	char			*tmp_file;
 	char			*home;
 }					t_shell;
+
+void			clear_end(t_shell *shell);
 
 void			clear(t_shell *shell);
 

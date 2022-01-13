@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/24 12:36:35 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/12 18:54:30 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/13 18:27:27 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,14 +113,22 @@ void 	convert_dol_her(char *str, t_shell *shell, long *j)
 	t_env	*tmp;
 	int		size;
 	int 	i;
-	dprintf(2, "str 2 = %s\n", str);
+
 	i = 0;
 	size = ft_strlen_space(str);
+	if (size == 0)
+	{
+		dprintf(2, "size = %d\n", size);
+		add_to_buff_king(shell, '$', j);
+		return;
+
+	}
 	tmp = shell->environ;
 	while (tmp)
 	{
 		if (ft_strncmp(tmp->var_env, str, size) == 0)
 		{
+			dprintf(2, "TMPC = %c\n", tmp->var_env[size]);
 			if ((tmp->var_env[size] = '='))
 			{
 				while (tmp->var_env[size + 1 + i])
@@ -133,7 +141,8 @@ void 	convert_dol_her(char *str, t_shell *shell, long *j)
 				add_to_buff_king(shell, 0, j);
 		}
 		tmp = tmp->next;
-	}	
+	}
+	return ;
 }
 
 int	parse_dollars_heredoc(char *str, t_shell *shell, char *tmp)
@@ -152,9 +161,7 @@ int	parse_dollars_heredoc(char *str, t_shell *shell, char *tmp)
 	{
 		if (str[i] == '$' && (!(is_whitespace(str[i + 1]))))
 		{
-			dprintf(2, "str 1 = %s\n", str);
 			convert_dol_her(&str[i + 1], shell, &j);
-			dprintf(2, "strlen = %d\n", ft_strlen_space(&str[i + 1]));
 			i += ft_strlen_space(&str[i + 1]) + 1;
 		}
 		add_to_buff_king(shell, str[i], &j);
@@ -212,7 +219,6 @@ void 	parse_les_redirections(t_cmd_list *temp, t_shell *shell)
 			shell->fd_in = open(tmp->fichier, O_RDONLY);
 			if (shell->fd_in < 0)
 			{
-				printf("fd = %d\n", shell->fd_out);
 				ft_putstr_fderr("bash: %s: No such file or directory\n", tmp->fichier);
 				g_global.error_dollars = 1;
 				shell->pipe = -1;

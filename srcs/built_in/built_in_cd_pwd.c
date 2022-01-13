@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:11:02 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/12 11:51:15 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/13 16:08:59 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,15 @@ char	*convert_tild(char *str, t_shell *shell)
 
 int	built_in_cd(t_shell *shell, char **opt)
 {
-	char *temp;
+	char	*temp;
+	int		i;
 
 	temp = NULL;
+	i = 0;
+	while (opt[i])
+		i++;
+	if (i > 2)
+		return(ft_error_two("bash: cd: too many arguments\n", shell, 7));
 	if (!opt[1])
 	{
 		if (!go_to_home(shell))

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:47 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/12 18:42:18 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/13 17:34:11 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,7 +62,9 @@ int	ft_check_is_digit(char *str)
 int	built_in_exit(t_shell *shell, char **opt)
 {
 	long	error;
+	int		i;
 
+	i = 0;
 	error = 0;
 	if (shell->environ)
 		ft_lstclear_env(&shell->environ);
@@ -70,9 +72,10 @@ int	built_in_exit(t_shell *shell, char **opt)
 		ft_lstclear_action(&shell->action);
 	if (shell->dol)
 		ft_lstclear_dol(&shell->dol);
-	if (opt[2])
+	while (opt[i])
+		i++;
+	if (i > 2)
 	{
-		dprintf(2, "exit = %s\n", opt[2]);
 		write(2, "exit\n", 6);
 		ft_putstr_fderr("bash: exit: too many arguments\n", NULL);
 		clear(shell);
@@ -84,28 +87,28 @@ int	built_in_exit(t_shell *shell, char **opt)
 		{
 			write(2, "exit\n", 6);
 			ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
-			clear(shell);
+			clear_end(shell);
 			exit(2);
 		}
 		else if (g_global.minus && ft_strlen(opt[1]) > 19)
 		{
 			write(2, "exit\n", 6);
 			ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
-			clear(shell);
+			clear_end(shell);
 			exit(2);
 		}
 		error = ft_atoi(opt[1]);
 		if (error > 255 || error < 0)
 		{
 			write(2, "exit\n", 6);
-			clear(shell);
+			clear_end(shell);
 			exit(error % 256);
 		}
 		write(2, "exit\n", 6);
-		clear(shell);
+		clear_end(shell);
 		exit(error);
 	}
 	write(2, "exit\n", 6);
-	clear(shell);
+	clear_end(shell);
 	exit(0);
 }

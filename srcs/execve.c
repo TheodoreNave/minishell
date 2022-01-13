@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/12 18:16:40 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/13 15:58:11 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 	{
 		if (!shell->opt2)
 		{
-			dprintf(2, "OPT2\n");
 			init_value(shell, tmp);
 		}
 		if ((tmp->type_end == TYPE_END) && shell->pipe == 0 && (built_in_check_2(shell->opt2, shell)))
@@ -36,8 +35,6 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 		}
 		if ((tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END) && shell->pipe != -1)
 		{
-			dprintf(2, "fd = %d\n", shell->fd_in);
-			printf("ALOOOOO\n");
 			j += 1;
 			shell->pipe = 1;
 			if (pipe(shell->pfd) == -1)
@@ -52,7 +49,6 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 			reset_value(shell);
 		tmp = tmp->next;
 	}
-	// init_value(shell, tmp);
 	shell->pipe = 0;
 	if (shell->fd_base > 0)
 		close(shell->fd_base);
@@ -80,6 +76,7 @@ void	printenv(char **tab)
 
 int	parse_env_2(t_shell *shell)
 {
+	(void)shell;
 	int	i;
 
 	i = 0;
@@ -110,7 +107,7 @@ int	parse_env_2(t_shell *shell)
 		shell->join = ft_strdup(shell->opt2[0]);
 	if (shell->parse_env)
 	{
-		free(shell->parse_env);
+		free_split(shell->parse_env);
 		shell->parse_env = NULL;
 	}
 	return (0);
