@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   parsing_error_token.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/25 16:21:10 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 20:15:24 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/14 17:53:52 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,7 @@ int	is_type_redir(int type)
 int	parsing_errors_token(t_shell *shell)
 {
 	t_token_list	*tmp;
-	char			*buf;
 
-	buf = NULL;
 	tmp = shell->token;
 	while (tmp)
 	{

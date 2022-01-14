@@ -1,66 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils.c                                            :+:      :+:    :+:   */
+/*   utils_buff.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:58:05 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/12 15:22:34 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 16:57:49 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/minishell.h"
-
-void	add_to_buff_no_space(t_shell *shell, char c)
-{
-	if (c != ' ')
-	{
-		shell->buff_temp[shell->x] = c;
-		shell->x++;
-	}
-	return ;
-}
-
-void add_to_buff_king(t_shell *shell, char c, long *j)
-{
-	shell->buffer_king[*j] = c;
-	(*j)++;
-	return ;
-}
-
-void	add_to_buff(t_shell *shell, char c)
-{
-	shell->buff_temp[shell->x] = c;
-	shell->x++;
-	return ;
-}
-
-void	clear_buffer_king(t_shell *shell)
-{
-	int	i;
-
-	i = 0;
-	while (shell->buffer_king[i])
-	{
-		shell->buffer_king[i] = '\0';
-		i++;
-	}
-	return ;
-}
-
-void	clear_buff(t_shell *shell)
-{
-	int	i;
-
-	i = 0;
-	while (shell->buff_temp[i])
-	{
-		shell->buff_temp[i] = '\0';
-		i++;
-	}
-	return ;
-}
 
 void	empty_buff_in_lst(t_shell *shell, char symbole)
 {

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 15:45:28 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/16 19:01:32 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:52:04 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -115,4 +115,14 @@ void 	print_new_lst(t_cmd_list *lst)
 		j++;
 		tmp = tmp->next;
 	}
+}
+
+void	printenv(char **tab)
+{
+	int	i;
+
+	i = 0;
+	while (tab[i])
+		i++;
+	return ;
 }

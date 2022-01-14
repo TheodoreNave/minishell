@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/03 14:09:08 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/10 13:47:00 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 16:14:05 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,19 @@ void	malloc_opt(t_token_list **tmp, t_cmd_list *tpmp)
 	tpmp->opt[i] = NULL;
 }
 
+void	init_lst_one(t_shell *shell, t_token_list **tmp, t_cmd_list *tpmp)
+{
+	tpmp->type_end = (*tmp)->type;
+	ft_lstadd_back_action(&shell->action, tpmp);
+	*tmp = (*tmp)->prev;
+}
+
+void	init_lst_two(t_shell *shell, t_cmd_list *tpmp)
+{
+	tpmp->type_end = TYPE_END;
+	ft_lstadd_back_action(&shell->action, tpmp);
+}
+
 int	init_lst_redir(t_shell *shell, t_token_list **tmp, t_cmd_list *tpmp)
 {
 	tpmp->type_start = (*tmp)->type;
@@ -44,22 +57,16 @@ int	init_lst_redir(t_shell *shell, t_token_list **tmp, t_cmd_list *tpmp)
 			if ((*tmp)->type == TYPE_WORD)
 				malloc_opt(tmp, tpmp);
 			if (*tmp)
-			{
-				tpmp->type_end = (*tmp)->type;
-				ft_lstadd_back_action(&shell->action, tpmp);
-				*tmp = (*tmp)->prev;
-			}
+				init_lst_one(shell, tmp, tpmp);
 			else
 			{
-				tpmp->type_end = TYPE_END;
-				ft_lstadd_back_action(&shell->action, tpmp);
+				init_lst_two(shell, tpmp);
 				return (0);
 			}
 		}
 		else
 		{
-			tpmp->type_end = TYPE_END;
-			ft_lstadd_back_action(&shell->action, tpmp);
+			init_lst_two(shell, tpmp);
 			return (0);
 		}
 	}

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:11:02 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/13 16:08:59 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 12:57:43 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,17 +20,32 @@ char	*convert_tild(char *str, t_shell *shell)
 	return (new);
 }
 
-int	built_in_cd(t_shell *shell, char **opt)
+void	built_in_cd_two(t_shell *shell, char **opt)
 {
 	char	*temp;
-	int		i;
 
 	temp = NULL;
+	if (opt[1][0] == '~')
+	{
+		temp = opt[1];
+		opt[1] = convert_tild(opt[1], shell);
+		free(temp);
+		temp = NULL;
+	}
+	if (chdir(opt[1]) == -1)
+		ft_error_two(opt[1], shell, 3);
+	parse_pwd_two(shell);
+}
+
+int	built_in_cd(t_shell *shell, char **opt)
+{	
+	int		i;
+
 	i = 0;
 	while (opt[i])
 		i++;
 	if (i > 2)
-		return(ft_error_two("bash: cd: too many arguments\n", shell, 7));
+		return (ft_error_two("bash: cd: too many arguments\n", shell, 7));
 	if (!opt[1])
 	{
 		if (!go_to_home(shell))
@@ -39,18 +54,7 @@ int	built_in_cd(t_shell *shell, char **opt)
 			parse_pwd_two(shell);
 	}
 	else
-	{
-		if (opt[1][0] == '~')
-		{
-			temp = opt[1];
-			opt[1] = convert_tild(opt[1], shell);
-			free(temp);
-			temp = NULL;
-		}
-		if (chdir(opt[1]) == -1)
-			ft_error_two(opt[1], shell, 3);
-		parse_pwd_two(shell);
-	}
+		built_in_cd_two(shell, opt);
 	return (0);
 }
 

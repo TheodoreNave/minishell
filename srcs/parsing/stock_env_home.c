@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   built_in_unset.c                                   :+:      :+:    :+:   */
+/*   stock_env_home.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/12/08 20:28:41 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/14 14:36:20 by tigerber         ###   ########.fr       */
+/*   Created: 2022/01/14 15:37:46 by tigerber          #+#    #+#             */
+/*   Updated: 2022/01/14 15:39:26 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../../includes/minishell.h"
 
-int	boucle_unset(t_shell *shell, char *opt)
+int	go_to_home(t_shell *shell)
 {
 	t_env	*tmp;
 
 	tmp = shell->environ;
 	while (tmp)
 	{
-		if ((ft_strncmp(tmp->var_env, opt, ft_strlen(opt)) == 0)
-			&& (tmp->var_env[(int)ft_strlen(opt)] == '='))
+		if (ft_strncmp(tmp->var_env, "HOME=", 5) == 0)
 		{
-			free(tmp->var_env);
-			tmp->var_env = ft_strdup("");
+			chdir(&tmp->var_env[5]);
 			return (1);
 		}
 		tmp = tmp->next;
@@ -31,19 +29,35 @@ int	boucle_unset(t_shell *shell, char *opt)
 	return (0);
 }
 
-int	built_in_unset(t_shell *shell, char **opt)
+void	stock_home(t_shell *shell)
+{
+	t_env	*tmp;
+
+	tmp = shell->environ;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->var_env, "HOME=", 5) == 0)
+		{
+			shell->home = ft_strdup(&tmp->var_env[5]);
+			return ;
+		}
+		tmp = tmp->next;
+	}
+}
+
+int	stock_env(char **env, t_shell *shell)
 {
 	int	i;
 
-	i = 1;
-	while (opt[i])
+	i = 0;
+	if (!env)
+		return (0);
+	while (env[i])
 	{
-		if (!boucle_unset(shell, opt[i]))
-		{
-			if (!check_name_variable(opt[i], shell, 5))
-				ft_error_two(opt[i], shell, 5);
-		}
+		ft_lstadd_back_env(&shell->environ, ft_lstnew_env(env[i]));
 		i++;
 	}
-	return (0);
+	parse_pwd(shell);
+	stock_home(shell);
+	return (1);
 }

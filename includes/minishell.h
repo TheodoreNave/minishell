@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/13 17:36:31 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 18:34:18 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -127,6 +127,8 @@ typedef struct s_shell
 	char			*home;
 }					t_shell;
 
+void			ft_minishell(t_shell *shell);
+
 void			clear_end(t_shell *shell);
 
 void			clear(t_shell *shell);
@@ -217,6 +219,8 @@ int				built_in_echo_n(char **opt, t_shell *shell);
 
 char			*join_dollars(t_shell *shell);
 
+void			recup_dollars(t_shell *shell);
+
 void			new_token_dollars(char *word, t_shell *shell);
 
 t_dol			*ft_lstnew_dol(char *word);
@@ -228,6 +232,8 @@ void			ft_lstclear_dol(t_dol **dol);
 void			print_list_dol(t_dol *token);
 
 int				ft_strlen_space(char *str);
+
+int				convert_dol_her(char *str, t_shell *shell, long *j);
 
 char			*convert_dollars(char *word, t_shell *shell);
 
@@ -242,6 +248,8 @@ int				ft_strlen_char(char *str, char c);
 int				count_env_lst(t_env *env);
 
 int				print_sort_env(t_env *env);
+
+int				is_double_redir(char a, char b);
 
 void			add_symbol(t_shell *shell, char symbole);
 
@@ -313,6 +321,8 @@ void			ft_lstclear_shell(t_token_list **token);
 void			ft_lstadd_back_shell(t_token_list **token, t_token_list *new);
 
 int				ft_lstsize_shell(t_token_list *lst);
+
+int				add_to_buff_redir(char c, t_shell *shell);
 
 void			add_to_buff_no_space(t_shell *shell, char c);
 

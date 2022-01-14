@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:47 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/13 17:34:11 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:27:47 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,19 +59,46 @@ int	ft_check_is_digit(char *str)
 	return (0);
 }
 
+void	exit_with_opt(t_shell *shell, char **opt)
+{	
+	if (ft_check_is_digit(opt[1])
+		|| (ft_strlen(opt[1]) > 18 && !g_global.minus))
+	{
+		write(2, "exit\n", 6);
+		ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
+		clear_end(shell);
+		exit(2);
+	}
+	else if (g_global.minus && ft_strlen(opt[1]) > 19)
+	{
+		write(2, "exit\n", 6);
+		ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
+		clear_end(shell);
+		exit(2);
+	}
+	return ;
+}
+
+void	exit_with_error(t_shell *shell, long error)
+{
+	if (error > 255 || error < 0)
+	{
+		write(2, "exit\n", 6);
+		clear_end(shell);
+		exit(error % 256);
+	}
+	write(2, "exit\n", 6);
+	clear_end(shell);
+	exit(error);
+}
+
 int	built_in_exit(t_shell *shell, char **opt)
 {
-	long	error;
 	int		i;
+	long	error;
 
+	error = ft_atoi(opt[1]);
 	i = 0;
-	error = 0;
-	if (shell->environ)
-		ft_lstclear_env(&shell->environ);
-	if (shell->action)
-		ft_lstclear_action(&shell->action);
-	if (shell->dol)
-		ft_lstclear_dol(&shell->dol);
 	while (opt[i])
 		i++;
 	if (i > 2)
@@ -79,34 +106,13 @@ int	built_in_exit(t_shell *shell, char **opt)
 		write(2, "exit\n", 6);
 		ft_putstr_fderr("bash: exit: too many arguments\n", NULL);
 		clear(shell);
-		exit(1);
+		g_global.error_dollars = 1;
+		return (0);
 	}
 	if (opt[1])
 	{
-		if (ft_check_is_digit(opt[1]) || (ft_strlen(opt[1]) > 18 && !g_global.minus))
-		{
-			write(2, "exit\n", 6);
-			ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
-			clear_end(shell);
-			exit(2);
-		}
-		else if (g_global.minus && ft_strlen(opt[1]) > 19)
-		{
-			write(2, "exit\n", 6);
-			ft_putstr_fderr("bash: exit: %s: numeric argument required\n", opt[1]);
-			clear_end(shell);
-			exit(2);
-		}
-		error = ft_atoi(opt[1]);
-		if (error > 255 || error < 0)
-		{
-			write(2, "exit\n", 6);
-			clear_end(shell);
-			exit(error % 256);
-		}
-		write(2, "exit\n", 6);
-		clear_end(shell);
-		exit(error);
+		exit_with_opt(shell, opt);
+		exit_with_error(shell, error);
 	}
 	write(2, "exit\n", 6);
 	clear_end(shell);

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/13 15:58:11 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:51:51 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,16 +62,6 @@ void		ft_check_access_mini(int i, t_shell *shell, char **env)
 		}
 		i++;
 	}
-}
-
-void	printenv(char **tab)
-{
-	int	i;
-
-	i = 0;
-	while (tab[i])
-		i++;
-	return ;
 }
 
 int	parse_env_2(t_shell *shell)

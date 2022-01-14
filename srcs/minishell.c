@@ -6,11 +6,12 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/13 17:36:03 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 13:17:25 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// PROB wc -c fichier non existant ensuite wc -c fichier valide 
+// PROB wc -c fichier non existant ensuite wc -c fichier valide
+//close fd
 #include "../includes/minishell.h"
 
 t_global	g_global;
@@ -26,6 +27,7 @@ void	signals(int sig)
 			rl_replace_line("", 0);
 			rl_redisplay();
 		}
+		g_global.no_ctrlc = 0; // ???????????
 		g_global.error_dollars = 130;
 	}
 }
@@ -44,41 +46,14 @@ static void	setup(char **env, t_utils *utils, t_shell *shell)
 	stock_env(env, shell);
 }
 
-void	clear(t_shell *shell)
+void	ft_minishell(t_shell *shell)
 {
-	ft_lstclear_shell(&shell->token);
-	ft_lstclear_action(&shell->action);
-	if (shell->new_env_tab)
-	{
-		free_split(shell->new_env_tab);
-		shell->new_env_tab = NULL;
-	}
-	if (shell->opt2)
-	{
-		free_split(shell->opt2);
-		shell->opt2 = NULL;	
-	}
-	if (shell->parse_env)
-	{
-		free_split(shell->parse_env);
-		shell->parse_env = NULL;
-	}
-	if (shell->join)
-	{
-		free(shell->join);
-		shell->join = NULL;
-	}
-}
-
-void	clear_end(t_shell *shell)
-{
-	clear(shell);
-	ft_lstclear_env(&shell->environ);
-	if (shell->home)
-	{
-		free(shell->home);
-		shell->home = NULL;
-	}
+	parsing_dollars(shell);
+	if (parsing_errors_token(shell))
+		fill_cmd(shell);
+	if (shell->action)
+		test_execve(shell);
+	return ;
 }
 
 int	main(int ac, char **av, char **env)
@@ -101,13 +76,7 @@ int	main(int ac, char **av, char **env)
 		if (buffer)
 			add_history(buffer);
 		if (make_token_lst(buffer, &shell))
-		{
-			parsing_dollars(&shell);
-			if (parsing_errors_token(&shell))
-				fill_cmd(&shell);
-			if (shell.action)
-				test_execve(&shell);
-		}
+			ft_minishell(&shell);
 		clear(&shell);
 	}
 	clear_end(&shell);

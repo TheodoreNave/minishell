@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/08 20:07:23 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/11 16:35:36 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 14:44:48 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,6 +61,16 @@ int	check_var_in_env(t_env *env, char *opt)
 	return (1);
 }
 
+int	built_in_export_extension(char **opt, t_env *environ)
+{
+	if (!opt[1])
+	{
+		print_sort_env(environ);
+		return (0);
+	}
+	return (1);
+}
+
 int	built_in_export(char **opt, t_env *environ, t_shell *shell)
 {
 	int	i;
@@ -68,11 +78,8 @@ int	built_in_export(char **opt, t_env *environ, t_shell *shell)
 
 	i = 1;
 	j = 0;
-	if (!opt[1])
-	{
-		print_sort_env(environ);
+	if (!built_in_export_extension(opt, environ))
 		return (0);
-	}
 	while (opt[i])
 	{
 		if (check_var_in_env(environ, opt[i]))

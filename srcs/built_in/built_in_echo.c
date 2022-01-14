@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:20 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/12 18:41:48 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 13:02:47 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	check_if_n(char *str)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	if (str[i] == '-')
@@ -32,7 +32,7 @@ int	check_if_n(char *str)
 
 void	builtin_echo(char **opt, t_shell *shell)
 {
-	int i;
+	int	i;
 
 	i = 1;
 	if (opt[1])

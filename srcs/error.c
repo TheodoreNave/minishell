@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:16:14 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/12 18:41:13 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/14 17:31:43 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	ft_putstr_fderr(char *str, char *str2)
 	return ;
 }
 
-int	ft_error_two(char *str, t_shell *shell, int error)
+void	ft_error_extend(char *str, t_shell *shell, int error)
 {
 	if (error == 1)
 	{
@@ -73,6 +73,12 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 		ft_putstr_fderr("bash: export: `%s': not a valid identifier\n", str);
 		g_global.error_dollars = 1;
 	}
+	return ;
+}
+
+int	ft_error_two(char *str, t_shell *shell, int error)
+{
+	ft_error_extend(str, shell, error);
 	if (error == 5)
 	{
 		ft_putstr_fderr("bash: unset: `%s': not a valid identifier\n", str);
@@ -91,7 +97,8 @@ int	ft_error_two(char *str, t_shell *shell, int error)
 	}
 	if (error == 8)
 	{
-		ft_putstr_fderr("bash: warning: here-document delimited by end-of-file (wanted `%s')\n", str);
+		write(2, "bash: warning: here-document delimited by end-of-file", 54);
+		ft_putstr_fderr(" (wanted `%s')\n", str);
 		g_global.error_dollars = 0;
 	}
 	return (0);

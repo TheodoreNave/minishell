@@ -3,10 +3,10 @@
 #                                                         :::      ::::::::    #
 #    makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: tnave <tnave@student.42.fr>                +#+  +:+       +#+         #
+#    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2022/01/10 20:14:05 by tnave            ###   ########.fr        #
+#    Updated: 2022/01/14 18:32:52 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,15 +15,22 @@ NAME = minishell
 SRCS =  srcs/minishell.c								\
 		srcs/execve.c									\
 		srcs/utils_execve.c								\
+		srcs/utils_execve_two.c							\
+		srcs/utils_convert_dol_herdoc.c 				\
 		srcs/opt_exec_mini.c							\
 		srcs/prompt.c									\
-		srcs/utils.c 									\
+		srcs/utils_buff.c 								\
+		srcs/utils_buff_two.c 							\
 		srcs/utils_two.c								\
 		srcs/outils.c 									\
 		srcs/error.c 									\
+		srcs/clear.c 									\
 		srcs/parsing/environement.c						\
+		srcs/parsing/stock_env_home.c					\
 		srcs/parsing/parsing_for_token.c				\
+		srcs/parsing/parsing_for_token_two.c			\
 		srcs/parsing/parsing_dollars.c					\
+		srcs/parsing/parsing_dollars_two.c				\
 		srcs/parsing/utils_parsing_dollars.c			\
 		srcs/parsing/parsing_error_token.c 				\
 		srcs/parsing/file_cmd.c 						\
