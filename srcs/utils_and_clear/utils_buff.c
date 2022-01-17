@@ -6,11 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:58:05 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/14 16:57:49 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:54:20 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	empty_buff_in_lst(t_shell *shell, char symbole)
 {

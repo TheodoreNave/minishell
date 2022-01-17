@@ -6,15 +6,43 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:32:18 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/14 18:39:58 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/17 13:23:50 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
+
+int	convert_dol_her_ext(char *str, t_shell *shell, long *j)
+{
+	t_env	*tmp;
+	int		size;
+	int		i;
+
+	i = 0;
+	size = ft_strlen_space(str);
+	tmp = shell->environ;
+	while (tmp)
+	{
+		if (ft_strncmp(tmp->var_env, str, size) == 0)
+		{
+			if (tmp->var_env[size] == '=')
+			{
+				while (tmp->var_env[size + 1 + i])
+				{
+					add_to_buff_king(shell, tmp->var_env[size + 1 + i], j);
+					i++;
+				}
+			}
+			else
+				add_to_buff_king(shell, 0, j);
+		}
+		tmp = tmp->next;
+	}
+	return (size);
+}
 
 int	convert_dol_her(char *str, t_shell *shell, long *j)
 {
-	t_env	*tmp;
 	char	*dol_temp;
 	int		size;
 	int		i;
@@ -38,26 +66,7 @@ int	convert_dol_her(char *str, t_shell *shell, long *j)
 		add_to_buff_king(shell, '$', j);
 		return (0);
 	}
-	tmp = shell->environ;
-	///////////////////////////////////////////////////////////////////////////
-	while (tmp)
-	{
-		if (ft_strncmp(tmp->var_env, str, size) == 0)
-		{
-			if (tmp->var_env[size] == '=')
-			{
-				while (tmp->var_env[size + 1 + i])
-				{
-					add_to_buff_king(shell, tmp->var_env[size + 1 + i], j);
-					i++;
-				}
-			}
-			else
-				add_to_buff_king(shell, 0, j);
-		}
-		tmp = tmp->next;
-	}
-	return (size);
+	return (convert_dol_her_ext(str, shell, j));
 }
 
 int	parse_dollars_heredoc(char *str, t_shell *shell, char *tmp)

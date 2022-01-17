@@ -6,12 +6,10 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/14 13:17:25 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:21:55 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-// PROB wc -c fichier non existant ensuite wc -c fichier valide
-//close fd
 #include "../includes/minishell.h"
 
 t_global	g_global;

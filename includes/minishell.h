@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/14 18:34:18 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/17 17:24:12 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ typedef struct s_global
 {
 	int			error_dollars;
 	int			minus;
-	int 		no_ctrlc;
+	int			no_ctrlc;
 	int			read_here_doc;
 }				t_global;
 
@@ -125,7 +125,37 @@ typedef struct s_shell
 	int				prompt;
 	char			*tmp_file;
 	char			*home;
+	pid_t			last_pid;
+	int				j;
 }					t_shell;
+
+void			free_buff(char *buff);
+
+char			*prompt_ext_one(t_shell *shell, char *buff);
+
+void			prompt_ext_two(t_shell *shell);
+
+void			prompt_ext_five(t_shell *shell);
+
+char			*prompt_ext_three(t_shell *shell, char *buff);
+
+char			*prompt_ext_four(t_shell *shell, char *buff);
+
+char			*prompt(t_shell *shell, char *buff);
+
+void			exec_error(t_shell *shell);
+
+void			exec_error_one(t_shell *shell);
+
+void			exec_error_two(t_shell *shell);
+
+void			exec_error_three(t_shell *shell);
+
+int				exec_error_pid(void);
+
+int				parse_env_two(t_shell *shell);
+
+int				ft_heredoc(t_shell *shell, t_cmd_list *tmp);
 
 void			ft_minishell(t_shell *shell);
 
@@ -133,11 +163,11 @@ void			clear_end(t_shell *shell);
 
 void			clear(t_shell *shell);
 
-int 			parse_dollars_heredoc(char *str, t_shell *shell, char *tmp);
+int				parse_dollars_heredoc(char *str, t_shell *shell, char *tmp);
 
 void			clear_buffer_king(t_shell *shell);
 
-void 			add_to_buff_king(t_shell *shell, char c, long *j);
+void			add_to_buff_king(t_shell *shell, char c, long *j);
 
 int				ft_strlen_no_space(char *str);
 
@@ -190,8 +220,6 @@ void			pipe_or_not(t_shell *shell, char **tab,
 					char **opt, t_cmd_list *tmp);
 
 void			parse_les_redirections(t_cmd_list *temp, t_shell *shell);
-
-int				parse_env_2(t_shell *shell);
 
 int				test_execve(t_shell *shell);
 

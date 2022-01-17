@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   utils_two.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/10 20:13:19 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/10 20:13:32 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/17 16:54:23 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 int	ft_strlen_char(char *str, char c)
 {

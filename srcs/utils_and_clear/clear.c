@@ -6,11 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:45:37 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/14 17:35:14 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:54:00 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	clear_lst(t_shell *shell)
 {

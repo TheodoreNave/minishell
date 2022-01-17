@@ -6,11 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/10 15:16:14 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/14 17:31:43 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:54:07 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	ft_strcpy(char *buff, char *str)
 {

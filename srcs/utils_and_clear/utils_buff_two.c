@@ -6,11 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 16:52:12 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/14 16:58:05 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:54:17 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	add_to_buff_no_space(t_shell *shell, char c)
 {

@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   pipex.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/10 18:42:34 by tnave             #+#    #+#             */
-/*   Updated: 2021/11/24 16:37:36 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/17 17:25:37 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,10 +96,10 @@ void			opt_exec(char **av, char **environ,
 					t_utils *utils, t_utils_list *tmp);
 
 void			pipe_in(int pfd[2], t_utils *utils,
-					 char **argv, char **environ);
+					char **argv, char **environ);
 
 void			pipe_out(int pfd[2], t_utils *utils,
-					 char **argv, char **environ);
+					char **argv, char **environ);
 
 void			exit_function(t_utils *utils);
 

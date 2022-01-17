@@ -6,11 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 18:19:43 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/14 18:29:55 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/17 14:19:04 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 void	init_value(t_shell *shell, t_cmd_list *tmp)
 {
@@ -33,7 +33,7 @@ void	init_value(t_shell *shell, t_cmd_list *tmp)
 		free(shell->join);
 		shell->join = NULL;
 	}
-	parse_env_2(shell);
+	parse_env_two(shell);
 }
 
 void	reset_value(t_shell *shell)

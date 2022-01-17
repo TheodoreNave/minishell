@@ -6,11 +6,11 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 12:17:05 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/14 16:22:10 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/17 16:54:12 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/minishell.h"
+#include "../../includes/minishell.h"
 
 char	*ft_strrev(char *str)
 {
