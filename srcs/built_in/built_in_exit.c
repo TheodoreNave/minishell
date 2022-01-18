@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/09 01:55:47 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/14 14:27:47 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:33:31 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -97,7 +97,6 @@ int	built_in_exit(t_shell *shell, char **opt)
 	int		i;
 	long	error;
 
-	error = ft_atoi(opt[1]);
 	i = 0;
 	while (opt[i])
 		i++;
@@ -109,6 +108,8 @@ int	built_in_exit(t_shell *shell, char **opt)
 		g_global.error_dollars = 1;
 		return (0);
 	}
+	if (i == 2)
+		error = ft_atoi(opt[1]);
 	if (opt[1])
 	{
 		exit_with_opt(shell, opt);

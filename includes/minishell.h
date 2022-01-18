@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/17 17:24:12 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/18 17:45:37 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 
 # define MINISHELL_H
 
-# include "pipex.h"
 # include <stdlib.h>
 # include <unistd.h>
 # include <string.h>
@@ -44,6 +43,34 @@
 
 # define STDIN 0
 # define STDOUT 1
+
+typedef struct s_utils_list
+{
+	char				*cmd;
+	char				**cmd_opt;
+	char				*path;
+	int					pfd[2];
+
+	struct s_utils_list	*prev;
+	struct s_utils_list	*next;
+
+}	t_utils_list;
+
+typedef struct s_utils
+{
+	int					fd_one;
+	int					fd_two;
+	int					invalid_fd;
+	char				**parse_env;
+	int					cmd_ok;
+	char				*join;
+	t_utils_list		*lst;
+	char				**temp;
+	int					p;
+	int					wrong_cmd;
+	char				*error_msg;
+
+}	t_utils;
 
 typedef struct s_dol
 {
@@ -127,7 +154,38 @@ typedef struct s_shell
 	char			*home;
 	pid_t			last_pid;
 	int				j;
+	int				ret;
+	int				save_fd_in;
+	int				save_fd_out;
 }					t_shell;
+
+int				ft_strncmpp(const char *s1, const char *s2, size_t n);
+
+char			*ft_strjoin(char *s1, char *s2);
+
+size_t			ft_strlen(const char *str);
+
+int				ft_word_count(char const *str, char c);
+
+char			*new_full_string(char const *str, int l, int word);
+
+char			**schwifty(char **str, char const *s, char c, int words);
+
+char			**ft_split(char const *s, char c);
+
+int				ft_strncmp(const char *s1, const char *s2, size_t n);
+
+char			*is_slash(char *str);
+
+char			*ft_strjoin_three(char *s1, char *s2, char *s3);
+
+char			*ft_strdup(char *s1);
+
+int				ft_count_line(char **str);
+
+void			free_split(char **tab);
+
+void			*ft_memset(void *b, int c, size_t len);
 
 void			free_buff(char *buff);
 

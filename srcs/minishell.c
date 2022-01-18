@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:55:32 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/17 17:21:55 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:11:33 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,13 @@ void	signals(int sig)
 	if (sig == SIGINT)
 	{
 		write(2, "\n", 1);
-		if (!g_global.no_ctrlc)
+		if (g_global.no_ctrlc)
 		{
 			rl_on_new_line();
 			rl_replace_line("", 0);
 			rl_redisplay();
 		}
-		g_global.no_ctrlc = 0; // ???????????
+		g_global.no_ctrlc = 1;
 		g_global.error_dollars = 130;
 	}
 }
@@ -62,6 +62,7 @@ int	main(int ac, char **av, char **env)
 
 	buffer = (char *) NULL;
 	(void)av;
+	// (void)ac;
 	if (ac != 1)
 		return (0);
 	mem(&utils, &shell);
@@ -69,12 +70,13 @@ int	main(int ac, char **av, char **env)
 	rl_outstream = stderr;
 	while (1)
 	{
+		g_global.no_ctrlc = 1;
 		shell.fd_base = 0;
 		buffer = prompt(&shell, buffer);
 		if (buffer)
 			add_history(buffer);
 		if (make_token_lst(buffer, &shell))
-			ft_minishell(&shell);
+			ft_minishell(&shell);		
 		clear(&shell);
 	}
 	clear_end(&shell);

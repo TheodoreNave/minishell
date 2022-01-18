@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/14 14:34:56 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/17 14:36:23 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:39:03 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,16 +42,17 @@ void	check_access_mini_ext(t_shell *shell, t_cmd_list *tmp, char **env)
 	}
 	if ((tmp->type_start == TYPE_PIPE || tmp->type_end == TYPE_END)
 		&& shell->pipe == -1)
+	{
 		reset_value(shell);
+	}
 	return ;
 }
 
 void	ft_check_access_mini(int i, t_shell *shell, char **env)
 {
 	t_cmd_list	*tmp;
-	int			ret;
 
-	ret = 0;
+	shell->ret = 0;
 	shell->j = 0;
 	tmp = shell->action;
 	while (tmp)
@@ -65,11 +66,13 @@ void	ft_check_access_mini(int i, t_shell *shell, char **env)
 	i = 0;
 	while (i < shell->j)
 	{
-		if (waitpid(-1, &ret, 0) == shell->last_pid)
+		if (waitpid(-1, &shell->ret, 0) == shell->last_pid)
 		{
-			if (WIFEXITED(ret))
-				g_global.error_dollars = WEXITSTATUS(ret);
+			if (WIFEXITED(shell->ret))
+				g_global.error_dollars = WEXITSTATUS(shell->ret);
 		}
+		else
+			g_global.no_ctrlc = 0;
 		i++;
 	}
 }

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 15:45:28 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/17 16:38:11 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/18 14:08:36 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,25 +64,6 @@ void 	print_list_dol(t_dol *token)
 		tmp = tmp->next;
 	}
 		printf("____________________________________________________\n");
-}
-
-
-void	print_env_lst(t_env *env, int indic)			// If option -> ft_error
-{
-	t_env *tmp;
-
-	tmp = env;
-	if (indic == 1)
-	{
-		while (tmp)
-		{
-			if (tmp->var_env[0] != '\0')
-			{
-				printf("%s\n", tmp->var_env);
-			}
-			tmp = tmp->next;
-		}
-	}
 }
 
 void 	print_new_lst(t_cmd_list *lst)

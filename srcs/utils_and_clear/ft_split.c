@@ -3,16 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   ft_split.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: tnave <tnave@student.42.fr>                +#+  +:+       +#+        */
+/*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/11 11:38:32 by tnave             #+#    #+#             */
-/*   Updated: 2021/10/15 15:36:25 by tnave            ###   ########.fr       */
+/*   Updated: 2022/01/18 14:07:32 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
+#include "../../includes/minishell.h"
 
-static int	ft_word_count(char const *str, char c)
+int	ft_word_count(char const *str, char c)
 {
 	int		i;
 	int		count;
@@ -35,7 +35,7 @@ static int	ft_word_count(char const *str, char c)
 	return (count);
 }
 
-static char	*new_full_string(char const *str, int l, int word)
+char	*new_full_string(char const *str, int l, int word)
 {
 	char	*new;
 	int		size;
@@ -56,7 +56,7 @@ static char	*new_full_string(char const *str, int l, int word)
 	return (new);
 }
 
-static char	**schwifty(char **str, char const *s, char c, int words)
+char	**schwifty(char **str, char const *s, char c, int words)
 {
 	int		i;
 	int		j;

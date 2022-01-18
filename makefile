@@ -6,7 +6,7 @@
 #    By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/08/03 15:56:05 by tnave             #+#    #+#              #
-#    Updated: 2022/01/17 16:55:29 by tigerber         ###   ########.fr        #
+#    Updated: 2022/01/18 14:13:12 by tigerber         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,14 +50,9 @@ SRCS =  srcs/minishell.c								\
 		srcs/built_in/built_in_unset.c 					\
 		srcs/built_in/built_in_echo.c 					\
 		srcs/built_in/built_in_exit.c 					\
-		les_print.c										\
-		pipex/exit_error.c								\
-		pipex/ft_lst.c									\
-		pipex/ft_split.c								\
-		pipex/parsing.c 								\
-		pipex/pipex.c									\
-		pipex/utils_two.c								\
-		pipex/utils.c									\
+		srcs/utils_and_clear/ft_split.c					\
+		srcs/utils_and_clear/clear_two.c				\
+		srcs/utils_and_clear/clear_three.c			
 
 CC = clang
 

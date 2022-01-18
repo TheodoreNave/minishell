@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:45:37 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/17 16:54:00 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:06:22 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,11 +52,36 @@ void	clear(t_shell *shell)
 void	clear_end(t_shell *shell)
 {
 	clear(shell);
-	ft_lstclear_env(&shell->environ);
+	if (shell->environ)
+		ft_lstclear_env(&shell->environ);
 	if (shell->home)
 	{
 		free(shell->home);
 		shell->home = NULL;
 	}
 	return ;
+}
+
+void	*ft_memset(void *b, int c, size_t len)
+{
+	unsigned char	*pb;
+
+	pb = b;
+	while (len > 0)
+	{
+		*pb = c;
+		pb++;
+		len--;
+	}
+	return (b);
+}
+
+int	ft_count_line(char **str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+		i++;
+	return (i);
 }

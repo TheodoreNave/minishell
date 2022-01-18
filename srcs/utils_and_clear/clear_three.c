@@ -1,36 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   utils_two.c                                        :+:      :+:    :+:   */
+/*   clear_three.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/11 11:38:16 by tnave             #+#    #+#             */
-/*   Updated: 2021/12/11 19:38:40 by tigerber         ###   ########.fr       */
+/*   Created: 2022/01/18 14:10:52 by tigerber          #+#    #+#             */
+/*   Updated: 2022/01/18 14:11:40 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/pipex.h"
-
-void	ft_free(char **ptr)
-{
-	free(*ptr);
-	ptr = NULL;
-}
-
-void	*ft_memset(void *b, int c, size_t len)
-{
-	unsigned char	*pb;
-
-	pb = b;
-	while (len > 0)
-	{
-		*pb = c;
-		pb++;
-		len--;
-	}
-	return (b);
-}
+#include "../../includes/minishell.h"
 
 char	*ft_strdup(char *s1)
 {
@@ -78,24 +58,34 @@ char	*ft_strjoin_three(char *s1, char *s2, char *s3)
 	return (str);
 }
 
-char	*ft_strjoin(char *s1, char *s2)
+char	*is_slash(char *str)
 {
-	int				i;
-	int				j;
-	char			*str;
+	int	i;
 
 	i = 0;
-	j = 0;
-	if (!s1 || !s2)
-		return (NULL);
-	str = malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
-	if (!(str))
-		return (NULL);
-	while (s1[j])
-		str[i++] = s1[j++];
-	j = 0;
-	while (s2[j])
-		str[i++] = s2[j++];
-	str[i] = '\0';
+	while (str[i])
+	{
+		if (str[i] == '/')
+			return (&str[i]);
+		i++;
+	}
 	return (str);
+}
+
+void	free_split(char **tab)
+{
+	int				i;
+
+	i = 0;
+	while (tab[i])
+	{
+		if (tab[i])
+		{
+			free(tab[i]);
+			tab[i] = NULL;
+		}
+		i++;
+	}
+	free(tab);
+	tab = NULL;
 }
