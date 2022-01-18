@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/08/03 15:56:31 by tnave             #+#    #+#             */
-/*   Updated: 2022/01/18 17:45:37 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:46:33 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -158,6 +158,8 @@ typedef struct s_shell
 	int				save_fd_in;
 	int				save_fd_out;
 }					t_shell;
+
+void			ft_close_fd(t_shell *shell);
 
 int				ft_strncmpp(const char *s1, const char *s2, size_t n);
 

@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/18 14:10:52 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/18 14:11:40 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:46:13 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -88,4 +88,14 @@ void	free_split(char **tab)
 	}
 	free(tab);
 	tab = NULL;
+}
+
+void	ft_close_fd(t_shell *shell)
+{
+	close(shell->fd_in);
+	close(shell->fd_out);
+	close(shell->fd_temp);
+	close(shell->pfd[0]);
+	close(shell->pfd[1]);
+	close(shell->fd_base);
 }

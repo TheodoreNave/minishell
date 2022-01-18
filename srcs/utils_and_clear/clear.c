@@ -6,7 +6,7 @@
 /*   By: tigerber <tigerber@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/01/14 12:45:37 by tigerber          #+#    #+#             */
-/*   Updated: 2022/01/18 18:06:22 by tigerber         ###   ########.fr       */
+/*   Updated: 2022/01/18 18:46:49 by tigerber         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,7 @@ void	clear_end(t_shell *shell)
 		free(shell->home);
 		shell->home = NULL;
 	}
+	ft_close_fd(shell);
 	return ;
 }
 
